@@ -1,4 +1,4 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.screen;
 
 /**
  * This enum serves as a enumeration of all possible inputactions.

@@ -1,4 +1,4 @@
-package de.uni_kiel.progOOproject17.model.levelgen;
+package de.uni_kiel.progOOproject17.model.kittenGame.levelGen;
 
 import de.uni_kiel.progOOproject17.model.abs.GameElement;
 

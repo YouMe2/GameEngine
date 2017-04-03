@@ -4,12 +4,10 @@ import java.awt.Rectangle;
 
 import de.uni_kiel.progOOproject17.model.Background;
 import de.uni_kiel.progOOproject17.model.Floor;
-import de.uni_kiel.progOOproject17.model.MenuScreen;
 import de.uni_kiel.progOOproject17.model.Particle;
-import de.uni_kiel.progOOproject17.model.Priority;
-import de.uni_kiel.progOOproject17.model.Scoreboard;
-import de.uni_kiel.progOOproject17.model.SortedLinkedList;
 import de.uni_kiel.progOOproject17.model.abs.GameEntity;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenScoreboard;
+import de.uni_kiel.progOOproject17.model.screen.MenuScreen;
 
 /**
  * This interface needs to be implemented by anything to be rendered by any
@@ -31,7 +29,7 @@ public interface Viewable extends Priority {
 	 */
 	public static final int BG_LAYER = 0;
 	/**
-	 * The {@link Scoreboard} layer.
+	 * The {@link KittenScoreboard} layer.
 	 */
 	public static final int SB_LAYER = 1;
 	/**
@@ -101,7 +99,7 @@ public interface Viewable extends Priority {
 	 * Returns the priority of this {@link Viewable}, when on the same layer
 	 * with others.
 	 * 
-	 * @see de.uni_kiel.progOOproject17.model.Priority#getPriority()
+	 * @see de.uni_kiel.progOOproject17.view.abs.Priority#getPriority()
 	 */
 	@Override
 	public float getPriority();

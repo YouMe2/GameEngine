@@ -1,9 +1,8 @@
 /**
  * 
  */
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.view.abs;
 
-import de.uni_kiel.progOOproject17.view.abs.Viewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
 
 /**

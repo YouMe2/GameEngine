@@ -1,11 +1,12 @@
-package de.uni_kiel.progOOproject17.model.levelgen;
+package de.uni_kiel.progOOproject17.model.kittenGame.levelGen;
 
 import static de.uni_kiel.progOOproject17.model.PLBaseModel.LHPIXEL_HEIGHT;
 import static de.uni_kiel.progOOproject17.model.PLBaseModel.LHPIXEL_WIDTH;
-import static de.uni_kiel.progOOproject17.model.levelgen.LevelGenerator.*;
+import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.LevelGenerator.*;
 
-import de.uni_kiel.progOOproject17.model.Enemy;
 import de.uni_kiel.progOOproject17.model.abs.GameElement;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenEnemy;
+
 import java.awt.Point;
 
 /**
@@ -20,7 +21,7 @@ public enum Obstacle {
 
 	SINGLE(LHPIXEL_WIDTH * 4, x -> {
 		// creates a single enemy on floor level
-		Enemy e = new Enemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x, FLOOR_POS));
+		KittenEnemy e = new KittenEnemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x, FLOOR_POS));
 		
 		
 		e.move(0, -e.getView().getHeight());
@@ -29,17 +30,17 @@ public enum Obstacle {
 	}), DOUBLE(LHPIXEL_WIDTH * 6, x -> {
 		// creates two enemies next to each other on floor level
 		int distance = LHPIXEL_WIDTH;
-		Enemy e0 = new Enemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x, FLOOR_POS));
+		KittenEnemy e0 = new KittenEnemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x, FLOOR_POS));
 		e0.move(0, -e0.getView().getHeight());
 		e0.setGravityActive(true);
-		Enemy e1 = new Enemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x + e0.getView().getWidth() + distance, FLOOR_POS));
+		KittenEnemy e1 = new KittenEnemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x + e0.getView().getWidth() + distance, FLOOR_POS));
 		e1.move(0, -e1.getView().getHeight());
 		e1.setGravityActive(true);
 		return new GameElement[] { e0, e1 };
 	}), HOVERING(LHPIXEL_WIDTH * 8, x -> {
 		// creates a single enemy hovering above the floor
 		int hoveringHeight = (int) (LHPIXEL_HEIGHT * 1.1);
-		Enemy e = new Enemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x, FLOOR_POS));
+		KittenEnemy e = new KittenEnemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x, FLOOR_POS));
 		e.move(0, -e.getView().getHeight() - hoveringHeight);
 		e.setGravityActive(false);
 		return new GameElement[] { e };
@@ -47,10 +48,10 @@ public enum Obstacle {
 		// creates two enemies next to each other hovering above the floor
 		int distance = (int) (LHPIXEL_WIDTH * 1.0);
 		int hoveringHeight = (int) (LHPIXEL_HEIGHT * 1.1);
-		Enemy e0 = new Enemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x, FLOOR_POS));
+		KittenEnemy e0 = new KittenEnemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x, FLOOR_POS));
 		e0.move(0, -e0.getView().getHeight() - hoveringHeight);
 		e0.setGravityActive(false);
-		Enemy e1 = new Enemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x + e0.getView().getWidth() + distance, FLOOR_POS));
+		KittenEnemy e1 = new KittenEnemy(ENEMYRESKEY, new Point(LHPIXEL_WIDTH * 2 + x + e0.getView().getWidth() + distance, FLOOR_POS));
 		e1.move(0, -e1.getView().getHeight() - hoveringHeight);
 		e1.setGravityActive(false);
 		return new GameElement[] { e0, e1 };
@@ -58,13 +59,13 @@ public enum Obstacle {
 		// creates three enemies next to each other hovering above the floor
 		int distance = (int) (LHPIXEL_WIDTH * 1.0);
 		int hoveringHeight = (int) (LHPIXEL_HEIGHT * 1.1);
-		Enemy e0 = new Enemy(ENEMYRESKEY, new Point(x, FLOOR_POS));
+		KittenEnemy e0 = new KittenEnemy(ENEMYRESKEY, new Point(x, FLOOR_POS));
 		e0.move(0, -e0.getView().getHeight() - hoveringHeight);
 		e0.setGravityActive(false);
-		Enemy e1 = new Enemy(ENEMYRESKEY, new Point(x + e0.getView().getWidth() + distance, FLOOR_POS));
+		KittenEnemy e1 = new KittenEnemy(ENEMYRESKEY, new Point(x + e0.getView().getWidth() + distance, FLOOR_POS));
 		e1.move(0, -e1.getView().getHeight() - hoveringHeight);
 		e1.setGravityActive(false);
-		Enemy e2 = new Enemy(ENEMYRESKEY, new Point(e1.getView().getX() + e1.getView().getWidth() + distance, FLOOR_POS));
+		KittenEnemy e2 = new KittenEnemy(ENEMYRESKEY, new Point(e1.getView().getX() + e1.getView().getWidth() + distance, FLOOR_POS));
 		e2.move(0, -e1.getView().getHeight() - hoveringHeight);
 		e2.setGravityActive(false);
 		return new GameElement[] { e0, e1, e2 };
@@ -75,10 +76,10 @@ public enum Obstacle {
 		int hoveringHeightUpper = LHPIXEL_HEIGHT * 2;
 		int hoveringHeightLower = (int) (LHPIXEL_HEIGHT * 1.1);
 		int spaceBefore = (int) (LHPIXEL_HEIGHT * 2.5);
-		Enemy e0 = new Enemy(ENEMYRESKEY, new Point(x + spaceBefore, FLOOR_POS));
+		KittenEnemy e0 = new KittenEnemy(ENEMYRESKEY, new Point(x + spaceBefore, FLOOR_POS));
 		e0.move(0, -e0.getView().getHeight() - hoveringHeightLower);
 		e0.setGravityActive(false);
-		Enemy e1 = new Enemy(ENEMYRESKEY, new Point(x + spaceBefore, FLOOR_POS));
+		KittenEnemy e1 = new KittenEnemy(ENEMYRESKEY, new Point(x + spaceBefore, FLOOR_POS));
 		e1.move(0, -e1.getView().getHeight() - hoveringHeightUpper);
 		e1.setGravityActive(false);
 		return new GameElement[] { e0, e1 };
@@ -88,10 +89,10 @@ public enum Obstacle {
 		int hoveringHeightUpper = LHPIXEL_HEIGHT * 3;
 		int hoveringHeightLower = (int) (LHPIXEL_HEIGHT * 1.1);
 		int spaceBefore = (int) (LHPIXEL_HEIGHT * 2.5);
-		Enemy e0 = new Enemy(ENEMYRESKEY, new Point(x + spaceBefore, FLOOR_POS));
+		KittenEnemy e0 = new KittenEnemy(ENEMYRESKEY, new Point(x + spaceBefore, FLOOR_POS));
 		e0.move(0, -e0.getView().getHeight() - hoveringHeightLower);
 		e0.setGravityActive(false);
-		Enemy e1 = new Enemy(ENEMYRESKEY, new Point(x + spaceBefore, FLOOR_POS));
+		KittenEnemy e1 = new KittenEnemy(ENEMYRESKEY, new Point(x + spaceBefore, FLOOR_POS));
 		e1.move(0, -e1.getView().getHeight() - hoveringHeightUpper);
 		e1.setGravityActive(false);
 		return new GameElement[] { e0, e1 };
@@ -100,7 +101,7 @@ public enum Obstacle {
 		// has to decide quickly whether to crouch or to jump.
 		int spaceBefore = LHPIXEL_WIDTH * 1;
 		int hoveringHeight = 15;
-		Enemy e = new Enemy(ENEMYRESKEY, new Point(x + spaceBefore, FLOOR_POS));
+		KittenEnemy e = new KittenEnemy(ENEMYRESKEY, new Point(x + spaceBefore, FLOOR_POS));
 		e.move(0, -e.getView().getHeight() - hoveringHeight);
 		e.setGravityActive(false);
 		return new GameElement[] { e };

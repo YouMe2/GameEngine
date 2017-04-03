@@ -1,7 +1,5 @@
 package de.uni_kiel.progOOproject17.model.abs;
 
-import de.uni_kiel.progOOproject17.model.CreationHelper;
-
 /**
  * This interface implies that instances of this it can be destroyed and need to
  * be activated in the first place!

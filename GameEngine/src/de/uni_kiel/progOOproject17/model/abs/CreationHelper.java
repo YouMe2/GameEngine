@@ -1,7 +1,4 @@
-package de.uni_kiel.progOOproject17.model;
-
-import de.uni_kiel.progOOproject17.model.abs.DestroyListener;
-import de.uni_kiel.progOOproject17.model.abs.ElementCreator;
+package de.uni_kiel.progOOproject17.model.abs;
 
 /**
  * Serves as a wraper for the interfaces {@link ElementCreator} and {@link DestroyListener}.

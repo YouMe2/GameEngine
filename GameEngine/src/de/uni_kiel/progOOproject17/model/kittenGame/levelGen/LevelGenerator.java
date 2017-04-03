@@ -1,9 +1,9 @@
-package de.uni_kiel.progOOproject17.model.levelgen;
+package de.uni_kiel.progOOproject17.model.kittenGame.levelGen;
 
 import de.uni_kiel.progOOproject17.model.Background;
-import de.uni_kiel.progOOproject17.model.CreationHelper;
 import de.uni_kiel.progOOproject17.model.Floor;
 import de.uni_kiel.progOOproject17.model.PLBaseModel;
+import de.uni_kiel.progOOproject17.model.abs.CreationHelper;
 import de.uni_kiel.progOOproject17.model.abs.Environment;
 import de.uni_kiel.progOOproject17.model.abs.GameElement;
 import de.uni_kiel.progOOproject17.model.abs.Ticked;

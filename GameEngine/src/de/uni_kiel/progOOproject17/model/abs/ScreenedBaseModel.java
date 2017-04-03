@@ -10,7 +10,8 @@ import java.util.Arrays;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
-import de.uni_kiel.progOOproject17.model.InputActionKey;
+import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
+import de.uni_kiel.progOOproject17.model.screen.Screen;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**

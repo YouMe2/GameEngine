@@ -1,7 +1,9 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.kittenGame;
 
 import java.awt.Point;
 
+import de.uni_kiel.progOOproject17.model.PLBaseModel;
+import de.uni_kiel.progOOproject17.model.abs.CreationHelper;
 import de.uni_kiel.progOOproject17.model.abs.Environment;
 import de.uni_kiel.progOOproject17.model.abs.GameEntity;
 import de.uni_kiel.progOOproject17.model.abs.GameObject;
@@ -11,7 +13,7 @@ import de.uni_kiel.progOOproject17.model.abs.Hitbox;
  * This class represents a {@link GameEntity} that serves as a Enemy.
  *
  */
-public class Enemy extends GameEntity {
+public class KittenEnemy extends GameEntity {
 
 	/**
 	 * Constructs a new Enemy which by default is set to deadly.
@@ -21,13 +23,13 @@ public class Enemy extends GameEntity {
 	 * @param x the x coord
 	 * @param y the y coord
 	 */
-	public Enemy(String resKey, int x, int y) {
+	public KittenEnemy(String resKey, int x, int y) {
 		super(new Hitbox.RectHitbox(x, y, PLBaseModel.LHPIXEL_WIDTH * 2, Math.round(PLBaseModel.LHPIXEL_HEIGHT * 0.9f)), resKey, x, y, PLBaseModel.LHPIXEL_WIDTH * 2, Math.round(PLBaseModel.LHPIXEL_HEIGHT * 0.9f));
 		setDeadly(true);
 	}
 	
 	
-	public Enemy(String resKey, Point p) {
+	public KittenEnemy(String resKey, Point p) {
 		this(resKey, p.x, p.y);
 	}
 

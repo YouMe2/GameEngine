@@ -1,26 +1,28 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.kittenGame;
 
 import static de.uni_kiel.progOOproject17.model.PLBaseModel.GAME_WIDTH;
 import static de.uni_kiel.progOOproject17.model.PLBaseModel.LHPIXEL_HEIGHT;
 import static de.uni_kiel.progOOproject17.model.PLBaseModel.LHPIXEL_WIDTH;
 
+import de.uni_kiel.progOOproject17.model.PLBaseModel;
 import de.uni_kiel.progOOproject17.model.abs.GameCompound;
+import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
  * This class represents a {@link GameCompound} that acts as a Scoreboard. The
- * {@link Scoreboard} can display the three values given by the {@link Stats}
+ * {@link KittenScoreboard} can display the three values given by the {@link KittenStats}
  * interface.
  *
  */
-public class Scoreboard extends GameCompound {
+public class KittenScoreboard extends GameCompound {
 
 	/**
-	 * The stats this {@link Scoreboard} shows.
+	 * The stats this {@link KittenScoreboard} shows.
 	 */
-	private final Stats stats;
+	private final KittenStats stats;
 
 	/**
 	 * The {@link Viewable} that make up the display for the progress
@@ -40,11 +42,11 @@ public class Scoreboard extends GameCompound {
 	private String lifesKey = "life";
 
 	/**
-	 * Constructs a new {@link Scoreboard} which when being ticked will display the {@link Stats} in stats.
+	 * Constructs a new {@link KittenScoreboard} which when being ticked will display the {@link KittenStats} in stats.
 	 * 
-	 * @param stats the {@link Stats} to display
+	 * @param stats the {@link KittenStats} to display
 	 */
-	public Scoreboard(Stats stats) {
+	public KittenScoreboard(KittenStats stats) {
 		super(0, 0, GAME_WIDTH, LHPIXEL_HEIGHT * 3);
 		this.stats = stats;
 

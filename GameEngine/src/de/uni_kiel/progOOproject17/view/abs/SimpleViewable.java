@@ -1,10 +1,9 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.view.abs;
 
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import de.uni_kiel.progOOproject17.model.abs.Distance;
-import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
  * This class serves as a simple implementation on the {@link Viewable}

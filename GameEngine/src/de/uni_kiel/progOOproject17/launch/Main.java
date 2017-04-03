@@ -5,15 +5,9 @@ import de.uni_kiel.progOOproject17.controller.abs.AbstractController;
 import de.uni_kiel.progOOproject17.controller.abs.TickedController;
 import de.uni_kiel.progOOproject17.model.Background;
 import de.uni_kiel.progOOproject17.model.Block;
-import de.uni_kiel.progOOproject17.model.Enemy;
 import de.uni_kiel.progOOproject17.model.Floor;
-import de.uni_kiel.progOOproject17.model.GameScreen;
 import de.uni_kiel.progOOproject17.model.PLBaseModel;
 import de.uni_kiel.progOOproject17.model.Particle;
-import de.uni_kiel.progOOproject17.model.Player;
-import de.uni_kiel.progOOproject17.model.Scoreboard;
-import de.uni_kiel.progOOproject17.model.StartMenu;
-import de.uni_kiel.progOOproject17.model.Stats;
 import de.uni_kiel.progOOproject17.model.abs.AbstractBaseModel;
 import de.uni_kiel.progOOproject17.model.abs.Collidable;
 import de.uni_kiel.progOOproject17.model.abs.Deadly;
@@ -24,8 +18,14 @@ import de.uni_kiel.progOOproject17.model.abs.GameElement;
 import de.uni_kiel.progOOproject17.model.abs.GameEntity;
 import de.uni_kiel.progOOproject17.model.abs.GameObject;
 import de.uni_kiel.progOOproject17.model.abs.Gravitational;
-import de.uni_kiel.progOOproject17.model.abs.Screen;
-import de.uni_kiel.progOOproject17.model.levelgen.LevelGenerator;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenEnemy;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenGameScreen;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenPlayer;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenScoreboard;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenStats;
+import de.uni_kiel.progOOproject17.model.kittenGame.levelGen.LevelGenerator;
+import de.uni_kiel.progOOproject17.model.screen.Screen;
+import de.uni_kiel.progOOproject17.model.screen.StartMenu;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
 import de.uni_kiel.progOOproject17.view.PLDektopView;
@@ -102,10 +102,10 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  * <p>
  * Most of those <code>Screen</code>s are different menus for example the
  * {@link StartMenu} but there is also one special <code>Screen</code>: the
- * {@link GameScreen}. This class itself hosts the game logic and again serves
+ * {@link KittenGameScreen}. This class itself hosts the game logic and again serves
  * as a smaller kind of controller or manager for the game logic. It is the
- * {@link Environment} for all of the game logic and holds the {@link Player}'s
- * {@link Stats} as well as a {@link LevelGenerator} and a {@link Scoreboard}.
+ * {@link Environment} for all of the game logic and holds the {@link KittenPlayer}'s
+ * {@link KittenStats} as well as a {@link LevelGenerator} and a {@link KittenScoreboard}.
  * <h2>Game class hierarchy</h2> The game logic itself is build upon a big
  * branched structure. The superclass of the game logics structure is
  * {@link GameComponent}. It declares the very basics of every
@@ -124,8 +124,8 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  * <code>GameObject</code>s and additionally are {@link Gravitational} and
  * provide the functionality of having a velocity and executing movement based
  * on the gravity, their velocity and collisions with other
- * <code>GameObject</code>s. The {@link Enemy}s, {@link Block}s and the
- * {@link Player} are <code>GameEntities</code>. The <code>Player</code> is
+ * <code>GameObject</code>s. The {@link KittenEnemy}s, {@link Block}s and the
+ * {@link KittenPlayer} are <code>GameEntities</code>. The <code>Player</code> is
  * possibly the most interesting entity, because it implements the game
  * mechanics that are responsible for jumping and crouching, taking damage and
  * earning points.

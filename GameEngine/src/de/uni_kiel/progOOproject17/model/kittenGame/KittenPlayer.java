@@ -1,4 +1,4 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.kittenGame;
 
 import static de.uni_kiel.progOOproject17.model.abs.MoveState.CROUCHING;
 import static de.uni_kiel.progOOproject17.model.abs.MoveState.JUMPING;
@@ -7,6 +7,8 @@ import static de.uni_kiel.progOOproject17.model.abs.MoveState.NORMAL;
 
 import java.awt.Point;
 
+import de.uni_kiel.progOOproject17.model.PLBaseModel;
+import de.uni_kiel.progOOproject17.model.Particle;
 import de.uni_kiel.progOOproject17.model.abs.Distance;
 import de.uni_kiel.progOOproject17.model.abs.GameEntity;
 import de.uni_kiel.progOOproject17.model.abs.GameObject;
@@ -18,13 +20,13 @@ import de.uni_kiel.progOOproject17.resources.ResourceManager;
 import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
 
 /**
- * This class represents a {@link GameEntity} that acts as the {@link Player}.
+ * This class represents a {@link GameEntity} that acts as the {@link KittenPlayer}.
  * The player has a certain number of lifes and points. The player can be
  * interacted with view setting a {@link MoveCommand}.
  * 
  *
  */
-public class Player extends GameEntity {
+public class KittenPlayer extends GameEntity {
 
 	/**
 	 * The number of points the player scored.
@@ -92,7 +94,7 @@ public class Player extends GameEntity {
 	 * @param pos
 	 *            the position
 	 */
-	public Player(String resKey, Point pos) {
+	public KittenPlayer(String resKey, Point pos) {
 		this(resKey, pos.x, pos.y);
 	}
 
@@ -106,7 +108,7 @@ public class Player extends GameEntity {
 	 * @param y
 	 *            the y coord
 	 */
-	public Player(String resKey, int x, int y) {
+	public KittenPlayer(String resKey, int x, int y) {
 		super(new Hitbox.RectHitbox(x, y, PLAYER_W, PLAYER_H_NORMAL), resKey, x, y, PLAYER_W, PLAYER_H_NORMAL);
 		this.resKey = resKey;
 	}

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.screen;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -14,7 +14,10 @@ import java.util.function.Consumer;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
+import de.uni_kiel.progOOproject17.model.Block;
+import de.uni_kiel.progOOproject17.model.SimpleEnvironment;
 import de.uni_kiel.progOOproject17.model.abs.Collidable;
+import de.uni_kiel.progOOproject17.model.abs.CreationHelper;
 import de.uni_kiel.progOOproject17.model.abs.Destroyable;
 import de.uni_kiel.progOOproject17.model.abs.Distance;
 import de.uni_kiel.progOOproject17.model.abs.Environment;
@@ -22,7 +25,6 @@ import de.uni_kiel.progOOproject17.model.abs.GameElement;
 import de.uni_kiel.progOOproject17.model.abs.GameObject;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox;
 import de.uni_kiel.progOOproject17.model.abs.MoveCommand;
-import de.uni_kiel.progOOproject17.model.abs.Screen;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox.CircleHitbox;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox.LineHitbox;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox.PointHitbox;

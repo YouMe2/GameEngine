@@ -10,7 +10,7 @@ import java.security.SecurityPermission;
 
 import javax.annotation.Generated;
 
-import de.uni_kiel.progOOproject17.model.SimpleViewable;
+import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**

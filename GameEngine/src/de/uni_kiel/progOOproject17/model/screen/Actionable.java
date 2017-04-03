@@ -1,4 +1,4 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.screen;
 
 import javax.swing.Action;
 

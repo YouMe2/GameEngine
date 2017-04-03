@@ -1,11 +1,11 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.kittenGame;
 
 /**
  * This interface represents the functionality of being able to track some
  * statistics about progress, points and lifes for eg of the player.
  *
  */
-public interface Stats {
+public interface KittenStats {
 
 	/**
 	 * Returns the points p this object gained. <code> (0 <= p)</code>

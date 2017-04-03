@@ -1,20 +1,21 @@
-package de.uni_kiel.progOOproject17.model.levelgen;
+package de.uni_kiel.progOOproject17.model.kittenGame.levelGen;
 
-import static de.uni_kiel.progOOproject17.model.levelgen.LevelGenerator.FLOOR_HEIGHT;
-import static de.uni_kiel.progOOproject17.model.levelgen.LevelGenerator.FLOOR_POS;
-import static de.uni_kiel.progOOproject17.model.levelgen.Obstacle.CENTER;
-import static de.uni_kiel.progOOproject17.model.levelgen.Obstacle.DOUBLE;
-import static de.uni_kiel.progOOproject17.model.levelgen.Obstacle.DOUBLE_HOVERING;
-import static de.uni_kiel.progOOproject17.model.levelgen.Obstacle.HOVERING;
-import static de.uni_kiel.progOOproject17.model.levelgen.Obstacle.SINGLE;
-import static de.uni_kiel.progOOproject17.model.levelgen.Obstacle.TRIPLE_HOVERING;
-import static de.uni_kiel.progOOproject17.model.levelgen.Obstacle.TWO_ON_TOP;
-import static de.uni_kiel.progOOproject17.model.levelgen.Obstacle.TWO_ON_TOP_HIGH;
-
-import de.uni_kiel.progOOproject17.model.CreationHelper;
 import de.uni_kiel.progOOproject17.model.Floor;
+import de.uni_kiel.progOOproject17.model.abs.CreationHelper;
 import de.uni_kiel.progOOproject17.model.abs.Environment;
 import de.uni_kiel.progOOproject17.model.abs.GameElement;
+
+import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.LevelGenerator.FLOOR_HEIGHT;
+import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.LevelGenerator.FLOOR_POS;
+import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.Obstacle.CENTER;
+import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.Obstacle.DOUBLE;
+import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.Obstacle.DOUBLE_HOVERING;
+import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.Obstacle.HOVERING;
+import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.Obstacle.SINGLE;
+import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.Obstacle.TRIPLE_HOVERING;
+import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.Obstacle.TWO_ON_TOP;
+import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.Obstacle.TWO_ON_TOP_HIGH;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;

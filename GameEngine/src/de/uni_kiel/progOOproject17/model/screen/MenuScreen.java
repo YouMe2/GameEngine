@@ -1,4 +1,4 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.screen;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -7,8 +7,9 @@ import java.util.Arrays;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
-import de.uni_kiel.progOOproject17.model.abs.Screen;
+import de.uni_kiel.progOOproject17.model.PLBaseModel;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
+import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**

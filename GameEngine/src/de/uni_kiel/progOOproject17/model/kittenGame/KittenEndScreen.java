@@ -1,34 +1,35 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.kittenGame;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.Action;
 
+import de.uni_kiel.progOOproject17.model.screen.MenuScreen;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
  * This class represents a {@link MenuScreen} which will show after the game
  * ended.
  */
-public class EndScreen extends MenuScreen {
+public class KittenEndScreen extends MenuScreen {
 
-	private Scoreboard scoreboard;
+	private KittenScoreboard scoreboard;
 
 	/**
-	 * Constructs a new {@link EndScreen} that will show the given {@link Stats}
+	 * Constructs a new {@link KittenEndScreen} that will show the given {@link KittenStats}
 	 * and a simple {@link MenuScreen} with a retry action and a exit action.
 	 * 
 	 * @param w the width
 	 * @param h the height
-	 * @param stats the {@link Stats} to show
+	 * @param stats the {@link KittenStats} to show
 	 * @param newGameAction the retry action
 	 * @param exitAction the exit action
 	 */
-	public EndScreen(int w, int h, Stats stats, Action newGameAction, Action exitAction) {
+	public KittenEndScreen(int w, int h, KittenStats stats, Action newGameAction, Action exitAction) {
 		super(w, h, new String[] { "play", "exit" }, new Action[] { newGameAction, exitAction });
 
-		scoreboard = new Scoreboard(stats);
+		scoreboard = new KittenScoreboard(stats);
 
 	}
 

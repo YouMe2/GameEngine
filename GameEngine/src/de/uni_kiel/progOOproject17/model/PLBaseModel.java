@@ -1,9 +1,14 @@
 package de.uni_kiel.progOOproject17.model;
 
 import de.uni_kiel.progOOproject17.controller.PLController;
-import de.uni_kiel.progOOproject17.model.abs.Screen;
 import de.uni_kiel.progOOproject17.model.abs.ScreenedBaseModel;
 import de.uni_kiel.progOOproject17.model.abs.TickedBaseModel;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenEndScreen;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenGameScreen;
+import de.uni_kiel.progOOproject17.model.screen.DebugScreen;
+import de.uni_kiel.progOOproject17.model.screen.PauseMenu;
+import de.uni_kiel.progOOproject17.model.screen.Screen;
+import de.uni_kiel.progOOproject17.model.screen.StartMenu;
 import de.uni_kiel.progOOproject17.view.abs.OutputView;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 import java.awt.Point;
@@ -56,7 +61,7 @@ public class PLBaseModel extends ScreenedBaseModel {
 
 	
 	/**
-	 * The {@link Action} which starts a new {@link GameScreen}.
+	 * The {@link Action} which starts a new {@link KittenGameScreen}.
 	 */
 	public AbstractAction newGame = new AbstractAction() {
 
@@ -68,14 +73,14 @@ public class PLBaseModel extends ScreenedBaseModel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			setActiveScreen(new GameScreen(GAME_WIDTH, GAME_HEIGHT, pauseGame, endGame));
+			setActiveScreen(new KittenGameScreen(GAME_WIDTH, GAME_HEIGHT, pauseGame, endGame));
 			setShowPausedScreen(false);
 		}
 	};
 
 	/**
-	 * The {@link Action} which pauses an active {@link GameScreen} and displays
-	 * the {@link PauseMenu} as an overlay to the paused {@link GameScreen}
+	 * The {@link Action} which pauses an active {@link KittenGameScreen} and displays
+	 * the {@link PauseMenu} as an overlay to the paused {@link KittenGameScreen}
 	 */
 	public AbstractAction pauseGame = new AbstractAction() {
 
@@ -110,7 +115,7 @@ public class PLBaseModel extends ScreenedBaseModel {
 	};
 
 	/**
-	 * The {@link Action} which displays the {@link EndScreen} after a game has
+	 * The {@link Action} which displays the {@link KittenEndScreen} after a game has
 	 * ended.
 	 */
 	public AbstractAction endGame = new AbstractAction() {
@@ -122,7 +127,7 @@ public class PLBaseModel extends ScreenedBaseModel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			setActiveScreen(new EndScreen(GAME_WIDTH, GAME_HEIGHT, ((GameScreen) getActiveScreeen()).getPlayerStats(),
+			setActiveScreen(new KittenEndScreen(GAME_WIDTH, GAME_HEIGHT, ((KittenGameScreen) getActiveScreeen()).getPlayerStats(),
 					newGame, exitGame));
 			setShowPausedScreen(false);
 		}
@@ -151,7 +156,7 @@ public class PLBaseModel extends ScreenedBaseModel {
 	 * {@link StartMenu}.
 	 */
 	public PLBaseModel() {
-		setActiveScreen(new StartMenu(GAME_WIDTH, GAME_HEIGHT, newGame, exitGame));
+		setActiveScreen(new StartMenu(GAME_WIDTH, GAME_HEIGHT, newGame, newGame, exitGame));
 	}
 	
 	public void showDebugScreen(){

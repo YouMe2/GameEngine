@@ -1,8 +1,8 @@
 package de.uni_kiel.progOOproject17.controller;
 
 import de.uni_kiel.progOOproject17.controller.abs.TickedController;
-import de.uni_kiel.progOOproject17.model.InputActionKey;
 import de.uni_kiel.progOOproject17.model.PLBaseModel;
+import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.view.PLDektopView;
 import java.awt.event.ActionEvent;

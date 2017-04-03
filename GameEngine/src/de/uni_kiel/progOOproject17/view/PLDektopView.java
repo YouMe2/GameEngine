@@ -7,13 +7,13 @@ import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
 import de.uni_kiel.progOOproject17.model.PLBaseModel;
-import de.uni_kiel.progOOproject17.model.ViewablesList;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
 import de.uni_kiel.progOOproject17.view.abs.FramedIOView;
 import de.uni_kiel.progOOproject17.view.abs.InputView;
 import de.uni_kiel.progOOproject17.view.abs.OutputView;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
+import de.uni_kiel.progOOproject17.view.abs.ViewablesList;
 import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
 
 /**

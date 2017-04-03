@@ -1,10 +1,9 @@
-package de.uni_kiel.progOOproject17.model.abs;
+package de.uni_kiel.progOOproject17.model.screen;
 
 import java.util.HashMap;
 import javax.swing.Action;
 
-import de.uni_kiel.progOOproject17.model.Actionable;
-import de.uni_kiel.progOOproject17.model.InputActionKey;
+import de.uni_kiel.progOOproject17.model.abs.GameCompound;
 
 /**
  * This class represents a advanced {@link GameCompound} that acts as a

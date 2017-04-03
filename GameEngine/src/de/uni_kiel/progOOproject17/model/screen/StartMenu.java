@@ -1,6 +1,8 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.screen;
 
+import de.uni_kiel.progOOproject17.model.PLBaseModel;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
+import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 import javax.swing.Action;
 
@@ -17,8 +19,8 @@ public class StartMenu extends MenuScreen {
 	 * @param w the width
 	 * @param h the height
 	 */
-	public StartMenu(int w, int h, Action newGameAction, Action exitAction) {
-		super(w, h, new String[] { "play", "exit" }, new Action[] { newGameAction, exitAction });
+	public StartMenu(int w, int h, Action kittenGameAction, Action testGameAction, Action exitAction) {
+		super(w, h, new String[] { "play_kitten", "play_test", "exit" }, new Action[] { kittenGameAction, testGameAction, exitAction });
 		setBackground("black");
 
 		addViewable(new SimpleViewable(GameProperties.getInstance().getProperty("titleResKey"), PLBaseModel.lhToGam(8, 0, 12, 3), Viewable.FLOOR_LAYER));

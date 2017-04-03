@@ -3,8 +3,7 @@ package de.uni_kiel.progOOproject17.model.abs;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import de.uni_kiel.progOOproject17.model.CreationHelper;
-import de.uni_kiel.progOOproject17.model.SimpleViewable;
+import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 public abstract class GameElement implements Viewable, Destroyable, Ticked {

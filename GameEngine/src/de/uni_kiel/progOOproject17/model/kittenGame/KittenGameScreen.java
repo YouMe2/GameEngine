@@ -1,4 +1,4 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.kittenGame;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,10 @@ import java.util.function.Consumer;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
+import de.uni_kiel.progOOproject17.model.PLBaseModel;
+import de.uni_kiel.progOOproject17.model.SimpleEnvironment;
 import de.uni_kiel.progOOproject17.model.abs.Collidable;
+import de.uni_kiel.progOOproject17.model.abs.CreationHelper;
 import de.uni_kiel.progOOproject17.model.abs.Destroyable;
 import de.uni_kiel.progOOproject17.model.abs.Distance;
 import de.uni_kiel.progOOproject17.model.abs.Environment;
@@ -18,27 +21,28 @@ import de.uni_kiel.progOOproject17.model.abs.GameElement;
 import de.uni_kiel.progOOproject17.model.abs.GameObject;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox;
 import de.uni_kiel.progOOproject17.model.abs.MoveCommand;
-import de.uni_kiel.progOOproject17.model.abs.Screen;
-import de.uni_kiel.progOOproject17.model.levelgen.LevelGenerator;
+import de.uni_kiel.progOOproject17.model.kittenGame.levelGen.LevelGenerator;
+import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
+import de.uni_kiel.progOOproject17.model.screen.Screen;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
  * This class represents a {@link Screen} that serves as the environment for the
- * game. It holds all the {@link GameElement}s, the {@link Scoreboard} and the
+ * game. It holds all the {@link GameElement}s, the {@link KittenScoreboard} and the
  * {@link LevelGenerator}, as well as the relevant actions for the player.
  */
-public class GameScreen extends Screen implements Stats {
+public class KittenGameScreen extends Screen implements KittenStats {
 
 	private final LinkedList<GameElement> gameElements;
 	private final LinkedList<GameElement> createdElements;
 	private final LinkedList<Destroyable> destroyedElements;
 
-	private final Player player;
+	private final KittenPlayer player;
 	private int screenVelocity = Integer.valueOf(GameProperties.getInstance().getProperty("startVelocity"));
 
-	private Scoreboard scoreboard;
+	private KittenScoreboard scoreboard;
 	private LevelGenerator levelGenerator;
 	private final Action endAction;
 
@@ -77,8 +81,8 @@ public class GameScreen extends Screen implements Stats {
 	private long deathtime = -1;
 
 	/**
-	 * Constructs a new {@link GameScreen} which essentially constructs a fully
-	 * new game. Creates a {@link Player}. Starts the {@link LevelGenerator} and
+	 * Constructs a new {@link KittenGameScreen} which essentially constructs a fully
+	 * new game. Creates a {@link KittenPlayer}. Starts the {@link LevelGenerator} and
 	 * initializes the player actions.
 	 * 
 	 * @param w
@@ -90,7 +94,7 @@ public class GameScreen extends Screen implements Stats {
 	 * @param endAction
 	 *            the action for when the game ended (Player died)
 	 */
-	public GameScreen(int w, int h, Action pauseAction, Action endAction) {
+	public KittenGameScreen(int w, int h, Action pauseAction, Action endAction) {
 		super(w, h);
 		this.inGameScreenBoarder = new Rectangle(0, 0, w, h);
 		this.endAction = endAction;
@@ -99,10 +103,10 @@ public class GameScreen extends Screen implements Stats {
 		createdElements = new LinkedList<>();
 		this.environment = new SimpleEnvironment(gameElements);
 
-		player = new Player(GameProperties.getInstance().getProperty("playerResKey"),
+		player = new KittenPlayer(GameProperties.getInstance().getProperty("playerResKey"),
 				PLBaseModel.lhToGame(3, PLBaseModel.LH_HEIGHT - 3));
 		player.setPermaXVel(screenVelocity);
-		scoreboard = new Scoreboard(getPlayerStats());
+		scoreboard = new KittenScoreboard(getPlayerStats());
 
 		levelGenerator = new LevelGenerator(environment, creatHelp, () -> {
 			player.addPoint();
@@ -191,7 +195,7 @@ public class GameScreen extends Screen implements Stats {
 			public void accept(GameElement e) {
 
 				e.tick(timestamp);
-				if (e.getView().getViewRect().getMaxX() < GameScreen.this.getX())
+				if (e.getView().getViewRect().getMaxX() < KittenGameScreen.this.getX())
 					e.destroy();
 
 			};
@@ -227,11 +231,11 @@ public class GameScreen extends Screen implements Stats {
 	}
 
 	/**
-	 * Returns the {@link Stats} of the player.
+	 * Returns the {@link KittenStats} of the player.
 	 * 
-	 * @return the {@link Stats} of the player
+	 * @return the {@link KittenStats} of the player
 	 */
-	public Stats getPlayerStats() {
+	public KittenStats getPlayerStats() {
 		return this;
 	}
 
