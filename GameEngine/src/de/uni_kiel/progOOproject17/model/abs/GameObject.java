@@ -15,7 +15,9 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	private Hitbox hitbox;
 	private boolean solid = true;
 	
-	private ArrayList<Effect<Effectable>> effects;
+	private Stats stats;
+	
+	private ArrayList<Effect> effects;
 
 	/**
 	 * Constructs a new {@link GameObject}.
@@ -32,6 +34,23 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 		super(resKey, x, y, w, h, layer);
 		this.hitbox = hitbox;
 		this.effects = new ArrayList<>();
+		
+		
+	}
+	
+	/**
+	 * @param stats the stats to set
+	 */
+	public void setStats(Stats stats) {
+		this.stats = stats;
+	}
+	
+	/**
+	 * @return the stats
+	 */
+	public Stats getStats() {
+		//TODO safer with clone?
+		return stats;
 	}
 	
 	/* (non-Javadoc)
@@ -43,48 +62,31 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 		tickEffects(timestamp);
 	}
 
-	/**
-	 * 
-	 */
 	private void tickEffects(long timestamp) {
-		for (Effect<Effectable> effect : effects) {
+		for (Effect effect : effects) {
 			effect.tick(timestamp);
 		}
 		
 	}
 	
-//	/* (non-Javadoc)
-//	 * @see de.uni_kiel.progOOproject17.model.abs.Effectable#applyEffect(de.uni_kiel.progOOproject17.model.abs.Effect)
-//	 */
-//	@Override
-//	public void applyEffect(Effect<> e) {
-//
-//		effects.add(e);
-//		e.initEffect(this);
-//		
-//	}
 	
 	/* (non-Javadoc)
 	 * @see de.uni_kiel.progOOproject17.model.abs.Effectable#applyEffect(de.uni_kiel.progOOproject17.model.abs.Effect)
 	 */
 	@Override
-	public void applyEffect(Effect<? extends Effectable> e) {
-		// TODO Auto-generated method stub
+	public void applyEffect(Effect e) {
+		effects.add(e);
+		e.apply(stats);
 		
 	}
-	
-	/* (non-Javadoc)
-	 * @see de.uni_kiel.progOOproject17.model.abs.GameObject#applyEffect(de.uni_kiel.progOOproject17.model.abs.Effect)
-	 */
-
 	
 	/* (non-Javadoc)
 	 * @see de.uni_kiel.progOOproject17.model.abs.Effectable#removeEffect(de.uni_kiel.progOOproject17.model.abs.Effect)
 	 */
 	@Override
-	public void removeEffect(Effect<Effectable> e) {
+	public void endEffect(Effect e) {
 		effects.remove(e);
-		
+		e.end();
 	}
 	
 

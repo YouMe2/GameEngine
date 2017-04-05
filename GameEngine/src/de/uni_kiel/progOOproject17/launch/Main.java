@@ -60,8 +60,8 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  * The {@link PLController} specifies that class even further and defines how
  * the controller of our actual game behaves. It refers to instances of a
  * {@link PLDektopView} and a {@link PLLighthouseView}. Also, it specifies that
- * the model is a {@link KittenBaseModel} (and thereby it defines that the program
- * is actually a game and not anything else).
+ * the model is a {@link KittenBaseModel} (and thereby it defines that the
+ * program is actually a game and not anything else).
  * <h1>View</h1> The view is again separated into two main parts: inputs and
  * outputs. As mentioned above, these are defined by the two interfaces
  * <code>InputView</code> and <code>OutputView</code> which are responsible for
@@ -101,11 +101,12 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  * hierarchy" width="800" height="235">
  * <p>
  * Most of those <code>Screen</code>s are different menus for example the
- * {@link KittenStartMenu} but there is also one special <code>Screen</code>: the
- * {@link KittenGameScreen}. This class itself hosts the game logic and again serves
- * as a smaller kind of controller or manager for the game logic. It is the
- * {@link Environment} for all of the game logic and holds the {@link KittenPlayer}'s
- * {@link KittenStats} as well as a {@link LevelGenerator} and a {@link KittenScoreboard}.
+ * {@link KittenStartMenu} but there is also one special <code>Screen</code>:
+ * the {@link KittenGameScreen}. This class itself hosts the game logic and
+ * again serves as a smaller kind of controller or manager for the game logic.
+ * It is the {@link Environment} for all of the game logic and holds the
+ * {@link KittenPlayer}'s {@link KittenStats} as well as a
+ * {@link LevelGenerator} and a {@link KittenScoreboard}.
  * <h2>Game class hierarchy</h2> The game logic itself is build upon a big
  * branched structure. The superclass of the game logics structure is
  * {@link GameComponent}. It declares the very basics of every
@@ -125,8 +126,8 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  * provide the functionality of having a velocity and executing movement based
  * on the gravity, their velocity and collisions with other
  * <code>GameObject</code>s. The {@link KittenEnemy}s, {@link Block}s and the
- * {@link KittenPlayer} are <code>GameEntities</code>. The <code>Player</code> is
- * possibly the most interesting entity, because it implements the game
+ * {@link KittenPlayer} are <code>GameEntities</code>. The <code>Player</code>
+ * is possibly the most interesting entity, because it implements the game
  * mechanics that are responsible for jumping and crouching, taking damage and
  * earning points.
  * <p>
@@ -153,11 +154,10 @@ public class Main {
 
 	public static void main(String[] args) {
 
-
-		
 		ResourceManager.getInstance().init();
 
-		new PLController(new PLDektopView(GameProperties.getInstance().getProperty("titleText")), new KittenBaseModel()).start(0);
+		new PLController(new PLDektopView(GameProperties.getInstance().getProperty("titleText")), new KittenBaseModel())
+				.start(0);
 
 	}
 

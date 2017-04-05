@@ -25,7 +25,7 @@ public class TestBaseModel extends ScreenedBaseModel{
 	//TODO screen and priority test for new Viewable architectur
 	
 	//TODO onHitEffects -> Effects
-	
+	//TODO use Effects testwise?
 	
 	/**
 	 * 

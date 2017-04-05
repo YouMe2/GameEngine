@@ -10,10 +10,8 @@ package de.uni_kiel.progOOproject17.model.abs;
  */
 public interface Effectable {
 	
-	public void applyEffect(Effect<? extends Effectable> e);
+	public void applyEffect(Effect e);
 
-	public void removeEffect(Effect<Effectable> e);
+	public void endEffect(Effect e);
 
-
-	
 }
