@@ -2,11 +2,11 @@ package de.uni_kiel.progOOproject17.model.kittenGame.levelGen;
 
 import de.uni_kiel.progOOproject17.model.Background;
 import de.uni_kiel.progOOproject17.model.Floor;
-import de.uni_kiel.progOOproject17.model.PLBaseModel;
 import de.uni_kiel.progOOproject17.model.abs.CreationHelper;
 import de.uni_kiel.progOOproject17.model.abs.Environment;
 import de.uni_kiel.progOOproject17.model.abs.GameElement;
 import de.uni_kiel.progOOproject17.model.abs.Ticked;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
 import java.awt.Rectangle;
@@ -36,11 +36,11 @@ public class LevelGenerator implements Ticked {
 	 * The height of the generated floor, supposed to be equivalent to the
 	 * height of one window on the skyscraper.
 	 */
-	public static final int FLOOR_HEIGHT = PLBaseModel.lhToGame(0, 1).y;
+	public static final int FLOOR_HEIGHT = KittenBaseModel.lhToGame(0, 1).y;
 	/**
 	 * The position of the floor.
 	 */
-	public static final int FLOOR_POS = PLBaseModel.GAME_HEIGHT - LevelGenerator.FLOOR_HEIGHT;
+	public static final int FLOOR_POS = KittenBaseModel.GAME_HEIGHT - LevelGenerator.FLOOR_HEIGHT;
 
 	/**
 	 * The standard reskey for the enemys.
@@ -154,7 +154,7 @@ public class LevelGenerator implements Ticked {
 		Stage stage = stages[currentStage];
 		// Create first floor
 		if (currentStage == 0) {
-			int floorLength = PLBaseModel.GAME_WIDTH + 800;
+			int floorLength = KittenBaseModel.GAME_WIDTH + 800;
 			Floor startFloor = new Floor("floor", 0, FLOOR_POS, floorLength, FLOOR_HEIGHT);
 			stageStart = floorLength;
 			createHelper.create(startFloor);
@@ -187,7 +187,7 @@ public class LevelGenerator implements Ticked {
 	 * @return the width of the generated background
 	 */
 	private int spawnBackground(int backgroundStart) {
-		Background b = new Background("bg", backgroundStart, 0, 1024, PLBaseModel.GAME_HEIGHT);
+		Background b = new Background("bg", backgroundStart, 0, 1024, KittenBaseModel.GAME_HEIGHT);
 		int backgroundEnd = backgroundStart + b.getView().getWidth();
 		createHelper.create(b);
 //		System.out.println("Spawned background from " + backgroundStart + " to " + backgroundEnd);

@@ -1,14 +1,11 @@
-package de.uni_kiel.progOOproject17.model;
+package de.uni_kiel.progOOproject17.model.kittenGame;
 
 import de.uni_kiel.progOOproject17.controller.PLController;
 import de.uni_kiel.progOOproject17.model.abs.ScreenedBaseModel;
 import de.uni_kiel.progOOproject17.model.abs.TickedBaseModel;
-import de.uni_kiel.progOOproject17.model.kittenGame.KittenEndScreen;
-import de.uni_kiel.progOOproject17.model.kittenGame.KittenGameScreen;
 import de.uni_kiel.progOOproject17.model.screen.DebugScreen;
 import de.uni_kiel.progOOproject17.model.screen.PauseMenu;
 import de.uni_kiel.progOOproject17.model.screen.Screen;
-import de.uni_kiel.progOOproject17.model.screen.StartMenu;
 import de.uni_kiel.progOOproject17.view.abs.OutputView;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 import java.awt.Point;
@@ -30,7 +27,7 @@ import javax.swing.Action;
  * this being a game made to be viewable on the Lighthouse!
  * 
  */
-public class PLBaseModel extends ScreenedBaseModel {
+public class KittenBaseModel extends ScreenedBaseModel {
 
 	/**
 	 * The width of the Lighthouse in pixels
@@ -73,7 +70,7 @@ public class PLBaseModel extends ScreenedBaseModel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			setActiveScreen(new KittenGameScreen(GAME_WIDTH, GAME_HEIGHT, pauseGame, endGame));
+			showScreen(new KittenGameScreen(GAME_WIDTH, GAME_HEIGHT, pauseGame, endGame));
 			setShowPausedScreen(false);
 		}
 	};
@@ -91,7 +88,7 @@ public class PLBaseModel extends ScreenedBaseModel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			setActiveScreen(new PauseMenu(GAME_WIDTH, GAME_HEIGHT, resumeAction, exitGame));
+			showScreen(new PauseMenu(GAME_WIDTH, GAME_HEIGHT, resumeAction, exitGame));
 			setShowPausedScreen(true);
 		}
 	};
@@ -127,7 +124,7 @@ public class PLBaseModel extends ScreenedBaseModel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			setActiveScreen(new KittenEndScreen(GAME_WIDTH, GAME_HEIGHT, ((KittenGameScreen) getActiveScreeen()).getPlayerStats(),
+			showScreen(new KittenEndScreen(GAME_WIDTH, GAME_HEIGHT, ((KittenGameScreen) getActiveScreeen()).getPlayerStats(),
 					newGame, exitGame));
 			setShowPausedScreen(false);
 		}
@@ -152,15 +149,15 @@ public class PLBaseModel extends ScreenedBaseModel {
 	};
 
 	/**
-	 * Constructs a new {@link PLBaseModel} which starts the
-	 * {@link StartMenu}.
+	 * Constructs a new {@link KittenBaseModel} which starts the
+	 * {@link KittenStartMenu}.
 	 */
-	public PLBaseModel() {
-		setActiveScreen(new StartMenu(GAME_WIDTH, GAME_HEIGHT, newGame, newGame, exitGame));
+	public KittenBaseModel() {
+		showScreen(new KittenStartMenu(GAME_WIDTH, GAME_HEIGHT, newGame, exitGame));
 	}
 	
 	public void showDebugScreen(){
-		setActiveScreen( new DebugScreen(GAME_WIDTH, GAME_HEIGHT, resumeAction));
+		showScreen( new DebugScreen(GAME_WIDTH, GAME_HEIGHT, resumeAction));
 	}
 	
 

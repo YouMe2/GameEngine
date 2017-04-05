@@ -10,7 +10,6 @@ import java.util.function.Consumer;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
-import de.uni_kiel.progOOproject17.model.PLBaseModel;
 import de.uni_kiel.progOOproject17.model.SimpleEnvironment;
 import de.uni_kiel.progOOproject17.model.abs.Collidable;
 import de.uni_kiel.progOOproject17.model.abs.CreationHelper;
@@ -104,7 +103,7 @@ public class KittenGameScreen extends Screen implements KittenStats {
 		this.environment = new SimpleEnvironment(gameElements);
 
 		player = new KittenPlayer(GameProperties.getInstance().getProperty("playerResKey"),
-				PLBaseModel.lhToGame(3, PLBaseModel.LH_HEIGHT - 3));
+				KittenBaseModel.lhToGame(3, KittenBaseModel.LH_HEIGHT - 3));
 		player.setPermaXVel(screenVelocity);
 		scoreboard = new KittenScoreboard(getPlayerStats());
 
@@ -186,7 +185,7 @@ public class KittenGameScreen extends Screen implements KittenStats {
 
 			}
 
-		inGameScreenBoarder.setLocation((int) (player.getHitbox().getX() - PLBaseModel.LHPIXEL_WIDTH * 2.5), 0);
+		inGameScreenBoarder.setLocation((int) (player.getHitbox().getX() - KittenBaseModel.LHPIXEL_WIDTH * 2.5), 0);
 
 		levelGenerator.tick(timestamp);
 		gameElements.forEach(new Consumer<GameElement>() {

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
-import de.uni_kiel.progOOproject17.model.PLBaseModel;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
 import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
@@ -17,7 +17,7 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  * simple menu.
  * 
  */
-public abstract class MenuScreen extends Screen {
+public class MenuScreen extends Screen {
 
 	private SimpleViewable background;
 
@@ -29,11 +29,11 @@ public abstract class MenuScreen extends Screen {
 
 	private int selction = 0;
 
-	public static final int ENTRY_WIDTH = PLBaseModel.LHPIXEL_WIDTH * 6;
-	public static final int ENTRY_HEIGHT = PLBaseModel.LHPIXEL_HEIGHT * 3;
+	public static final int ENTRY_WIDTH = KittenBaseModel.LHPIXEL_WIDTH * 6;
+	public static final int ENTRY_HEIGHT = KittenBaseModel.LHPIXEL_HEIGHT * 3;
 
-	public static final int CURSOR_WIDTH = PLBaseModel.LHPIXEL_WIDTH * 6;
-	public static final int CURSOR_HEIGHT = PLBaseModel.LHPIXEL_HEIGHT * 3;
+	public static final int CURSOR_WIDTH = KittenBaseModel.LHPIXEL_WIDTH * 6;
+	public static final int CURSOR_HEIGHT = KittenBaseModel.LHPIXEL_HEIGHT * 3;
 
 	/**
 	 * Constructs a new {@link MenuScreen} with entries specified by the resKeys
@@ -55,12 +55,12 @@ public abstract class MenuScreen extends Screen {
 
 		for (int i = 0; i < actions.length; i++) {
 			entries[i] = new SimpleViewable(resKeys[i], (getWidth() - ENTRY_WIDTH) / 2,
-					4 * PLBaseModel.LHPIXEL_HEIGHT + i * (ENTRY_HEIGHT + PLBaseModel.LHPIXEL_HEIGHT), ENTRY_WIDTH,
+					4 * KittenBaseModel.LHPIXEL_HEIGHT + i * (ENTRY_HEIGHT + KittenBaseModel.LHPIXEL_HEIGHT), ENTRY_WIDTH,
 					ENTRY_HEIGHT, Viewable.MENU_LAYER);
 		}
 
 		selectionCursor = new SimpleViewable("selection", (getWidth() - ENTRY_WIDTH) / 2,
-				4 * PLBaseModel.LHPIXEL_HEIGHT + selction * (ENTRY_HEIGHT + PLBaseModel.LHPIXEL_HEIGHT), CURSOR_WIDTH,
+				4 * KittenBaseModel.LHPIXEL_HEIGHT + selction * (ENTRY_HEIGHT + KittenBaseModel.LHPIXEL_HEIGHT), CURSOR_WIDTH,
 				CURSOR_HEIGHT, Viewable.MENU2_LAYER);
 
 		putAction(InputActionKey.UP_P, new AbstractAction() {
@@ -114,11 +114,11 @@ public abstract class MenuScreen extends Screen {
 	@Override
 	public void tick(long timestamp) {
 
-		selectionCursor.setLocation(PLBaseModel.LHPIXEL_WIDTH * 2,
-				4 * PLBaseModel.LHPIXEL_HEIGHT + selction * (ENTRY_HEIGHT + PLBaseModel.LHPIXEL_HEIGHT));
+		selectionCursor.setLocation(KittenBaseModel.LHPIXEL_WIDTH * 2,
+				4 * KittenBaseModel.LHPIXEL_HEIGHT + selction * (ENTRY_HEIGHT + KittenBaseModel.LHPIXEL_HEIGHT));
 
 		selectionCursor.setLocation((getWidth() - ENTRY_WIDTH) / 2,
-				4 * PLBaseModel.LHPIXEL_HEIGHT + selction * (ENTRY_HEIGHT + PLBaseModel.LHPIXEL_HEIGHT));
+				4 * KittenBaseModel.LHPIXEL_HEIGHT + selction * (ENTRY_HEIGHT + KittenBaseModel.LHPIXEL_HEIGHT));
 
 	}
 

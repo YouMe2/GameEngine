@@ -2,7 +2,6 @@ package de.uni_kiel.progOOproject17.model.kittenGame;
 
 import java.awt.Point;
 
-import de.uni_kiel.progOOproject17.model.PLBaseModel;
 import de.uni_kiel.progOOproject17.model.abs.CreationHelper;
 import de.uni_kiel.progOOproject17.model.abs.Environment;
 import de.uni_kiel.progOOproject17.model.abs.GameEntity;
@@ -24,7 +23,7 @@ public class KittenEnemy extends GameEntity {
 	 * @param y the y coord
 	 */
 	public KittenEnemy(String resKey, int x, int y) {
-		super(new Hitbox.RectHitbox(x, y, PLBaseModel.LHPIXEL_WIDTH * 2, Math.round(PLBaseModel.LHPIXEL_HEIGHT * 0.9f)), resKey, x, y, PLBaseModel.LHPIXEL_WIDTH * 2, Math.round(PLBaseModel.LHPIXEL_HEIGHT * 0.9f));
+		super(new Hitbox.RectHitbox(x, y, KittenBaseModel.LHPIXEL_WIDTH * 2, Math.round(KittenBaseModel.LHPIXEL_HEIGHT * 0.9f)), resKey, x, y, KittenBaseModel.LHPIXEL_WIDTH * 2, Math.round(KittenBaseModel.LHPIXEL_HEIGHT * 0.9f));
 		setDeadly(true);
 	}
 	
@@ -43,8 +42,7 @@ public class KittenEnemy extends GameEntity {
 			return;
 		}
 
-		// movement
-		doMovement();
+		super.tick(timestamp);
 
 	}
 

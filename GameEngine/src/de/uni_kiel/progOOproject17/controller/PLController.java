@@ -1,7 +1,7 @@
 package de.uni_kiel.progOOproject17.controller;
 
 import de.uni_kiel.progOOproject17.controller.abs.TickedController;
-import de.uni_kiel.progOOproject17.model.PLBaseModel;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel;
 import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.view.PLDektopView;
@@ -12,12 +12,12 @@ import javax.swing.AbstractAction;
 /**
  * This class represents the controller of this MVC structure and therefore the
  * access point to the whole program it self. This class is the most powerful in
- * the whole Program structure followed by the {@link PLBaseModel}.
+ * the whole Program structure followed by the {@link KittenBaseModel}.
  * 
  * It is the intermediary between all the views, which are split into inputs and
  * outputs, and the model, which itself contains a massively branched structure.
  * The creation of an {@link PLController} requires a {@link PLDektopView}
- * and a {@link PLBaseModel}. After creation the controller awaits a call of the
+ * and a {@link KittenBaseModel}. After creation the controller awaits a call of the
  * {@link #start(long)} method which will start the ticked gamecycle. It can
  * also be stooped with the {@link #stop()} method and then restarted with again
  * with the {@link #start(long)} method.
@@ -29,7 +29,7 @@ public class PLController extends TickedController {
 	 * stores the casted model to prevent casting on every call of
 	 * {@link #getModel()}
 	 */
-	private PLBaseModel myModel;
+	private KittenBaseModel myModel;
 
 	/**
 	 * stores the gameTime for a (re-)start when stopped for debugging purposes
@@ -48,9 +48,9 @@ public class PLController extends TickedController {
 	 * @param view
 	 *            the {@link PLDektopView} serving as standartIn and standardOut
 	 * @param model
-	 *            the {@link PLBaseModel} hosting the game.
+	 *            the {@link KittenBaseModel} hosting the game.
 	 */
-	public PLController(PLDektopView view, PLBaseModel model) {
+	public PLController(PLDektopView view, KittenBaseModel model) {
 		super(view, view, model, Integer.valueOf(GameProperties.getInstance().getProperty("tickLength")));
 
 		// standard Game Actions:
@@ -147,9 +147,9 @@ public class PLController extends TickedController {
 	 * de.uni_kiel.progOOproject17.controller.abs.TickedController#getModel()
 	 */
 	@Override
-	public PLBaseModel getModel() {
+	public KittenBaseModel getModel() {
 		if (myModel == null)
-			myModel = (PLBaseModel) model;
+			myModel = (KittenBaseModel) model;
 		return myModel;
 	}
 

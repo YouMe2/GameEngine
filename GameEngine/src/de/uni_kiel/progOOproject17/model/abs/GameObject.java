@@ -1,17 +1,21 @@
 package de.uni_kiel.progOOproject17.model.abs;
 
+import java.util.ArrayList;
+
 /**
  * This class represents a advanced {@link GameElement} that also is can be
  * {@link Deadly} and is {@link Collidable}.
  * 
  */
-public abstract class GameObject extends GameElement implements Deadly, Collidable {
+public abstract class GameObject extends GameElement implements Deadly, Collidable, Effectable {
 
 	private boolean deadly;
 	private int killcounter;
 
 	private Hitbox hitbox;
 	private boolean solid = true;
+	
+	private ArrayList<Effect<Effectable>> effects;
 
 	/**
 	 * Constructs a new {@link GameObject}.
@@ -27,8 +31,62 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	public GameObject(Hitbox hitbox, String resKey, int x, int y, int w, int h, int layer) {
 		super(resKey, x, y, w, h, layer);
 		this.hitbox = hitbox;
-
+		this.effects = new ArrayList<>();
 	}
+	
+	/* (non-Javadoc)
+	 * @see de.uni_kiel.progOOproject17.model.abs.Ticked#tick(long)
+	 */
+	@Override
+	public void tick(long timestamp) {
+		
+		tickEffects(timestamp);
+	}
+
+	/**
+	 * 
+	 */
+	private void tickEffects(long timestamp) {
+		for (Effect<Effectable> effect : effects) {
+			effect.tick(timestamp);
+		}
+		
+	}
+	
+//	/* (non-Javadoc)
+//	 * @see de.uni_kiel.progOOproject17.model.abs.Effectable#applyEffect(de.uni_kiel.progOOproject17.model.abs.Effect)
+//	 */
+//	@Override
+//	public void applyEffect(Effect<> e) {
+//
+//		effects.add(e);
+//		e.initEffect(this);
+//		
+//	}
+	
+	/* (non-Javadoc)
+	 * @see de.uni_kiel.progOOproject17.model.abs.Effectable#applyEffect(de.uni_kiel.progOOproject17.model.abs.Effect)
+	 */
+	@Override
+	public void applyEffect(Effect<? extends Effectable> e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/* (non-Javadoc)
+	 * @see de.uni_kiel.progOOproject17.model.abs.GameObject#applyEffect(de.uni_kiel.progOOproject17.model.abs.Effect)
+	 */
+
+	
+	/* (non-Javadoc)
+	 * @see de.uni_kiel.progOOproject17.model.abs.Effectable#removeEffect(de.uni_kiel.progOOproject17.model.abs.Effect)
+	 */
+	@Override
+	public void removeEffect(Effect<Effectable> e) {
+		effects.remove(e);
+		
+	}
+	
 
 	/*
 	 * (non-Javadoc)

@@ -32,8 +32,7 @@ public abstract class ScreenedBaseModel extends TickedBaseModel {
 	 * 
 	 */
 	public ScreenedBaseModel() {
-		
-		
+
 		
 	}
 
@@ -72,7 +71,7 @@ public abstract class ScreenedBaseModel extends TickedBaseModel {
 	 * @param s
 	 *            the new {@link Screen}
 	 */
-	public void setActiveScreen(Screen s) {
+	public void showScreen(Screen s) {
 		pausedScreen = activeScreeen;
 		activeScreeen = s;
 	}

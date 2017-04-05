@@ -6,7 +6,6 @@ import de.uni_kiel.progOOproject17.controller.abs.TickedController;
 import de.uni_kiel.progOOproject17.model.Background;
 import de.uni_kiel.progOOproject17.model.Block;
 import de.uni_kiel.progOOproject17.model.Floor;
-import de.uni_kiel.progOOproject17.model.PLBaseModel;
 import de.uni_kiel.progOOproject17.model.Particle;
 import de.uni_kiel.progOOproject17.model.abs.AbstractBaseModel;
 import de.uni_kiel.progOOproject17.model.abs.Collidable;
@@ -18,14 +17,15 @@ import de.uni_kiel.progOOproject17.model.abs.GameElement;
 import de.uni_kiel.progOOproject17.model.abs.GameEntity;
 import de.uni_kiel.progOOproject17.model.abs.GameObject;
 import de.uni_kiel.progOOproject17.model.abs.Gravitational;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel;
 import de.uni_kiel.progOOproject17.model.kittenGame.KittenEnemy;
 import de.uni_kiel.progOOproject17.model.kittenGame.KittenGameScreen;
 import de.uni_kiel.progOOproject17.model.kittenGame.KittenPlayer;
 import de.uni_kiel.progOOproject17.model.kittenGame.KittenScoreboard;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenStartMenu;
 import de.uni_kiel.progOOproject17.model.kittenGame.KittenStats;
 import de.uni_kiel.progOOproject17.model.kittenGame.levelGen.LevelGenerator;
 import de.uni_kiel.progOOproject17.model.screen.Screen;
-import de.uni_kiel.progOOproject17.model.screen.StartMenu;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
 import de.uni_kiel.progOOproject17.view.PLDektopView;
@@ -60,7 +60,7 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  * The {@link PLController} specifies that class even further and defines how
  * the controller of our actual game behaves. It refers to instances of a
  * {@link PLDektopView} and a {@link PLLighthouseView}. Also, it specifies that
- * the model is a {@link PLBaseModel} (and thereby it defines that the program
+ * the model is a {@link KittenBaseModel} (and thereby it defines that the program
  * is actually a game and not anything else).
  * <h1>View</h1> The view is again separated into two main parts: inputs and
  * outputs. As mentioned above, these are defined by the two interfaces
@@ -101,7 +101,7 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  * hierarchy" width="800" height="235">
  * <p>
  * Most of those <code>Screen</code>s are different menus for example the
- * {@link StartMenu} but there is also one special <code>Screen</code>: the
+ * {@link KittenStartMenu} but there is also one special <code>Screen</code>: the
  * {@link KittenGameScreen}. This class itself hosts the game logic and again serves
  * as a smaller kind of controller or manager for the game logic. It is the
  * {@link Environment} for all of the game logic and holds the {@link KittenPlayer}'s
@@ -157,8 +157,7 @@ public class Main {
 		
 		ResourceManager.getInstance().init();
 
-		new PLController(new PLDektopView(GameProperties.getInstance().getProperty("titleText")), new PLBaseModel())
-				.start(0);
+		new PLController(new PLDektopView(GameProperties.getInstance().getProperty("titleText")), new KittenBaseModel()).start(0);
 
 	}
 

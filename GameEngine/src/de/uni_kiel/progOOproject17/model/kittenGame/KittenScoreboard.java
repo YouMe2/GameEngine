@@ -1,13 +1,13 @@
 package de.uni_kiel.progOOproject17.model.kittenGame;
 
-import static de.uni_kiel.progOOproject17.model.PLBaseModel.GAME_WIDTH;
-import static de.uni_kiel.progOOproject17.model.PLBaseModel.LHPIXEL_HEIGHT;
-import static de.uni_kiel.progOOproject17.model.PLBaseModel.LHPIXEL_WIDTH;
-
-import de.uni_kiel.progOOproject17.model.PLBaseModel;
 import de.uni_kiel.progOOproject17.model.abs.GameCompound;
 import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
+
+import static de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel.GAME_WIDTH;
+import static de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel.LHPIXEL_HEIGHT;
+import static de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel.LHPIXEL_WIDTH;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -72,7 +72,7 @@ public class KittenScoreboard extends GameCompound {
 	@Override
 	public void tick(long timestamp) {
 
-		progressDisplay.setSize((int) (stats.getProgress() * PLBaseModel.GAME_WIDTH), progressDisplay.getHeight());
+		progressDisplay.setSize((int) (stats.getProgress() * KittenBaseModel.GAME_WIDTH), progressDisplay.getHeight());
 
 		int p = stats.getPoints();
 		if (p > pointsDisplay.length)

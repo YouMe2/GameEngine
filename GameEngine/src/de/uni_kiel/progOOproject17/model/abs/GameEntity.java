@@ -47,6 +47,18 @@ public abstract class GameEntity extends GameObject implements Gravitational {
 		velocity = new Distance(0, 0);
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see de.uni_kiel.progOOproject17.model.abs.Ticked#tick(long)
+	 */
+	@Override
+	public void tick(long timestamp) {
+
+		doMovement();
+		super.tick(timestamp);
+	}
+
+
 
 
 	/*

@@ -1,7 +1,7 @@
 package de.uni_kiel.progOOproject17.model.kittenGame.levelGen;
 
-import static de.uni_kiel.progOOproject17.model.PLBaseModel.LHPIXEL_HEIGHT;
-import static de.uni_kiel.progOOproject17.model.PLBaseModel.LHPIXEL_WIDTH;
+import static de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel.LHPIXEL_HEIGHT;
+import static de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel.LHPIXEL_WIDTH;
 import static de.uni_kiel.progOOproject17.model.kittenGame.levelGen.LevelGenerator.*;
 
 import de.uni_kiel.progOOproject17.model.abs.GameElement;

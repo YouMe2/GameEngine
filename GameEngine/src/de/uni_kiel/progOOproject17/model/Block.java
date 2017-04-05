@@ -67,10 +67,9 @@ public class Block extends GameEntity {
 			setVelocity(0, 0);
 			break;
 		}
-
-		// movement
-		doMovement();
-
+		
+		
+		super.tick(timestamp);
 	}
 
 	/*

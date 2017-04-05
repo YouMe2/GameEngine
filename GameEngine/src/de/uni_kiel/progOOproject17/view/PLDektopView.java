@@ -6,8 +6,8 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
-import de.uni_kiel.progOOproject17.model.PLBaseModel;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox;
+import de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
 import de.uni_kiel.progOOproject17.view.abs.FramedIOView;
 import de.uni_kiel.progOOproject17.view.abs.InputView;
@@ -40,8 +40,8 @@ public class PLDektopView extends FramedIOView {
 	 *            the title
 	 */
 	public PLDektopView(String title) {
-		super(title, PLBaseModel.GAME_WIDTH, PLBaseModel.GAME_HEIGHT, false);
-		img = new BufferedImage(PLBaseModel.GAME_WIDTH, PLBaseModel.GAME_HEIGHT, BufferedImage.TYPE_3BYTE_BGR);
+		super(title, KittenBaseModel.GAME_WIDTH, KittenBaseModel.GAME_HEIGHT, false);
+		img = new BufferedImage(KittenBaseModel.GAME_WIDTH, KittenBaseModel.GAME_HEIGHT, BufferedImage.TYPE_3BYTE_BGR);
 		res = ResourceManager.getInstance();
 		// setResizable(false);
 	}
@@ -56,7 +56,7 @@ public class PLDektopView extends FramedIOView {
 	public void render(Viewable[] viewables) {
 
 		final Graphics gr = img.getGraphics();
-		gr.clearRect(0, 0, PLBaseModel.GAME_WIDTH, PLBaseModel.GAME_HEIGHT);
+		gr.clearRect(0, 0, KittenBaseModel.GAME_WIDTH, KittenBaseModel.GAME_HEIGHT);
 
 		for (int i = 0; i < Viewable.LAYERsSIZE; i++) {
 			final int layer = i;
@@ -70,7 +70,7 @@ public class PLDektopView extends FramedIOView {
 
 		gr.dispose();
 		Graphics gr2 = contentPane.getGraphics();
-		gr2.drawImage(img, 0, 0, PLBaseModel.GAME_WIDTH, PLBaseModel.GAME_HEIGHT, null);
+		gr2.drawImage(img, 0, 0, KittenBaseModel.GAME_WIDTH, KittenBaseModel.GAME_HEIGHT, null);
 		gr2.dispose();
 
 	}

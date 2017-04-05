@@ -1,20 +1,18 @@
 package de.uni_kiel.progOOproject17.model.kittenGame;
 
-import static de.uni_kiel.progOOproject17.model.abs.MoveState.CROUCHING;
-import static de.uni_kiel.progOOproject17.model.abs.MoveState.JUMPING;
-import static de.uni_kiel.progOOproject17.model.abs.MoveState.JUMPING_AND_CROUCHING;
-import static de.uni_kiel.progOOproject17.model.abs.MoveState.NORMAL;
+import static de.uni_kiel.progOOproject17.model.kittenGame.KittenMoveState.CROUCHING;
+import static de.uni_kiel.progOOproject17.model.kittenGame.KittenMoveState.JUMPING;
+import static de.uni_kiel.progOOproject17.model.kittenGame.KittenMoveState.JUMPING_AND_CROUCHING;
+import static de.uni_kiel.progOOproject17.model.kittenGame.KittenMoveState.NORMAL;
 
 import java.awt.Point;
 
-import de.uni_kiel.progOOproject17.model.PLBaseModel;
 import de.uni_kiel.progOOproject17.model.Particle;
 import de.uni_kiel.progOOproject17.model.abs.Distance;
 import de.uni_kiel.progOOproject17.model.abs.GameEntity;
 import de.uni_kiel.progOOproject17.model.abs.GameObject;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox;
 import de.uni_kiel.progOOproject17.model.abs.MoveCommand;
-import de.uni_kiel.progOOproject17.model.abs.MoveState;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
 import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
@@ -49,9 +47,9 @@ public class KittenPlayer extends GameEntity {
 	private MoveCommand currMoveCommand = MoveCommand.NONE;
 
 	/**
-	 * The current {@link MoveState} of the player
+	 * The current {@link KittenMoveState} of the player
 	 */
-	private MoveState currMoveState = MoveState.NORMAL;
+	private KittenMoveState currMoveState = KittenMoveState.NORMAL;
 
 	/**
 	 * The velocity the player will gain when starting to jump.
@@ -62,12 +60,12 @@ public class KittenPlayer extends GameEntity {
 	/**
 	 * The player width
 	 */
-	public static final int PLAYER_W = PLBaseModel.LHPIXEL_WIDTH
+	public static final int PLAYER_W = KittenBaseModel.LHPIXEL_WIDTH
 			* Integer.valueOf(GameProperties.getInstance().getProperty("playerW"));
 	/**
 	 * The player height when normal
 	 */
-	public static final int PLAYER_H_NORMAL = PLBaseModel.LHPIXEL_HEIGHT
+	public static final int PLAYER_H_NORMAL = KittenBaseModel.LHPIXEL_HEIGHT
 			* Integer.valueOf(GameProperties.getInstance().getProperty("playerH"));
 	/**
 	 * The player height when crouch
@@ -80,7 +78,7 @@ public class KittenPlayer extends GameEntity {
 	private Key key = new Key() {
 		@Override
 		public String getText() {
-			return (currMoveState == CROUCHING || currMoveState == MoveState.JUMPING_AND_CROUCHING) ? resKey + "_C" : resKey;
+			return (currMoveState == CROUCHING || currMoveState == KittenMoveState.JUMPING_AND_CROUCHING) ? resKey + "_C" : resKey;
 		}
 		
 	};
@@ -212,8 +210,7 @@ public class KittenPlayer extends GameEntity {
 		}
 		currMoveCommand = MoveCommand.NONE;
 
-		// movement
-		doMovement();
+		super.tick(timestamp);
 
 		if (getVelocity().y >= 0)
 			if (currMoveState == JUMPING)
