@@ -48,7 +48,6 @@ public class PLDektopView extends FramedIOView {
 		res = ResourceManager.getInstance();
 		// setResizable(false);
 		canvas = new Canvas();
-		
 
 		canvas.setSize(contentPane.getWidth(), contentPane.getHeight());
 		contentPane.add(canvas);
@@ -64,49 +63,37 @@ public class PLDektopView extends FramedIOView {
 	@Override
 	public void render(Viewable viewable) {
 
-
 		final Graphics gr = img.getGraphics();
 		gr.clearRect(0, 0, img.getWidth(), img.getHeight());
 
-		// for (int i = 0; i < Viewable.LAYERsSIZE; i++) {
-		// final int layer = i;
-		// Arrays.stream(viewables).filter(v -> v.getLayer() == layer).forEach(v
-		// -> {
-		//
-		// render(v, gr);
-		//
-		// });
-		//
-		// }
-
 		render(viewable, gr);
-
 		gr.dispose();
-		//TODO FIX BUFFERSTAT
-//		if ( canvas.getBufferStrategy() == null) {
-//			canvas.createBufferStrategy(2);
-//		}	
-//		Graphics gr2 = canvas.getBufferStrategy().getDrawGraphics();
-		Graphics gr2 = canvas.getGraphics();
+
+		if (canvas.getBufferStrategy() == null) {
+			canvas.createBufferStrategy(2);
+		}
+		Graphics gr2 = canvas.getBufferStrategy().getDrawGraphics();
 		gr2.drawImage(img, 0, 0, KittenBaseModel.GAME_WIDTH, KittenBaseModel.GAME_HEIGHT, null);
 		gr2.dispose();
+		canvas.getBufferStrategy().show();
 
 	}
 
-	
 	private void render(Viewable v, Graphics gr) {
 		if (v == null)
 			return;
 		if (!v.isVisble())
 			return;
 		
+
+
 		Rectangle rect = v.getViewRect();
 		Key key = v.getContentKey();
 		String keyText = key != null ? key.getText() : null;
-	
+
 		if (keyText == null)
 			keyText = "null";
-		
+
 		if (keyText.equals(ViewCompound.COMPOUND_KEYTEXT) && key instanceof ViewCompound) {
 			ViewCompound comp = (ViewCompound) key;
 
@@ -137,7 +124,7 @@ public class PLDektopView extends FramedIOView {
 				gr.drawString(keyText, rect.x + 2, rect.y + 16);
 			} else if (!keyText.equals("null")) {
 				// standard render
-//				System.out.println("redered img: "+keyText);
+				// System.out.println("redered img: "+keyText);
 				gr.drawImage(res.getImage(keyText), rect.x, rect.y, rect.width, rect.height, null);
 			}
 
