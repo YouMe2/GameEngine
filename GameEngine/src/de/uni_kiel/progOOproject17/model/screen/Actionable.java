@@ -35,6 +35,6 @@ public interface Actionable {
 	 * @param a
 	 *            the {@link Actionable} to forward the actions from.
 	 */
-	public void forwardAllActions(Actionable a);
+	public void forwardAllActionsToThis(Actionable a);
 
 }

@@ -1,31 +1,28 @@
+/**
+ * 
+ */
 package de.uni_kiel.progOOproject17.model.screen;
 
 import java.util.HashMap;
+
 import javax.swing.Action;
 
-import de.uni_kiel.progOOproject17.model.abs.GameCompound;
-
 /**
- * This class represents a advanced {@link GameCompound} that acts as a
- * {@link Screen} which specifly is {@link Actionable}.
+ * @author Yannik Eikmeier
+ * @since 10.04.2017
  *
  */
-public abstract class Screen extends GameCompound implements Actionable {
+public class HashMapActionable implements Actionable {
 
-	private final HashMapActionable actions;
+	private final HashMap<InputActionKey, Action> actions;
+	
 	/**
-	 * Constructs a new Screen with no action preset!
 	 * 
-	 * @param w
-	 *            the width
-	 * @param h
-	 *            the height
 	 */
-	public Screen(int w, int h) {
-		super(0, 0, w, h);
-		actions = new HashMapActionable();
+	public HashMapActionable() {
+		actions = new HashMap<>();
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -34,7 +31,7 @@ public abstract class Screen extends GameCompound implements Actionable {
 	 */
 	@Override
 	public void putAction(InputActionKey iA, Action action) {
-		actions.putAction(iA, action);
+		actions.put(iA, action);
 	}
 
 	/*
@@ -45,7 +42,7 @@ public abstract class Screen extends GameCompound implements Actionable {
 	 */
 	@Override
 	public Action getAction(InputActionKey iA) {
-		return actions.getAction(iA);
+		return actions.get(iA);
 	}
 
 	/*
@@ -56,7 +53,10 @@ public abstract class Screen extends GameCompound implements Actionable {
 	 */
 	@Override
 	public void forwardAllActionsToThis(Actionable a) {
-		actions.forwardAllActionsToThis(a);
+		actions.clear();
+
+		for (InputActionKey key : InputActionKey.values())
+			putAction(key, a.getAction(key));
 	}
 
 }

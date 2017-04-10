@@ -3,13 +3,13 @@
  */
 package de.uni_kiel.progOOproject17.model.abs;
 
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 
+import de.uni_kiel.progOOproject17.model.screen.Actionable;
+import de.uni_kiel.progOOproject17.model.screen.HashMapActionable;
 import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
 import de.uni_kiel.progOOproject17.model.screen.Screen;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
@@ -19,20 +19,21 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  * @since 28.03.2017
  *
  */
-public abstract class ScreenedBaseModel extends TickedBaseModel {
+public abstract class ScreenedBaseModel extends TickedBaseModel implements Actionable{
 
 	
 	private Screen pausedScreen;
 	private Screen activeScreeen;
 	private boolean showPausedScreen;
 	
+	private HashMapActionable actions;
 	
 
 	/**
 	 * 
 	 */
 	public ScreenedBaseModel() {
-
+		actions = new HashMapActionable();
 		
 	}
 
@@ -73,7 +74,8 @@ public abstract class ScreenedBaseModel extends TickedBaseModel {
 	 */
 	public void showScreen(Screen s) {
 		pausedScreen = activeScreeen;
-		activeScreeen = s;
+		activeScreeen = s;	
+		forwardAllActionsToThis(getActiveScreeen());	
 	}
 	
 	/**
@@ -88,38 +90,38 @@ public abstract class ScreenedBaseModel extends TickedBaseModel {
 	 * 
 	 */
 	public void resumeScreen() {
-		Screen helper = activeScreeen;
-		activeScreeen = pausedScreen;
-		pausedScreen = helper;
+		showScreen(pausedScreen);
 	}
 
-	/**
-	 * Returns a allways up-to-date {@link Action} that performes the
-	 * {@link Action} corresponding to the key.
-	 * 
-	 * @param key
-	 *            the {@link InputActionKey} which action will be returned
-	 * @return the action for the key
-	 */
-	public Action getAction(InputActionKey key) {
-
-		/*
-		 * Returns only a wrapper action which on being called then will get the
-		 * corresponding action and call it. This is done so that the returned
-		 * action will allways be up to date and never as to be refreshed.
-		 */
-		return new AbstractAction() {
-
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Action a = activeScreeen.getAction(key);
-				if (a != null)
-					a.actionPerformed(e);
-
-			}
-		};
-	}
+//	/**
+//	 * Returns a allways up-to-date {@link Action} that performes the
+//	 * {@link Action} corresponding to the key.
+//	 * 
+//	 * @param key
+//	 *            the {@link InputActionKey} which action will be returned
+//	 * @return the action for the key
+//	 */
+//	public Action getAction(InputActionKey key) {
+//
+//		return getActiveScreeen().getAction(key);
+//		
+////		/*
+////		 * Returns only a wrapper action which on being called then will get the
+////		 * corresponding action and call it. This is done so that the returned
+////		 * action will allways be up to date and never as to be refreshed.
+////		 */
+////		return new AbstractAction() {
+////
+////
+////			@Override
+////			public void actionPerformed(ActionEvent e) {
+////				Action a = activeScreeen.getAction(key);
+////				if (a != null)
+////					a.actionPerformed(e);
+////
+////			}
+////		};
+//	}
 
 	/**
 	 * @return
@@ -133,6 +135,39 @@ public abstract class ScreenedBaseModel extends TickedBaseModel {
 	 */
 	public void setShowPausedScreen(boolean showPausedScreen) {
 		this.showPausedScreen = showPausedScreen;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.uni_kiel.progOOproject17.model.Actionable#putAction(de.uni_kiel.
+	 * progOOproject17.model.InputActionKey, javax.swing.Action)
+	 */
+	@Override
+	public void putAction(InputActionKey iA, Action action) {
+		actions.putAction(iA, action);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.uni_kiel.progOOproject17.model.Actionable#getAction(de.uni_kiel.
+	 * progOOproject17.model.InputActionKey)
+	 */
+	@Override
+	public Action getAction(InputActionKey iA) {
+		return actions.getAction(iA);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.uni_kiel.progOOproject17.model.Actionable#forwardAllActions(de.
+	 * uni_kiel.progOOproject17.model.Actionable)
+	 */
+	@Override
+	public void forwardAllActionsToThis(Actionable a) {
+		actions.forwardAllActionsToThis(a);
 	}
 	
 	
