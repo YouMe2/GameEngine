@@ -21,5 +21,5 @@ public abstract class TickedBaseModel extends AbstractBaseModel implements Ticke
 	 * @see de.uni_kiel.progOOproject17.model.abs.AbstractBaseModel#getViewables()
 	 */
 	@Override
-	public abstract Viewable[] getViewables();
+	public abstract Viewable getViewable();
 }

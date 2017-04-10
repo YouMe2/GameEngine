@@ -3,6 +3,7 @@
  */
 package de.uni_kiel.progOOproject17.model.abs;
 
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +15,8 @@ import de.uni_kiel.progOOproject17.model.screen.Actionable;
 import de.uni_kiel.progOOproject17.model.screen.HashMapActionable;
 import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
 import de.uni_kiel.progOOproject17.model.screen.Screen;
+import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
+import de.uni_kiel.progOOproject17.view.abs.ViewCompound;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
@@ -25,16 +28,18 @@ public abstract class ScreenedBaseModel extends TickedBaseModel implements Actio
 
 	private Screen pausedScreen;
 	private Screen activeScreeen;
-	private boolean showPausedScreen;
 
 	private HashMapActionable actions;
+	
+	private final SimpleViewable view;
+	private final ViewCompound compView;
 
-	/**
-	 * 
-	 */
-	public ScreenedBaseModel() {
+	
+	public ScreenedBaseModel(int w, int h) {
 		actions = new HashMapActionable();
-
+		compView = new ViewCompound();		
+		view = new SimpleViewable(compView, new Rectangle(0, 0, w, h));
+		
 	}
 
 	/*
@@ -52,18 +57,8 @@ public abstract class ScreenedBaseModel extends TickedBaseModel implements Actio
 	 * @see de.uni_kiel.progOOproject17.model.abs.TickedBaseModel#getViewables()
 	 */
 	@Override
-	public Viewable[] getViewables() {
-
-		if (showPausedScreen) {
-			ArrayList<Viewable> views = new ArrayList<>();
-
-			if (pausedScreen != null)
-				views.addAll(Arrays.asList(pausedScreen.getViewables()));
-			views.addAll(Arrays.asList(getActiveScreeen().getViewables()));
-
-			return views.toArray(new Viewable[views.size()]);
-		}
-		return getActiveScreeen().getViewables();
+	public Viewable getViewable() {
+		return view;
 	}
 
 	/**
@@ -76,9 +71,13 @@ public abstract class ScreenedBaseModel extends TickedBaseModel implements Actio
 	 *            the new {@link Screen}
 	 */
 	public void showScreen(Screen s) {
+		compView.clear();
+		
 		pausedScreen = activeScreeen;
 		activeScreeen = s;
+		
 		forwardAllActionsToThis(getActiveScreeen());
+		compView.addViewable(getActiveScreeen().getViewable());
 	}
 
 	/**
@@ -125,19 +124,6 @@ public abstract class ScreenedBaseModel extends TickedBaseModel implements Actio
 	//// };
 	// }
 
-	/**
-	 * @return
-	 */
-	public boolean isShowPausedScreen() {
-		return showPausedScreen;
-	}
-
-	/**
-	 * @param showPausedScreen
-	 */
-	public void setShowPausedScreen(boolean showPausedScreen) {
-		this.showPausedScreen = showPausedScreen;
-	}
 
 	/*
 	 * (non-Javadoc)

@@ -110,7 +110,7 @@ public abstract class AbstractController {
 		synchronized (outs) {
 
 			for (OutputView out : outs)
-				out.render(model.getViewables());
+				out.render(model.getViewable());
 		}
 
 	}

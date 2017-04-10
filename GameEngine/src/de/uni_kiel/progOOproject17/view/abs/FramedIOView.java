@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 
 /**
  * This class provides a {@link JFrame} which holds an {@link InputView} in as
- * well as a {@link MappedKeyInput} and a {@link OutputView}. This class
- * builds a basic Frame which can easily be modified by the subclass.
+ * well as a {@link MappedKeyInput} and a {@link OutputView}. This class builds
+ * a basic Frame which can easily be modified by the subclass.
  *
  *
  *
@@ -130,8 +130,12 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 		in.setEnabeled(enabeled);
 	}
 
-	/* (non-Javadoc)
-	 * @see de.uni_kiel.progOOproject17.view.abs.InputView#setEnabeled(java.lang.String, boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.uni_kiel.progOOproject17.view.abs.InputView#setEnabeled(java.lang.
+	 * String, boolean)
 	 */
 	@Override
 	public void setEnabeled(String key, boolean enabeled) {
@@ -141,5 +145,8 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 		else
 			in.setEnabeled(key, enabeled);
 	}
+
+
+	//TODO implement render here?
 
 }

@@ -6,7 +6,6 @@ import static de.uni_kiel.progOOproject17.model.kittenGame.KittenMoveState.JUMPI
 import static de.uni_kiel.progOOproject17.model.kittenGame.KittenMoveState.NORMAL;
 
 import java.awt.Point;
-import java.awt.Rectangle;
 
 import de.uni_kiel.progOOproject17.model.Particle;
 import de.uni_kiel.progOOproject17.model.abs.Distance;
@@ -16,8 +15,6 @@ import de.uni_kiel.progOOproject17.model.abs.Hitbox;
 import de.uni_kiel.progOOproject17.model.abs.MoveCommand;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
-import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
-import de.uni_kiel.progOOproject17.view.abs.Viewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
 
 /**
@@ -111,8 +108,12 @@ public class KittenPlayer extends GameEntity {
 	 */
 	public KittenPlayer(String resKey, int x, int y) {
 		super(new Hitbox.RectHitbox(x, y, PLAYER_W, PLAYER_H_NORMAL));
-		this.resKey = resKey;	
-		setView(new SimpleViewable(key, new Rectangle(x, y, PLAYER_W, PLAYER_H_NORMAL), Viewable.ENTITY_LAYER));
+		this.resKey = resKey;
+		getViewable().setKey(key);
+		getViewable().setLocation(x, y);
+		getViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
+		getViewable().setVisable(true);
+		
 		
 	}
 
@@ -211,6 +212,8 @@ public class KittenPlayer extends GameEntity {
 			default:
 				break;
 			}
+			break;
+		default:
 			break;
 		}
 		currMoveCommand = MoveCommand.NONE;

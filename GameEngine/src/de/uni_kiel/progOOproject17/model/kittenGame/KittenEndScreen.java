@@ -31,6 +31,8 @@ public class KittenEndScreen extends MenuScreen {
 
 		scoreboard = new KittenScoreboard(stats);
 
+		addViewable(scoreboard.getViewable());
+		
 	}
 
 	/*
@@ -45,18 +47,18 @@ public class KittenEndScreen extends MenuScreen {
 	}
 
 	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.uni_kiel.progOOproject17.model.MenuScreen#getViewables()
-	 */
-	@Override
-	public Viewable[] getViewables() {
-
-		ArrayList<Viewable> views = new ArrayList<>();
-		views.addAll(Arrays.asList(scoreboard.getViewables()));
-		views.addAll(Arrays.asList(super.getViewables()));
-		return views.toArray(new Viewable[views.size()]);
-
-	}
+//	 * (non-Javadoc)
+//	 *
+//	 * @see de.uni_kiel.progOOproject17.model.MenuScreen#getViewables()
+//	 */
+//	@Override
+//	public Viewable[] getViewables() {
+//
+//		ArrayList<Viewable> views = new ArrayList<>();
+//		views.addAll(Arrays.asList(scoreboard.getViewables()));
+//		views.addAll(Arrays.asList(super.getViewables()));
+//		return views.toArray(new Viewable[views.size()]);
+//
+//	}
 
 }

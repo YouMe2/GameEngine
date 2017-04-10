@@ -2,6 +2,7 @@ package de.uni_kiel.progOOproject17.model.kittenGame;
 
 import de.uni_kiel.progOOproject17.model.abs.GameCompound;
 import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
+import de.uni_kiel.progOOproject17.view.abs.ViewCompound;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 import static de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel.GAME_WIDTH;
@@ -54,15 +55,25 @@ public class KittenScoreboard extends GameCompound {
 		lifesDisplay = new SimpleViewable[GAME_WIDTH / (LHPIXEL_WIDTH * 3)];
 
 		progressDisplay = new SimpleViewable("stepbar", 0, Math.round(LHPIXEL_HEIGHT * 0.1f), 0,
-				Math.round(LHPIXEL_HEIGHT * 0.8f), Viewable.SB_LAYER);
+				Math.round(LHPIXEL_HEIGHT * 0.8f), Viewable.SB_LAYER, true);
 
 		for (int i = 0; i < pointsDisplay.length; i++)
-			pointsDisplay[i] = new SimpleViewable(null, LHPIXEL_WIDTH * (1 + 3 * i), LHPIXEL_HEIGHT * 2,
-					LHPIXEL_WIDTH * 2, LHPIXEL_HEIGHT, Viewable.SB_LAYER);
+			pointsDisplay[i] = new SimpleViewable(pointsKey, LHPIXEL_WIDTH * (1 + 3 * i), LHPIXEL_HEIGHT * 2,
+					LHPIXEL_WIDTH * 2, LHPIXEL_HEIGHT, Viewable.SB_LAYER, false);
 
 		for (int i = 0; i < lifesDisplay.length; i++)
-			lifesDisplay[i] = new SimpleViewable(null, LHPIXEL_WIDTH * (1 + 3 * i), LHPIXEL_HEIGHT, LHPIXEL_WIDTH * 2,
-					LHPIXEL_HEIGHT, Viewable.SB_LAYER);
+			lifesDisplay[i] = new SimpleViewable(lifesKey, LHPIXEL_WIDTH * (1 + 3 * i), LHPIXEL_HEIGHT, LHPIXEL_WIDTH * 2,
+					LHPIXEL_HEIGHT, Viewable.SB_LAYER, false);
+		
+		
+		//build up Viewables
+		ViewCompound compView = new ViewCompound();
+		compView.addViewable(progressDisplay);
+		compView.addAllViewables(pointsDisplay);
+		compView.addAllViewables(lifesDisplay);	
+		getViewable().setKey(compView);
+		getViewable().setPriority(Viewable.SB_LAYER);
+		
 
 	}
 
@@ -78,33 +89,21 @@ public class KittenScoreboard extends GameCompound {
 		if (p > pointsDisplay.length)
 			p = pointsDisplay.length;
 		for (int i = 0; i < p; i++)
-			pointsDisplay[i].setTextKey(pointsKey);
+			pointsDisplay[i].setVisable(true);
 		for (int i = p; i < pointsDisplay.length; i++)
-			pointsDisplay[i].setTextKey(null);
+			pointsDisplay[i].setVisable(false);
 
 		int l = stats.getLifes();
 		if (l > lifesDisplay.length)
 			l = lifesDisplay.length;
 
 		for (int i = 0; i < l; i++)
-			lifesDisplay[i].setTextKey(lifesKey);
+			lifesDisplay[i].setVisable(true);
 		for (int i = l; i < lifesDisplay.length; i++)
-			lifesDisplay[i].setTextKey(null);
+			lifesDisplay[i].setVisable(false);
 
 	}
 
-	/* (non-Javadoc)
-	 * @see de.uni_kiel.progOOproject17.model.abs.GameCompound#getViewables()
-	 */
-	@Override
-	public Viewable[] getViewables() {
 
-		ArrayList<Viewable> views = new ArrayList<>();
-		views.add(progressDisplay);
-		views.addAll(Arrays.asList(pointsDisplay));
-		views.addAll(Arrays.asList(lifesDisplay));
-
-		return views.toArray(new Viewable[views.size()]);
-	}
 
 }

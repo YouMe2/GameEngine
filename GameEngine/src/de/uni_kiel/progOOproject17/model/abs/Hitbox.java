@@ -153,7 +153,7 @@ public abstract class Hitbox {
 	 */
 	public abstract boolean contacts(Hitbox hitbox);
 
-	public abstract Viewable[] getDebugViewables();
+	public abstract SimpleViewable getDebugViewable();
 
 	// STATIC --------------------------------------------------
 
@@ -393,15 +393,12 @@ public abstract class Hitbox {
 		 * @see de.uni_kiel.progOOproject17.model.abs.Hitbox#getDebugViewables()
 		 */
 		@Override
-		public Viewable[] getDebugViewables() {
+		public SimpleViewable getDebugViewable() {
 
 			Point center = getCenter();
 			int r = getRadius();
-			return new Viewable[] {
-					new SimpleViewable(Viewable.DEBUGKEY_PREFIX + CIRCLE_KEY, center.x - r, center.y - r, r * 2, r * 2,
-							Viewable.DEBUG_LAYER),
-					new SimpleViewable(Viewable.DEBUGKEY_PREFIX + LINE_KEY, center.x, center.y, center.x, center.y,
-							Viewable.DEBUG_LAYER) };
+			return new SimpleViewable(Viewable.DEBUGKEY_PREFIX + CIRCLE_KEY, center.x - r, center.y - r, r * 2, r * 2,
+					Viewable.DEBUG_LAYER);
 		}
 
 		/*
@@ -567,9 +564,9 @@ public abstract class Hitbox {
 		 * @see de.uni_kiel.progOOproject17.model.abs.Hitbox#getDebugViewables()
 		 */
 		@Override
-		public Viewable[] getDebugViewables() {
-			return new Viewable[] { new SimpleViewable(Viewable.DEBUGKEY_PREFIX + Hitbox.LINE_KEY, getX(), getY(),
-					getX(), getY(), Viewable.DEBUG_LAYER) };
+		public SimpleViewable getDebugViewable() {
+			return new SimpleViewable(Viewable.DEBUGKEY_PREFIX + Hitbox.LINE_KEY, getX(), getY(),
+					getX(), getY(), Viewable.DEBUG_LAYER);
 		}
 	}
 
@@ -664,8 +661,9 @@ public abstract class Hitbox {
 		 * @see de.uni_kiel.progOOproject17.model.abs.Hitbox#getDebugViewables()
 		 */
 		@Override
-		public Viewable[] getDebugViewables() {
-			return new Viewable[0];
+		public SimpleViewable getDebugViewable() {
+			return new SimpleViewable(Viewable.DEBUGKEY_PREFIX + Hitbox.LINE_KEY, getX(), getY(),
+					getX(), getY(), Viewable.DEBUG_LAYER, false);
 		}
 
 		/*
@@ -942,23 +940,25 @@ public abstract class Hitbox {
 		 * @see de.uni_kiel.progOOproject17.model.abs.Hitbox#getDebugViewable()
 		 */
 		@Override
-		public Viewable[] getDebugViewables() {
+		public SimpleViewable getDebugViewable() {
 
-			Point[] thisPoints = this.getRealPoints();
+			//TODO MAKE FIX DEBUG VIEWS (ALL NOT JUST THIS!)
+			
+//			Point[] thisPoints = this.getRealPoints();
+//
+//			Viewable[] views = new Viewable[thisPoints.length];
+//
+//			for (int i = 0; i < views.length; i++) {
+//				Point edgeP1 = new Point(thisPoints[i]);
+//				Point edgeP2 = new Point(thisPoints[(i + 1) == thisPoints.length ? 0 : i + 1]);
+//
+//				views[i] = new SimpleViewable(Viewable.DEBUGKEY_PREFIX + Hitbox.LINE_KEY, edgeP1.x, edgeP1.y, edgeP2.x,
+//						edgeP2.y, Viewable.DEBUG_LAYER);
+//
+//				// System.out.println(edgeP1 + " " +edgeP2);
+//			}
 
-			Viewable[] views = new Viewable[thisPoints.length];
-
-			for (int i = 0; i < views.length; i++) {
-				Point edgeP1 = new Point(thisPoints[i]);
-				Point edgeP2 = new Point(thisPoints[(i + 1) == thisPoints.length ? 0 : i + 1]);
-
-				views[i] = new SimpleViewable(Viewable.DEBUGKEY_PREFIX + Hitbox.LINE_KEY, edgeP1.x, edgeP1.y, edgeP2.x,
-						edgeP2.y, Viewable.DEBUG_LAYER);
-
-				// System.out.println(edgeP1 + " " +edgeP2);
-			}
-
-			return views;
+			return null;
 
 		}
 

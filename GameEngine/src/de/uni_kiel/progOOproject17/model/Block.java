@@ -27,6 +27,7 @@ public class Block extends GameEntity {
 	public Block(Hitbox hitbox) {
 		super(hitbox);
 		setGravityActive(false);
+		getViewable().setVisable(true);
 	}
 	
 	/**

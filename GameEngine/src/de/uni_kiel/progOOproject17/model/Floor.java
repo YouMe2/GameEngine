@@ -23,7 +23,14 @@ public class Floor extends GameObject {
 	 */
 	public Floor(String resKey, Rectangle rect) {
 		super(new Hitbox.RectHitbox(rect.x, rect.y, rect.width, rect.height));
-		setView(new SimpleViewable(resKey, rect, Viewable.FLOOR_LAYER));
+		
+		getViewable().setTextKey(resKey);
+		getViewable().setLocation(rect.getLocation());
+		getViewable().setSize(rect.getSize());
+		getViewable().setPriority(Viewable.FLOOR_LAYER);
+		getViewable().setVisable(true);
+		
+		
 	}
 
 	/**

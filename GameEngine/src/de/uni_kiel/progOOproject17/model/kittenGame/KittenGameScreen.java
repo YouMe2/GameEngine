@@ -25,6 +25,7 @@ import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
 import de.uni_kiel.progOOproject17.model.screen.Screen;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
+import de.uni_kiel.progOOproject17.view.abs.ViewCompound;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
@@ -38,6 +39,9 @@ public class KittenGameScreen extends Screen implements KittenStats {
 	private final LinkedList<GameElement> createdElements;
 	private final LinkedList<Destroyable> destroyedElements;
 
+	private final ViewCompound compView = new ViewCompound();
+	
+	
 	private final KittenPlayer player;
 	private int screenVelocity = Integer.valueOf(GameProperties.getInstance().getProperty("startVelocity"));
 
@@ -64,6 +68,7 @@ public class KittenGameScreen extends Screen implements KittenStats {
 
 			createdElements.add(g);
 			g.getViewable().setRelativeAnchor(inGameScreenBoarder);
+			compView.addViewable(g.getViewable());
 			g.activate(environment, this);
 		}
 
@@ -165,6 +170,12 @@ public class KittenGameScreen extends Screen implements KittenStats {
 
 		creatHelp.create(player);
 
+		
+		//Viewable zusammen setzten:
+		compView.addViewable(scoreboard.getViewable());	
+		getViewable().setKey(compView);
+		
+		
 	}
 
 	/*
@@ -208,26 +219,11 @@ public class KittenGameScreen extends Screen implements KittenStats {
 
 		gameElements.addAll(createdElements);
 		createdElements.clear();
+		
+		
+		
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.uni_kiel.progOOproject17.model.abs.GameCompound#getViewables()
-	 */
-	@Override
-	public Viewable[] getViewables() {
-		ArrayList<Viewable> views = new ArrayList<>();
-		views.addAll(Arrays.asList(scoreboard.getViewables()));
-		//TODO fix HITBOX OPTION
-//		for (GameElement e : gameElements) {
-//			if (e instanceof Collidable)
-//				views.addAll(Arrays.asList(((Collidable) e).getHitbox().getDebugViewables()));
-//		}
-		
-		views.addAll(gameElements);
-		return views.toArray(new Viewable[views.size()]);
-	}
 
 	/**
 	 * Returns the {@link KittenStats} of the player.

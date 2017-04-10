@@ -18,16 +18,12 @@ public class SortedLinkedList<T extends Priority> extends LinkedList<T> {
 	 * 
 	 */
 	private static final long serialVersionUID = 944137668105543179L;
-	private float maxPri = 0;
 	
 
 	@Override
 	public boolean add(T e) {
 
-		if (e.getPriority() >= maxPri) {
-			maxPri = e.getPriority();
-			addLast(e);
-		}
+
 		
 		
 		ListIterator<T> it = listIterator();
@@ -46,7 +42,11 @@ public class SortedLinkedList<T extends Priority> extends LinkedList<T> {
 		
 		if(index == size()){
 			addLast(e);
-			System.out.println(" messed up list? maybe?");
+//			System.out.println(" messed up list? maybe?");
+			return true;
+		}
+		else if (index == -1) {
+			addFirst(e);
 			return true;
 		}
 		else {

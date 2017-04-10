@@ -31,7 +31,7 @@ public class TestBaseModel extends ScreenedBaseModel{
 	 * 
 	 */
 	public TestBaseModel() {
-		
+		super(10, 10);
 
 		
 	}

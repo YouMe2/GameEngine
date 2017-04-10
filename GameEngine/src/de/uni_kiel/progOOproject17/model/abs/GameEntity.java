@@ -40,6 +40,7 @@ public abstract class GameEntity extends GameObject implements Gravitational {
 	public GameEntity(Hitbox hitbox) {
 		super(hitbox);
 		velocity = new Distance(0, 0);
+		getViewable().setPriority(Viewable.ENTITY_LAYER);
 	}
 
 	

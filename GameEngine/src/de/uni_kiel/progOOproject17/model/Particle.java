@@ -48,10 +48,16 @@ public class Particle extends GameElement {
 	 */
 	public Particle(String resKey, int x, int y, int w, int h, int dtime, int lenghth) {
 		super();
-		setView(new SimpleViewable(key, new Rectangle(x, y, w, h), Viewable.PARTICLE_LAYER));
 		this.resKey = resKey;
 		this.max = lenghth;
 		this.dtime = dtime;
+		
+		getViewable().setKey(key);
+		getViewable().setLocation(x, y);
+		getViewable().setSize(w, h);
+		getViewable().setPriority(Viewable.PARTICLE_LAYER);
+		getViewable().setVisable(true);
+		
 	}
 
 

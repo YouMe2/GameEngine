@@ -1,5 +1,6 @@
 package de.uni_kiel.progOOproject17.model.screen;
 
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import javax.swing.Action;
 import de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
 import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
+import de.uni_kiel.progOOproject17.view.abs.ViewCompound;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
@@ -19,13 +21,11 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  */
 public class MenuScreen extends Screen {
 
-	private SimpleViewable background;
-
+	private final ViewCompound compView = new ViewCompound();	
+	private final SimpleViewable background;
 	private final SimpleViewable selectionCursor;
-
 	private final SimpleViewable[] entries;
 
-	private final ArrayList<Viewable> externalViews = new ArrayList<>();
 
 	private int selction = 0;
 
@@ -50,18 +50,18 @@ public class MenuScreen extends Screen {
 	 */
 	public MenuScreen(int w, int h, String[] resKeys, Action[] actions) {
 		super(w, h);
-
+		background = new SimpleViewable(null, new Rectangle(0, 0, w, h), Viewable.BG_LAYER, false);
 		entries = new SimpleViewable[resKeys.length];
 
 		for (int i = 0; i < actions.length; i++) {
 			entries[i] = new SimpleViewable(resKeys[i], (getWidth() - ENTRY_WIDTH) / 2,
-					4 * KittenBaseModel.LHPIXEL_HEIGHT + i * (ENTRY_HEIGHT + KittenBaseModel.LHPIXEL_HEIGHT), ENTRY_WIDTH,
-					ENTRY_HEIGHT, Viewable.MENU_LAYER);
+					4 * KittenBaseModel.LHPIXEL_HEIGHT + i * (ENTRY_HEIGHT + KittenBaseModel.LHPIXEL_HEIGHT),
+					ENTRY_WIDTH, ENTRY_HEIGHT, Viewable.MENU_LAYER);
 		}
 
 		selectionCursor = new SimpleViewable("selection", (getWidth() - ENTRY_WIDTH) / 2,
-				4 * KittenBaseModel.LHPIXEL_HEIGHT + selction * (ENTRY_HEIGHT + KittenBaseModel.LHPIXEL_HEIGHT), CURSOR_WIDTH,
-				CURSOR_HEIGHT, Viewable.MENU2_LAYER);
+				4 * KittenBaseModel.LHPIXEL_HEIGHT + selction * (ENTRY_HEIGHT + KittenBaseModel.LHPIXEL_HEIGHT),
+				CURSOR_WIDTH, CURSOR_HEIGHT, Viewable.MENU2_LAYER);
 
 		putAction(InputActionKey.UP_P, new AbstractAction() {
 
@@ -106,9 +106,19 @@ public class MenuScreen extends Screen {
 
 			}
 		});
+
+		// build up Viewables
+		
+		compView.addViewable(background);
+		compView.addViewable(selectionCursor);
+		compView.addAllViewables(entries);
+		getViewable().setKey(compView);
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.uni_kiel.progOOproject17.model.abs.Ticked#tick(long)
 	 */
 	@Override
@@ -122,38 +132,29 @@ public class MenuScreen extends Screen {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see de.uni_kiel.progOOproject17.model.abs.GameCompound#getViewables()
-	 */
-	@Override
-	public Viewable[] getViewables() {
-		ArrayList<Viewable> views = new ArrayList<>();
-
-		if (background != null)
-			views.add(background);
-		views.addAll(Arrays.asList(entries));
-		views.add(selectionCursor);
-		views.addAll(this.externalViews);
-
-		return views.toArray(new Viewable[views.size()]);
-	}
-
 	/**
 	 * Sets a background.
 	 * 
-	 * @param resKey the resource key of the bg
+	 * @param resKey
+	 *            the resource key of the bg
 	 */
 	public void setBackground(String resKey) {
-		background = new SimpleViewable(resKey, 0, 0, getWidth(), getHeight(), Viewable.BG_LAYER);
+		if (resKey == null) {
+			background.setVisable(false);
+		}
+		
+		background.setTextKey(resKey);
+		background.setVisable(true);
 	}
 
 	/**
 	 * Adds a {@link Viewable} to the {@link MenuScreen}.
 	 * 
-	 * @param v the {@link Viewable} to be added
+	 * @param v
+	 *            the {@link Viewable} to be added
 	 */
-	public void addViewable(Viewable v) {
-		externalViews.add(v);
+	public void addViewable(SimpleViewable v) {
+		compView.addViewable(v);
 	}
 
 }

@@ -29,6 +29,8 @@ import de.uni_kiel.progOOproject17.model.abs.Hitbox.CircleHitbox;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox.LineHitbox;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox.PointHitbox;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox.PolygonHitbox;
+import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
+import de.uni_kiel.progOOproject17.view.abs.ViewCompound;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
@@ -41,10 +43,13 @@ public class DebugScreen extends Screen {
 	private final LinkedList<GameElement> gameElements;
 	private final LinkedList<GameElement> createdElements;
 	private final LinkedList<Destroyable> destroyedElements;
+
+	private final ViewCompound compView = new ViewCompound();
+
 	private final Environment environment;
 	private final CreationHelper creationHelper = new CreationHelper() {
 		/*
-		 * (non-Javadoc)
+		 * /* (non-Javadoc)
 		 * 
 		 * @see de.uni_kiel.progOOproject17.model.abs.ElementCreator#create(de.
 		 * uni_kiel.progOOproject17.model.abs.GameElement)
@@ -52,15 +57,21 @@ public class DebugScreen extends Screen {
 		@Override
 		public void create(GameElement g) {
 
-			System.out.println("Created: " + g.getViewable().getContentKey());
+			// System.out.println("Created: " + g.getResourceKey());
 
 			createdElements.add(g);
+			compView.addViewable(g.getViewable());
+			if (g instanceof Collidable)
+				compView.addViewable(((Collidable) g).getHitbox().getDebugViewable());
+			
+			
 			g.activate(environment, this);
 		}
 
 		@Override
 		public void onDestruction(Destroyable d) {
-			System.out.println("Destroyed: " + ((GameElement) d).getViewable().getContentKey());
+			// System.out.println("Destroyed: " + ((GameElement)
+			// d).getResourceKey());
 
 			destroyedElements.add(d);
 		}
@@ -81,14 +92,16 @@ public class DebugScreen extends Screen {
 		createdElements = new LinkedList<>();
 		environment = new SimpleEnvironment(gameElements);
 
-		testBlock = new Block(new Hitbox.PolygonHitbox( new Point(60, 60), 
-				new Point[] { new Point(0, 0), new Point(30, 30), new Point(0, 30), new Point(-10, 10) }));
+//		testBlock = new Block(new Hitbox.PolygonHitbox(new Point(60, 60),
+//				new Point[] { new Point(0, 0), new Point(30, 30), new Point(0, 30), new Point(-10, 10) }));
 
-		 testBlock = new Block(new Hitbox.CircleHitbox(60, 60, 6));
+//		testBlock = new Block(new Hitbox.CircleHitbox(60, 60, 6));
 
-		 testBlock = new Block(new Hitbox.LineHitbox(60, 60, 80, 70));
-
-		testBlock.setView("floor", 60, 60, 4, 4, Viewable.ENTITY_LAYER);
+		testBlock = new Block(new Hitbox.LineHitbox(60, 60, 80, 70));
+		testBlock.getViewable().setTextKey("floor");
+		testBlock.getViewable().setLocation(60, 60);
+		testBlock.getViewable().setSize(4, 4);
+		testBlock.getViewable().setPriority(Viewable.ENTITY_LAYER);
 		testBlock.activate(environment, creationHelper);
 
 		Block line = new Block(new Hitbox.LineHitbox(20, 100, 20, 200));
@@ -99,13 +112,14 @@ public class DebugScreen extends Screen {
 
 		creationHelper.create(new Block(new Hitbox.PointHitbox(50, 200)));
 
-//		creationHelper.create(new Background("floor", 50, 20, 1, 1));
+		// creationHelper.create(new Background("floor", 50, 20, 1, 1));
 
-		block = new Block( new Hitbox.PolygonHitbox(new Point(100, 100), new Point[] { new Point(0, 0), new Point(100, -10), new Point(0, 30) }));
-		block.setView("floor", 100, 100, 100, 30, Viewable.ENTITY_LAYER);
-
-//		System.out.println(block.getHitbox().intersects(testBlock.getHitbox()));
-		
+		block = new Block(new Hitbox.PolygonHitbox(new Point(100, 100),
+				new Point[] { new Point(0, 0), new Point(100, -10), new Point(0, 30) }));
+		block.getViewable().setTextKey("floor");
+		block.getViewable().setLocation(100, 100);
+		block.getViewable().setSize(100, 30);
+		block.getViewable().setPriority(Viewable.ENTITY_LAYER);
 		creationHelper.create(block);
 		creationHelper.create(testBlock);
 
@@ -176,9 +190,14 @@ public class DebugScreen extends Screen {
 		});
 
 		putAction(InputActionKey.SELECT_P, resumeAction);
+
+		// Viewable zusammen setzten:
+
 		
 		
 		
+		getViewable().setKey(compView);
+
 	}
 
 	/*
@@ -196,7 +215,8 @@ public class DebugScreen extends Screen {
 		// System.out.println(testBlock.getHitbox());
 		// System.out.println(block.getHitbox());
 
-//		System.out.println(((Hitbox.PolygonHitbox) testBlock.getHitbox()).isInside(new Point(50, 20)));
+		// System.out.println(((Hitbox.PolygonHitbox)
+		// testBlock.getHitbox()).isInside(new Point(50, 20)));
 
 		gameElements.removeAll(destroyedElements);
 		destroyedElements.clear();
@@ -206,25 +226,5 @@ public class DebugScreen extends Screen {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.uni_kiel.progOOproject17.model.abs.GameCompound#getViewables()
-	 */
-	@Override
-	public Viewable[] getViewables() {
-
-		
-		
-		ArrayList<Viewable> views = new ArrayList<>();
-
-		for (GameElement e : gameElements) {
-			if (e instanceof Collidable)
-				views.addAll(Arrays.asList(((Collidable) e).getHitbox().getDebugViewables()));
-		}
-		views.addAll(gameElements);
-		return views.toArray(new Viewable[views.size()]);
-
-	}
 
 }

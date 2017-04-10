@@ -22,8 +22,14 @@ public class Background extends GameElement {
 	 * @param h the height
 	 */
 	public Background(String resKey, int x, int y, int w, int h) {
-		super();
-		setView(new SimpleViewable(resKey, x, y, w, h, Viewable.BG_LAYER));
+		super();;
+		
+		getViewable().setTextKey(resKey);
+		getViewable().setLocation(x, y);
+		getViewable().setSize(w, h);
+		getViewable().setPriority(Viewable.BG_LAYER);
+		getViewable().setVisable(true);
+		
 	}
 
 	@Override

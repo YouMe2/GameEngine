@@ -15,6 +15,6 @@ public interface OutputView {
 	 *
 	 * @param viewables
 	 */
-	public void render(Viewable[] viewables);
+	public void render(Viewable viewable);
 
 }

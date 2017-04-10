@@ -8,6 +8,7 @@ import de.uni_kiel.progOOproject17.model.abs.GameEntity;
 import de.uni_kiel.progOOproject17.model.abs.GameObject;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox;
 import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
+import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
  * This class represents a {@link GameEntity} that serves as a Enemy.
@@ -30,8 +31,15 @@ public class KittenEnemy extends GameEntity {
 	public KittenEnemy(String resKey, int x, int y) {
 		super(new Hitbox.RectHitbox(x, y, KittenBaseModel.LHPIXEL_WIDTH * 2,
 				Math.round(KittenBaseModel.LHPIXEL_HEIGHT * 0.9f)));
-		setView(new SimpleViewable(resKey, x, y, KittenBaseModel.LHPIXEL_WIDTH * 2,
-				Math.round(KittenBaseModel.LHPIXEL_HEIGHT * 0.9f)));
+		
+		
+		getViewable().setTextKey(resKey);
+		getViewable().setLocation(x, y);
+		getViewable().setSize(KittenBaseModel.LHPIXEL_WIDTH * 2,
+				Math.round(KittenBaseModel.LHPIXEL_HEIGHT * 0.9f));
+		getViewable().setVisable(true);
+		
+		
 		setDeadly(true);
 
 	}

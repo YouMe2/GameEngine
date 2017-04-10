@@ -71,7 +71,6 @@ public class KittenBaseModel extends ScreenedBaseModel {
 		public void actionPerformed(ActionEvent e) {
 
 			showScreen(new KittenGameScreen(GAME_WIDTH, GAME_HEIGHT, pauseGame, endGame));
-			setShowPausedScreen(false);
 		}
 	};
 
@@ -88,8 +87,10 @@ public class KittenBaseModel extends ScreenedBaseModel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			showScreen(new PauseMenu(GAME_WIDTH, GAME_HEIGHT, resumeAction, exitGame));
-			setShowPausedScreen(true);
+			
+			PauseMenu pm = new PauseMenu(GAME_WIDTH, GAME_HEIGHT, resumeAction, exitGame);
+			pm.addViewable(getActiveScreeen().getViewable());
+			showScreen(pm);
 		}
 	};
 
@@ -107,7 +108,6 @@ public class KittenBaseModel extends ScreenedBaseModel {
 		public void actionPerformed(ActionEvent e) {
 
 			resumeScreen();
-			setShowPausedScreen(false);
 		}
 	};
 
@@ -126,7 +126,6 @@ public class KittenBaseModel extends ScreenedBaseModel {
 		public void actionPerformed(ActionEvent e) {
 			showScreen(new KittenEndScreen(GAME_WIDTH, GAME_HEIGHT, ((KittenGameScreen) getActiveScreeen()).getPlayerStats(),
 					newGame, exitGame));
-			setShowPausedScreen(false);
 		}
 	};
 
@@ -153,6 +152,7 @@ public class KittenBaseModel extends ScreenedBaseModel {
 	 * {@link KittenStartMenu}.
 	 */
 	public KittenBaseModel() {
+		super(GAME_WIDTH, GAME_HEIGHT);
 		showScreen(new KittenStartMenu(GAME_WIDTH, GAME_HEIGHT, newGame, exitGame));
 	}
 	

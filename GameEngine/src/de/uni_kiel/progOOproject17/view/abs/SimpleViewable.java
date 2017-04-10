@@ -40,15 +40,20 @@ public class SimpleViewable extends Observable implements Viewable {
 		this(keyText, x, y, w, h, 0);
 	}
 	
+	
 	public SimpleViewable(String keyText, int x, int y, int w, int h, float priority) {
-		this(new Key() {
+		this(keyText, x, y, w, h, priority, true);
+	}
 
+	public SimpleViewable(String keyText, int x, int y, int w, int h, float priority, boolean visable) {
+		this(new Key() {
+			
 			@Override
 			public String getText() {
 				return keyText;
 			}
-
-		}, new Rectangle(x, y, w, h), priority);
+			
+		}, new Rectangle(x, y, w, h), priority, visable);
 	}
 	
 	public SimpleViewable(String keyText, Rectangle rect, float priority) {
@@ -285,5 +290,15 @@ public class SimpleViewable extends Observable implements Viewable {
 	public void setKey(Key key) {
 		this.key = key;
 	}
+	
+	public void removeInAllComps() {
+		
+		setChanged();
+		notifyObservers(ViewCompound.REMOVE_ME_FLAG);
+		
+		
+	}
+	
+	
 
 }
