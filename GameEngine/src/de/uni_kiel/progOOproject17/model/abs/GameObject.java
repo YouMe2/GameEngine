@@ -19,23 +19,13 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	
 	private ArrayList<Effect> effects;
 
-	/**
-	 * Constructs a new {@link GameObject}.
-	 * 
-	 */
+	
+	
 	public GameObject(Hitbox hitbox) {
-		this(hitbox, null, 0, 0, 0, 0, -1);
-	}
-
-	/**
-	 * 
-	 */
-	public GameObject(Hitbox hitbox, String resKey, int x, int y, int w, int h, int layer) {
-		super(resKey, x, y, w, h, layer);
+		super();
 		this.hitbox = hitbox;
 		this.effects = new ArrayList<>();
-		
-		
+	
 	}
 	
 	/**

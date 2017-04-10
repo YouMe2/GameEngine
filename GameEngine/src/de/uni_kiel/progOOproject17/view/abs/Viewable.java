@@ -73,22 +73,22 @@ public interface Viewable extends Priority {
 	 */
 	public Rectangle getViewRect();
 
-	/**
-	 * Retruns the layer on which this {@link Viewable} needs to be redered.
-	 *
-	 * @see #LAYERsSIZE
-	 * @see #BG_LAYER
-	 * @see #SB_LAYER
-	 * @see #FLOOR_LAYER
-	 * @see #ENTITY_LAYER
-	 * @see #PARTICLE_LAYER
-	 * @see #DEBUG_LAYER
-	 * @see #MENU_LAYER
-	 * @see #MENU2_LAYER
-	 *
-	 * @return the layer.
-	 */
-	public int getLayer();
+//	/**
+//	 * Retruns the layer on which this {@link Viewable} needs to be redered.
+//	 *
+//	 * @see #LAYERsSIZE
+//	 * @see #BG_LAYER
+//	 * @see #SB_LAYER
+//	 * @see #FLOOR_LAYER
+//	 * @see #ENTITY_LAYER
+//	 * @see #PARTICLE_LAYER
+//	 * @see #DEBUG_LAYER
+//	 * @see #MENU_LAYER
+//	 * @see #MENU2_LAYER
+//	 *
+//	 * @return the layer.
+//	 */
+//	public int getLayer();
 
 	/**
 	 * @return the visble

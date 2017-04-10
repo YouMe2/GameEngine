@@ -1,15 +1,11 @@
 package de.uni_kiel.progOOproject17.model.abs;
 
-import java.awt.Point;
-import java.awt.Rectangle;
-
 import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
-import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
-public abstract class GameElement implements Viewable, Destroyable, Ticked {
+public abstract class GameElement implements Destroyable, Ticked {
 
 	private boolean alive = false;
-	private SimpleViewable view;
+	private SimpleViewable view = null;
 
 	/**
 	 * stores the {@link Environment} after this {@link GameElement} was
@@ -23,86 +19,22 @@ public abstract class GameElement implements Viewable, Destroyable, Ticked {
 	protected CreationHelper creationHelper;
 
 	public GameElement() {
-		this(null, 0, 0, 0, 0, -1);
-	}
-
-	/**
-	 * Constructs a new {@link GameElement} which still needs to be activated.
-	 * 
-	 * @param resKey
-	 *            the resource key for the internal {@link Viewable}
-	 * @param x
-	 *            the x coord
-	 * @param y
-	 *            the y coord
-	 * @param w
-	 *            the width
-	 * @param h
-	 *            the height
-	 */
-	public GameElement(String resKey, int x, int y, int w, int h, int layer) {
-		setView(resKey, x, y, w, h, layer);
 	}
 
 	/**
 	 * @param view
 	 *            the view to set
 	 */
-	public void setView(String resKey, int x, int y, int w, int h, int layer) {
-		view = new SimpleViewable(resKey, x, y, w, h, layer);
+	public void setView(SimpleViewable view) {
+		this.view = view;
 	}
 
+	
 
-	public SimpleViewable getView() {
+	public SimpleViewable getViewable() {
 		return view;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.uni_kiel.progOOproject17.view.abs.Viewable#getResourceKey()
-	 */
-	@Override
-	public Key getContentKey() {
-		return view.getContentKey();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.uni_kiel.progOOproject17.view.abs.Viewable#getViewRect()
-	 */
-	@Override
-	public Rectangle getViewRect() {
-		return view.getViewRect();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.uni_kiel.progOOproject17.view.abs.Viewable#getLayer()
-	 */
-	@Override
-	public int getLayer() {
-		return view.getLayer();
-	}
 	
-	/* (non-Javadoc)
-	 * @see de.uni_kiel.progOOproject17.view.abs.Viewable#isVisble()
-	 */
-	@Override
-	public boolean isVisble() {
-		return view.isVisble();
-	}
-	
-	/* (non-Javadoc)
-	 * @see de.uni_kiel.progOOproject17.view.abs.Viewable#getPriority()
-	 */
-	@Override
-	public float getPriority() {
-		return view.getPriority();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

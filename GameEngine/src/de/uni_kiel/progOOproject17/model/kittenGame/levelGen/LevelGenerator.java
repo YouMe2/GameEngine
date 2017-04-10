@@ -188,7 +188,7 @@ public class LevelGenerator implements Ticked {
 	 */
 	private int spawnBackground(int backgroundStart) {
 		Background b = new Background("bg", backgroundStart, 0, 1024, KittenBaseModel.GAME_HEIGHT);
-		int backgroundEnd = backgroundStart + b.getView().getWidth();
+		int backgroundEnd = backgroundStart + b.getViewable().getWidth();
 		createHelper.create(b);
 //		System.out.println("Spawned background from " + backgroundStart + " to " + backgroundEnd);
 		return backgroundEnd;

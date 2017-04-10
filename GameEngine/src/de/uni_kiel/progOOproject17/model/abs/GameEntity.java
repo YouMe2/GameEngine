@@ -2,7 +2,6 @@ package de.uni_kiel.progOOproject17.model.abs;
 
 import javax.swing.text.html.parser.Entity;
 
-import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
@@ -39,11 +38,7 @@ public abstract class GameEntity extends GameObject implements Gravitational {
 	 *            the heigt
 	 */
 	public GameEntity(Hitbox hitbox) {
-		this(hitbox, null, 0, 0, 0, 0);
-	}
-
-	public GameEntity(Hitbox hitbox, String resKey, int x, int y, int w, int h) {
-		super(hitbox, resKey, x, y, w, h, ENTITY_LAYER);
+		super(hitbox);
 		velocity = new Distance(0, 0);
 	}
 
@@ -57,8 +52,6 @@ public abstract class GameEntity extends GameObject implements Gravitational {
 		doMovement();
 		super.tick(timestamp);
 	}
-
-
 
 
 	/*
@@ -169,8 +162,8 @@ public abstract class GameEntity extends GameObject implements Gravitational {
 	
 	public void move(Distance d){	
 		getThisHitbox().translate(d);
-		if (getView() != null)
-			getView().translate(d);
+		if (getViewable() != null)
+			getViewable().translate(d);
 	}
 	
 	public void move(int dx, int dy){	

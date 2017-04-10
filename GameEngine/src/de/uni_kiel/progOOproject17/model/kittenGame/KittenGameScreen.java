@@ -63,7 +63,7 @@ public class KittenGameScreen extends Screen implements KittenStats {
 			// System.out.println("Created: " + g.getResourceKey());
 
 			createdElements.add(g);
-			g.getView().setRelativeAnchor(inGameScreenBoarder);
+			g.getViewable().setRelativeAnchor(inGameScreenBoarder);
 			g.activate(environment, this);
 		}
 
@@ -194,7 +194,7 @@ public class KittenGameScreen extends Screen implements KittenStats {
 			public void accept(GameElement e) {
 
 				e.tick(timestamp);
-				if (e.getView().getViewRect().getMaxX() < KittenGameScreen.this.getX())
+				if (e.getViewable().getViewRect().getMaxX() < KittenGameScreen.this.getX())
 					e.destroy();
 
 			};

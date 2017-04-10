@@ -13,7 +13,7 @@ import de.uni_kiel.progOOproject17.view.abs.FramedIOView;
 import de.uni_kiel.progOOproject17.view.abs.InputView;
 import de.uni_kiel.progOOproject17.view.abs.OutputView;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
-import de.uni_kiel.progOOproject17.view.abs.ViewablesList;
+import de.uni_kiel.progOOproject17.view.abs.ViewCompound;
 import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
 
 /**
@@ -86,8 +86,8 @@ public class PLDektopView extends FramedIOView {
 		String keyText = key != null ? key.getText() : "null";
 		if (keyText == null)
 			keyText = "null";
-		if (keyText.equals(ViewablesList.LISTKEY_TEXT) && key instanceof ViewablesList) {
-			ViewablesList list = (ViewablesList) key;
+		if (keyText.equals(ViewCompound.LISTKEY_TEXT) && key instanceof ViewCompound) {
+			ViewCompound list = (ViewCompound) key;
 			
 			for (Viewable viewable : list) {
 				render(viewable, gr);

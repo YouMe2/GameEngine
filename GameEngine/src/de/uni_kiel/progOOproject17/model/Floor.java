@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import de.uni_kiel.progOOproject17.model.abs.Environment;
 import de.uni_kiel.progOOproject17.model.abs.GameObject;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox;
+import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
@@ -21,7 +22,8 @@ public class Floor extends GameObject {
 	 * @param rect the {@link Rectangle} specifying the position and size
 	 */
 	public Floor(String resKey, Rectangle rect) {
-		this(resKey, rect.x, rect.y, rect.width, rect.height);
+		super(new Hitbox.RectHitbox(rect.x, rect.y, rect.width, rect.height));
+		setView(new SimpleViewable(resKey, rect, Viewable.FLOOR_LAYER));
 	}
 
 	/**
@@ -35,7 +37,7 @@ public class Floor extends GameObject {
 	 * @param h the height
 	 */
 	public Floor(String resKey, int x, int y, int w, int h) {
-		super(new Hitbox.RectHitbox(x, y, w, h), resKey, x, y, w, h, FLOOR_LAYER);
+		this(resKey, new Rectangle(x, y, w, h));
 
 	}
 

@@ -78,18 +78,18 @@ public class KittenScoreboard extends GameCompound {
 		if (p > pointsDisplay.length)
 			p = pointsDisplay.length;
 		for (int i = 0; i < p; i++)
-			pointsDisplay[i].setKeyText(pointsKey);
+			pointsDisplay[i].setTextKey(pointsKey);
 		for (int i = p; i < pointsDisplay.length; i++)
-			pointsDisplay[i].setKeyText(null);
+			pointsDisplay[i].setTextKey(null);
 
 		int l = stats.getLifes();
 		if (l > lifesDisplay.length)
 			l = lifesDisplay.length;
 
 		for (int i = 0; i < l; i++)
-			lifesDisplay[i].setKeyText(lifesKey);
+			lifesDisplay[i].setTextKey(lifesKey);
 		for (int i = l; i < lifesDisplay.length; i++)
-			lifesDisplay[i].setKeyText(null);
+			lifesDisplay[i].setTextKey(null);
 
 	}
 

@@ -52,7 +52,7 @@ public class DebugScreen extends Screen {
 		@Override
 		public void create(GameElement g) {
 
-			System.out.println("Created: " + g.getContentKey());
+			System.out.println("Created: " + g.getViewable().getContentKey());
 
 			createdElements.add(g);
 			g.activate(environment, this);
@@ -60,7 +60,7 @@ public class DebugScreen extends Screen {
 
 		@Override
 		public void onDestruction(Destroyable d) {
-			System.out.println("Destroyed: " + ((GameElement) d).getContentKey());
+			System.out.println("Destroyed: " + ((GameElement) d).getViewable().getContentKey());
 
 			destroyedElements.add(d);
 		}
@@ -214,6 +214,8 @@ public class DebugScreen extends Screen {
 	@Override
 	public Viewable[] getViewables() {
 
+		
+		
 		ArrayList<Viewable> views = new ArrayList<>();
 
 		for (GameElement e : gameElements) {

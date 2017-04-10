@@ -6,6 +6,7 @@ import static de.uni_kiel.progOOproject17.model.kittenGame.KittenMoveState.JUMPI
 import static de.uni_kiel.progOOproject17.model.kittenGame.KittenMoveState.NORMAL;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 
 import de.uni_kiel.progOOproject17.model.Particle;
 import de.uni_kiel.progOOproject17.model.abs.Distance;
@@ -15,6 +16,8 @@ import de.uni_kiel.progOOproject17.model.abs.Hitbox;
 import de.uni_kiel.progOOproject17.model.abs.MoveCommand;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
+import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
+import de.uni_kiel.progOOproject17.view.abs.Viewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
 
 /**
@@ -107,8 +110,10 @@ public class KittenPlayer extends GameEntity {
 	 *            the y coord
 	 */
 	public KittenPlayer(String resKey, int x, int y) {
-		super(new Hitbox.RectHitbox(x, y, PLAYER_W, PLAYER_H_NORMAL), resKey, x, y, PLAYER_W, PLAYER_H_NORMAL);
-		this.resKey = resKey;
+		super(new Hitbox.RectHitbox(x, y, PLAYER_W, PLAYER_H_NORMAL));
+		this.resKey = resKey;	
+		setView(new SimpleViewable(key, new Rectangle(x, y, PLAYER_W, PLAYER_H_NORMAL), Viewable.ENTITY_LAYER));
+		
 	}
 
 	// TESTWISE
@@ -141,13 +146,13 @@ public class KittenPlayer extends GameEntity {
 					Distance headDown = new Distance(0, PLAYER_H_NORMAL - PLAYER_H_CROUCH);
 					move(headDown);
 				}
-				getView().setSize(PLAYER_W, PLAYER_H_CROUCH);
+				getViewable().setSize(PLAYER_W, PLAYER_H_CROUCH);
 				((Hitbox.RectHitbox)getThisHitbox()).setSize(PLAYER_W, PLAYER_H_CROUCH);
 				ResourceManager.getInstance().getSound("crouch").play();
 				break;
 			case JUMPING:
 				currMoveState = JUMPING_AND_CROUCHING;
-				getView().setSize(PLAYER_W, PLAYER_H_CROUCH);
+				getViewable().setSize(PLAYER_W, PLAYER_H_CROUCH);
 				((Hitbox.RectHitbox)getThisHitbox()).setSize(PLAYER_W, PLAYER_H_CROUCH);
 				ResourceManager.getInstance().getSound("crouch").play();
 				break;
@@ -170,7 +175,7 @@ public class KittenPlayer extends GameEntity {
 					maxDistance.add(crouchingDifference);
 					move(maxDistance);
 				}
-				getView().setSize(PLAYER_W, PLAYER_H_NORMAL);
+				getViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
 				((Hitbox.RectHitbox)getThisHitbox()).setSize(PLAYER_W, PLAYER_H_NORMAL);
 				break;
 			case JUMPING_AND_CROUCHING:
@@ -181,7 +186,7 @@ public class KittenPlayer extends GameEntity {
 					maxDistance.add(crouchingDifference);
 					move(maxDistance);
 				}
-				getView().setSize(PLAYER_W, PLAYER_H_NORMAL);
+				getViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
 				((Hitbox.RectHitbox)getThisHitbox()).setSize(PLAYER_W, PLAYER_H_NORMAL);
 			default:
 				break;
@@ -299,14 +304,6 @@ public class KittenPlayer extends GameEntity {
 	 */
 	public void setCurrMoveCommand(MoveCommand currMoveCommand) {
 		this.currMoveCommand = currMoveCommand;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.uni_kiel.progOOproject17.model.abs.GameElement#getResourceKey()
-	 */
-	@Override
-	public Key getContentKey() {
-		return key;
 	}
 
 	/**

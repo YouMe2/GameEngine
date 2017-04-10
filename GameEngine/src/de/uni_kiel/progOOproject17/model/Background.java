@@ -1,6 +1,8 @@
 package de.uni_kiel.progOOproject17.model;
 
 import de.uni_kiel.progOOproject17.model.abs.GameElement;
+import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
+import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
  * This class represents a {@link GameElement} that serves as a simple
@@ -20,7 +22,8 @@ public class Background extends GameElement {
 	 * @param h the height
 	 */
 	public Background(String resKey, int x, int y, int w, int h) {
-		super(resKey, x, y, w, h, BG_LAYER);
+		super();
+		setView(new SimpleViewable(resKey, x, y, w, h, Viewable.BG_LAYER));
 	}
 
 	@Override

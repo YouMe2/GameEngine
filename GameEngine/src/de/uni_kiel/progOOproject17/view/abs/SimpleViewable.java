@@ -3,6 +3,8 @@ package de.uni_kiel.progOOproject17.view.abs;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.Observable;
+
 import de.uni_kiel.progOOproject17.model.abs.Distance;
 
 /**
@@ -10,10 +12,9 @@ import de.uni_kiel.progOOproject17.model.abs.Distance;
  * interface.
  *
  */
-public class SimpleViewable implements Viewable {
+public class SimpleViewable extends Observable implements Viewable {
 
 	private Key key;
-	private int layer;
 	private Rectangle rect;
 	private Rectangle relativeAnchor = new Rectangle(0, 0, 0, 0);
 	private boolean visable;
@@ -35,7 +36,11 @@ public class SimpleViewable implements Viewable {
 	 * @param layer
 	 *            the layer
 	 */
-	public SimpleViewable(String keyText, int x, int y, int w, int h, int layer) {
+	public SimpleViewable(String keyText, int x, int y, int w, int h) {
+		this(keyText, x, y, w, h, 0);
+	}
+	
+	public SimpleViewable(String keyText, int x, int y, int w, int h, float priority) {
 		this(new Key() {
 
 			@Override
@@ -43,49 +48,51 @@ public class SimpleViewable implements Viewable {
 				return keyText;
 			}
 
-		}, new Rectangle(x, y, w, h), layer);
+		}, new Rectangle(x, y, w, h), priority);
 	}
-
-	/**
-	 * Constructs a new {@link SimpleViewable}.
-	 * 
-	 * @param resKey
-	 *            the resource key
-	 * @param rect
-	 *            the {@link Rectangle}
-	 * @param layer
-	 *            the layer
-	 */
-	public SimpleViewable(Key key, Rectangle rect, int layer) {
-		this(key, rect, layer, 0, true);
-	}
-
-	public SimpleViewable(String keyText, Rectangle rect, int layer) {
+	
+	public SimpleViewable(String keyText, Rectangle rect, float priority) {
 		this(new Key() {
 
 			@Override
 			public String getText() {
 				return keyText;
 			}
-		}, rect, layer);
+
+		}, rect, priority);
 	}
 
-	public SimpleViewable(Key key, Rectangle rect, int layer, float priority) {
-		this(key, rect, layer, priority, true);
+	public SimpleViewable(Key key, Rectangle rect) {
+		this(key, rect, 0, true);
 	}
 
-	public SimpleViewable(Key key, Rectangle rect, int layer, boolean visable) {
-		this(key, rect, layer, 0, visable);
+	public SimpleViewable(String keyText, Rectangle rect) {
+		this(new Key() {
+
+			@Override
+			public String getText() {
+				return keyText;
+			}
+		}, rect);
 	}
 
-	public SimpleViewable(Key key, Rectangle rect, int layer, float priority, boolean visable) {
+	public SimpleViewable(Key key, Rectangle rect, float priority) {
+		this(key, rect, priority, true);
+	}
+
+	public SimpleViewable(Key key, Rectangle rect, boolean visable) {
+		this(key, rect, 0, visable);
+	}
+
+	public SimpleViewable(Key key, Rectangle rect, float priority, boolean visable) {
 		this.key = key;
 		this.rect = rect;
-		this.layer = layer;
 		this.priority = priority;
 		this.visable = visable;
 
 	}
+
+	
 
 	/*
 	 * (non-Javadoc)
@@ -111,15 +118,15 @@ public class SimpleViewable implements Viewable {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.uni_kiel.progOOproject17.view.abs.Viewable#getLayer()
-	 */
-	@Override
-	public int getLayer() {
-		return layer;
-	}
+	// /*
+	// * (non-Javadoc)
+	// *
+	// * @see de.uni_kiel.progOOproject17.view.abs.Viewable#getLayer()
+	// */
+	// @Override
+	// public int getLayer() {
+	// return layer;
+	// }
 
 	/*
 	 * (non-Javadoc)
@@ -143,6 +150,24 @@ public class SimpleViewable implements Viewable {
 
 	public void setRelativeAnchor(Rectangle relativeAnchor) {
 		this.relativeAnchor = relativeAnchor;
+	}
+
+	/**
+	 * @param priority
+	 *            the priority to set
+	 */
+	public void setPriority(float priority) {
+		this.priority = priority;
+		setChanged();
+		notifyObservers();
+	}
+
+	/**
+	 * @param visable
+	 *            the visable to set
+	 */
+	public void setVisable(boolean visable) {
+		this.visable = visable;
 	}
 
 	/**
@@ -191,7 +216,7 @@ public class SimpleViewable implements Viewable {
 	 * @param h
 	 */
 	public void setSize(int w, int h) {
-		rect.setSize(w, h);
+		setSize(new Dimension(w, h));
 	}
 
 	/**
@@ -242,15 +267,23 @@ public class SimpleViewable implements Viewable {
 	/**
 	 * @param pointsKey
 	 */
-	public void setKeyText(String keyText) {
-		this.key = new Key() {
+	public void setTextKey(String keyText) {
+		setKey(new Key() {
 
 			@Override
 			public String getText() {
 				return keyText;
 			}
-		};
+		});
 
+	}
+
+	/**
+	 * @param key
+	 *            the key to set
+	 */
+	public void setKey(Key key) {
+		this.key = key;
 	}
 
 }

@@ -1,8 +1,11 @@
 package de.uni_kiel.progOOproject17.model;
 
-import java.security.Key;
+import java.awt.Rectangle;
 
 import de.uni_kiel.progOOproject17.model.abs.GameElement;
+import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
+import de.uni_kiel.progOOproject17.view.abs.Viewable;
+import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
 
 /**
  * This class represents a {@link GameElement} that serves as a animated
@@ -44,16 +47,13 @@ public class Particle extends GameElement {
 	 *            the length of the counter
 	 */
 	public Particle(String resKey, int x, int y, int w, int h, int dtime, int lenghth) {
-		super(resKey, x, y, w, h, PARTICLE_LAYER);
+		super();
+		setView(new SimpleViewable(key, new Rectangle(x, y, w, h), Viewable.PARTICLE_LAYER));
 		this.resKey = resKey;
 		this.max = lenghth;
 		this.dtime = dtime;
 	}
 
-	@Override
-	public Key getContentKey() {
-		return key;
-	}
 
 	/*
 	 * (non-Javadoc)
