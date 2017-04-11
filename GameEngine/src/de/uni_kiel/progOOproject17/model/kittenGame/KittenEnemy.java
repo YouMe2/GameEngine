@@ -7,8 +7,6 @@ import de.uni_kiel.progOOproject17.model.abs.Environment;
 import de.uni_kiel.progOOproject17.model.abs.GameEntity;
 import de.uni_kiel.progOOproject17.model.abs.GameObject;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox;
-import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
-import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
  * This class represents a {@link GameEntity} that serves as a Enemy.

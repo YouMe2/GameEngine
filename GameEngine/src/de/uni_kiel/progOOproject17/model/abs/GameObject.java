@@ -9,37 +9,37 @@ import java.util.ArrayList;
  */
 public abstract class GameObject extends GameElement implements Deadly, Collidable, Effectable {
 
+	// TODO change deadly to be an effect
+	// TODO rework the deadly interface
 	private boolean deadly;
-	private int killcounter;
 
 	private Hitbox hitbox;
 	private boolean solid = true;
 	
-	private Stats stats;
+	private final Stats stats;
 	
 	private ArrayList<Effect> effects;
 
 	
-	
 	public GameObject(Hitbox hitbox) {
+		this(hitbox, null);
+		
+	}
+	
+	public GameObject(Hitbox hitbox, Stats stats) {
 		super();
 		this.hitbox = hitbox;
 		this.effects = new ArrayList<>();
-	
-	}
-	
-	/**
-	 * @param stats the stats to set
-	 */
-	public void setStats(Stats stats) {
-		this.stats = stats;
+		if (stats == null)
+			this.stats = new Stats(1, 0, 0, 0, 0, 0, 0);
+		else
+			this.stats = stats;
 	}
 	
 	/**
 	 * @return the stats
 	 */
 	public Stats getStats() {
-		//TODO safer with clone?
 		return stats;
 	}
 	
@@ -47,9 +47,9 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	 * @see de.uni_kiel.progOOproject17.model.abs.Ticked#tick(long)
 	 */
 	@Override
-	public void tick(long timestamp) {
-		
+	public void tick(long timestamp) {	
 		tickEffects(timestamp);
+		super.tick(timestamp);
 	}
 
 	private void tickEffects(long timestamp) {
@@ -111,6 +111,7 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	@Override
 	public Hitbox getHitbox() {
 //		return hitbox;
+		//FIXME too much cloning of hitboxes
 		return hitbox.clone();
 	}
 
@@ -146,7 +147,7 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	 */
 	@Override
 	public void addKill() {
-		killcounter++;
+		getStats().addKill();
 	}
 
 	/*
@@ -156,6 +157,6 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	 */
 	@Override
 	public int getKills() {
-		return killcounter;
+		return getStats().getKills();
 	}
 }

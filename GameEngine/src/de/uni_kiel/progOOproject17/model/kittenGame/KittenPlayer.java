@@ -13,14 +13,15 @@ import de.uni_kiel.progOOproject17.model.abs.GameEntity;
 import de.uni_kiel.progOOproject17.model.abs.GameObject;
 import de.uni_kiel.progOOproject17.model.abs.Hitbox;
 import de.uni_kiel.progOOproject17.model.abs.MoveCommand;
+import de.uni_kiel.progOOproject17.model.abs.Stats;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
 import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
 
 /**
- * This class represents a {@link GameEntity} that acts as the {@link KittenPlayer}.
- * The player has a certain number of lifes and points. The player can be
- * interacted with view setting a {@link MoveCommand}.
+ * This class represents a {@link GameEntity} that acts as the
+ * {@link KittenPlayer}. The player has a certain number of lifes and points.
+ * The player can be interacted with view setting a {@link MoveCommand}.
  * 
  *
  */
@@ -32,17 +33,20 @@ public class KittenPlayer extends GameEntity {
 	private int points = 0;
 
 	/**
-	 * The max lifes the player can have
+	 * // * The max lifes the player can have //
 	 */
-	private final int maxLifes = 9;
-	
-	/**
-	 * The current number of lifes
-	 */
-	private int lifes = Math.min(Integer.valueOf(GameProperties.getInstance().getProperty("playerLifes")), maxLifes);
+	// private final int maxLifes = 9;
+	//
+	// /**
+	// * The current number of lifes
+	// */
+	// private int lifes =
+	// Math.min(Integer.valueOf(GameProperties.getInstance().getProperty("playerLifes")),
+	// maxLifes);
 
 	/**
-	 * The current {@link MoveCommand} which will be evaluated by the tick() method
+	 * The current {@link MoveCommand} which will be evaluated by the tick()
+	 * method
 	 */
 	private MoveCommand currMoveCommand = MoveCommand.NONE;
 
@@ -72,18 +76,17 @@ public class KittenPlayer extends GameEntity {
 	 */
 	public static final int PLAYER_H_CROUCH = PLAYER_H_NORMAL / 2;
 
-	
 	private final String resKey;
-	
+
 	private Key key = new Key() {
 		@Override
 		public String getText() {
-			return (currMoveState == CROUCHING || currMoveState == KittenMoveState.JUMPING_AND_CROUCHING) ? resKey + "_C" : resKey;
+			return (currMoveState == CROUCHING || currMoveState == KittenMoveState.JUMPING_AND_CROUCHING)
+					? resKey + "_C" : resKey;
 		}
-		
+
 	};
-	
-	
+
 	/**
 	 * Constructs a new Player.
 	 * 
@@ -107,13 +110,13 @@ public class KittenPlayer extends GameEntity {
 	 *            the y coord
 	 */
 	public KittenPlayer(String resKey, int x, int y) {
-		super(new Hitbox.RectHitbox(x, y, PLAYER_W, PLAYER_H_NORMAL));
+		super(new Hitbox.RectHitbox(x, y, PLAYER_W, PLAYER_H_NORMAL),
+				new Stats(Integer.valueOf(GameProperties.getInstance().getProperty("playerLifes")), 0, 0, 0, 0, 0, 0));
 		this.resKey = resKey;
 		getViewable().setKey(key);
 		getViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
 		getViewable().setVisable(true);
-		
-		
+
 	}
 
 	// TESTWISE
@@ -142,18 +145,18 @@ public class KittenPlayer extends GameEntity {
 			switch (currMoveState) {
 			case NORMAL:
 				currMoveState = CROUCHING;
-				if (environment.isOnGround(this)){
+				if (environment.isOnGround(this)) {
 					Distance headDown = new Distance(0, PLAYER_H_NORMAL - PLAYER_H_CROUCH);
 					move(headDown);
 				}
 				getViewable().setSize(PLAYER_W, PLAYER_H_CROUCH);
-				((Hitbox.RectHitbox)getThisHitbox()).setSize(PLAYER_W, PLAYER_H_CROUCH);
+				((Hitbox.RectHitbox) getThisHitbox()).setSize(PLAYER_W, PLAYER_H_CROUCH);
 				ResourceManager.getInstance().getSound("crouch").play();
 				break;
 			case JUMPING:
 				currMoveState = JUMPING_AND_CROUCHING;
 				getViewable().setSize(PLAYER_W, PLAYER_H_CROUCH);
-				((Hitbox.RectHitbox)getThisHitbox()).setSize(PLAYER_W, PLAYER_H_CROUCH);
+				((Hitbox.RectHitbox) getThisHitbox()).setSize(PLAYER_W, PLAYER_H_CROUCH);
 				ResourceManager.getInstance().getSound("crouch").play();
 				break;
 			default:
@@ -165,18 +168,17 @@ public class KittenPlayer extends GameEntity {
 			switch (currMoveState) {
 			case CROUCHING:
 				currMoveState = NORMAL;
-				if (environment.isOnGround(this)){
+				if (environment.isOnGround(this)) {
 					Distance headUp = new Distance(0, PLAYER_H_CROUCH - PLAYER_H_NORMAL);
 					move(headUp);
-				}
-				else if (environment.willCollide(this, crouchingDifference)) {
+				} else if (environment.willCollide(this, crouchingDifference)) {
 					Distance maxDistance = environment.getCollisionDistance(this, crouchingDifference);
 					crouchingDifference.scale(-1.0);
 					maxDistance.add(crouchingDifference);
 					move(maxDistance);
 				}
 				getViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
-				((Hitbox.RectHitbox)getThisHitbox()).setSize(PLAYER_W, PLAYER_H_NORMAL);
+				((Hitbox.RectHitbox) getThisHitbox()).setSize(PLAYER_W, PLAYER_H_NORMAL);
 				break;
 			case JUMPING_AND_CROUCHING:
 				currMoveState = JUMPING;
@@ -187,7 +189,7 @@ public class KittenPlayer extends GameEntity {
 					move(maxDistance);
 				}
 				getViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
-				((Hitbox.RectHitbox)getThisHitbox()).setSize(PLAYER_W, PLAYER_H_NORMAL);
+				((Hitbox.RectHitbox) getThisHitbox()).setSize(PLAYER_W, PLAYER_H_NORMAL);
 			default:
 				break;
 			}
@@ -240,11 +242,10 @@ public class KittenPlayer extends GameEntity {
 			setVelocity(getVelocity().x, (int) (getVelocity().y * 0.7));
 
 		if (obj.isDeadly())
-			if (damage(1)){
+			if (damage(1)) {
 				obj.addKill();
 				System.out.println("Killed by: " + obj);
-			}
-			else
+			} else
 				obj.destroy();
 
 	}
@@ -261,13 +262,15 @@ public class KittenPlayer extends GameEntity {
 		if (!isAlive())
 			return false;
 
-		lifes -= dmg;
+		getStats().modifyHP(-dmg);
+		// lifes -= dmg;
 		ResourceManager.getInstance().getSound("playerhurt").play();
 
-		if (lifes <= 0) {
+		if (getLifes() <= 0) {
 			destroy();
 
-			creationHelper.create(new Particle("playerDeath", getThisHitbox().getX(), getThisHitbox().getY(), PLAYER_H_NORMAL, PLAYER_H_NORMAL, 200, 6));
+			creationHelper.create(new Particle("playerDeath", getThisHitbox().getX(), getThisHitbox().getY(),
+					PLAYER_H_NORMAL, PLAYER_H_NORMAL, 200, 6));
 			ResourceManager.getInstance().getSound("death").play();
 
 			return true;
@@ -295,7 +298,7 @@ public class KittenPlayer extends GameEntity {
 	 * @return the current lifes
 	 */
 	public int getLifes() {
-		return lifes;
+		return getStats().getHealthPoints();
 	}
 
 	/**
@@ -312,8 +315,9 @@ public class KittenPlayer extends GameEntity {
 	 * Adds a life to the player;
 	 */
 	public void addLife() {
-		lifes = Math.min(maxLifes, lifes+1);
-		
+		getStats().modifyHP(1);
+		// lifes = Math.min(maxLifes, lifes+1);
+
 	}
 
 }

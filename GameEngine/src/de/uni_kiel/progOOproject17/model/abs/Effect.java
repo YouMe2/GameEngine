@@ -73,7 +73,7 @@ public abstract class Effect implements Ticked {
 	 * @param applied
 	 *            the applied to set
 	 */
-	public void setApplied(boolean applied) {
+	private void setApplied(boolean applied) {
 		this.applied = applied;
 	}
 	

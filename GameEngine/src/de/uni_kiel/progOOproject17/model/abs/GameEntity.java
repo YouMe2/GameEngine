@@ -23,6 +23,13 @@ public abstract class GameEntity extends GameObject implements Gravitational {
 	private int permaYVel = 0;
 
 	/**
+	 * 
+	 */
+	public GameEntity(Hitbox hitbox) {
+		this(hitbox, null);
+	}
+
+	/**
 	 * Creates a new {@link GameEntity} with a no starting velocity and active
 	 * gravity.
 	 * 
@@ -37,8 +44,8 @@ public abstract class GameEntity extends GameObject implements Gravitational {
 	 * @param h
 	 *            the heigt
 	 */
-	public GameEntity(Hitbox hitbox) {
-		super(hitbox);
+	public GameEntity(Hitbox hitbox, Stats stats) {
+		super(hitbox, stats);
 		velocity = new Distance(0, 0);
 		getViewable().setTextKey("EmptyEntity");
 		getViewable().setLocation(hitbox.getLocation());
@@ -46,8 +53,9 @@ public abstract class GameEntity extends GameObject implements Gravitational {
 		getViewable().setPriority(Viewable.ENTITY_LAYER);
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.uni_kiel.progOOproject17.model.abs.Ticked#tick(long)
 	 */
 	@Override
@@ -56,7 +64,6 @@ public abstract class GameEntity extends GameObject implements Gravitational {
 		doMovement();
 		super.tick(timestamp);
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -163,18 +170,16 @@ public abstract class GameEntity extends GameObject implements Gravitational {
 		setVelocity(collDist);
 		environment.forEachContact(this, t -> onContactWith(t));
 	}
-	
-	public void move(Distance d){	
+
+	public void move(Distance d) {
 		getThisHitbox().translate(d);
 		if (getViewable() != null)
 			getViewable().translate(d);
 	}
-	
-	public void move(int dx, int dy){	
+
+	public void move(int dx, int dy) {
 		move(new Distance(dx, dy));
 	}
-	
-	
 
 	/**
 	 * This method will be called every time this {@link GameEntity} made direct

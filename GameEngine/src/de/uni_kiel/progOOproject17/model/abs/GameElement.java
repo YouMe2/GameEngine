@@ -28,6 +28,14 @@ public abstract class GameElement implements Destroyable, Ticked {
 		return view;
 	}
 	
+	/* (non-Javadoc)
+	 * @see de.uni_kiel.progOOproject17.model.abs.Ticked#tick(long)
+	 */
+	@Override
+	public void tick(long timestamp) {
+		
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

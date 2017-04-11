@@ -3,8 +3,6 @@
  */
 package de.uni_kiel.progOOproject17.model.abs;
 
-import java.util.Observable;
-
 /**
  * @author Yannik Eikmeier
  * @since 05.04.2017
@@ -86,6 +84,11 @@ public class Stats /* extends Observable */ implements Ticked {
 	 */
 	private int current_RP;
 
+	// Scores
+
+	private int deaths = 0;
+	private int kills = 0;
+
 	private boolean init = true;
 	private long lasttime = 0;
 	public static final int TICK_TIME = 1000;
@@ -98,17 +101,17 @@ public class Stats /* extends Observable */ implements Ticked {
 		if (hp_max < 0 || hp_ps < 0 || mp_max < 0 || mp_ps < 0 || sp < 0 || ap < 0)
 			throw new IllegalArgumentException("no negative stats allowed!");
 
-		BASE_MAX_HP = hp_max;
-		BASE_HP_PS = hp_ps;
+		this.BASE_MAX_HP = hp_max;
+		this.BASE_HP_PS = hp_ps;
 
-		BASE_MAX_MP = mp_max;
-		BASE_MP_PS = mp_ps;
+		this.BASE_MAX_MP = mp_max;
+		this.BASE_MP_PS = mp_ps;
 
-		BASE_SP = sp;
+		this.BASE_SP = sp;
 
-		BASE_AP = ap;
+		this.BASE_AP = ap;
 
-		BASE_RP = rp;
+		this.BASE_RP = rp;
 
 		reset();
 
@@ -271,6 +274,15 @@ public class Stats /* extends Observable */ implements Ticked {
 		max_MP += maxMP;
 	}
 
+	public void addKill() {
+		kills++;
+
+	}
+
+	public void addDeath() {
+		deaths++;
+	}
+
 	/**
 	 * @return the AbilityPoints
 	 */
@@ -327,6 +339,20 @@ public class Stats /* extends Observable */ implements Ticked {
 
 	public int getMP_PS() {
 		return MP_ps > 0 ? MP_ps : 0;
+	}
+
+	/**
+	 * @return the deaths
+	 */
+	public int getDeaths() {
+		return deaths;
+	}
+
+	/**
+	 * @return the kills
+	 */
+	public int getKills() {
+		return kills;
 	}
 
 }
