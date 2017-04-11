@@ -19,7 +19,7 @@ public class ViewCompound implements Key, Observer, Iterable<SimpleViewable> {
 
 	public static final Object REMOVE_ME_FLAG = new Object();
 
-	public static final String COMPOUND_KEYTEXT = "ViewablesList";
+	public static final String COMPOUND_KEYTEXT = "ViewCompound";
 
 	private final SortedLinkedList<SimpleViewable> views;
 

@@ -30,16 +30,10 @@ public abstract class ScreenedBaseModel extends TickedBaseModel implements Actio
 	private Screen activeScreeen;
 
 	private HashMapActionable actions;
-	
-	private final SimpleViewable view;
-	private final ViewCompound compView;
 
-	
-	public ScreenedBaseModel(int w, int h) {
+	public ScreenedBaseModel() {
 		actions = new HashMapActionable();
-		compView = new ViewCompound();		
-		view = new SimpleViewable(compView, new Rectangle(0, 0, w, h));
-		
+
 	}
 
 	/*
@@ -58,7 +52,7 @@ public abstract class ScreenedBaseModel extends TickedBaseModel implements Actio
 	 */
 	@Override
 	public Viewable getViewable() {
-		return view;
+		return getActiveScreeen().getViewable();
 	}
 
 	/**
@@ -71,13 +65,11 @@ public abstract class ScreenedBaseModel extends TickedBaseModel implements Actio
 	 *            the new {@link Screen}
 	 */
 	public void showScreen(Screen s) {
-		compView.clear();
-		
+
 		pausedScreen = activeScreeen;
 		activeScreeen = s;
-		
+
 		forwardAllActionsToThis(getActiveScreeen());
-		compView.addViewable(getActiveScreeen().getViewable());
 	}
 
 	/**
@@ -123,7 +115,6 @@ public abstract class ScreenedBaseModel extends TickedBaseModel implements Actio
 	//// }
 	//// };
 	// }
-
 
 	/*
 	 * (non-Javadoc)

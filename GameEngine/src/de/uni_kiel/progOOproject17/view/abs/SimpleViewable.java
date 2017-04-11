@@ -123,16 +123,6 @@ public class SimpleViewable extends Observable implements Viewable {
 
 	}
 
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see de.uni_kiel.progOOproject17.view.abs.Viewable#getLayer()
-	// */
-	// @Override
-	// public int getLayer() {
-	// return layer;
-	// }
-
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -46,12 +46,12 @@ public class PLDektopView extends FramedIOView {
 		super(title, KittenBaseModel.GAME_WIDTH, KittenBaseModel.GAME_HEIGHT, false);
 		img = new BufferedImage(KittenBaseModel.GAME_WIDTH, KittenBaseModel.GAME_HEIGHT, BufferedImage.TYPE_3BYTE_BGR);
 		res = ResourceManager.getInstance();
-		// setResizable(false);
 		canvas = new Canvas();
 
 		canvas.setSize(contentPane.getWidth(), contentPane.getHeight());
 		contentPane.add(canvas);
-
+		pack();
+//		setResizable(true);
 	}
 
 	/*
@@ -85,7 +85,7 @@ public class PLDektopView extends FramedIOView {
 		if (!v.isVisble())
 			return;
 		
-
+		
 
 		Rectangle rect = v.getViewRect();
 		Key key = v.getContentKey();
@@ -97,9 +97,21 @@ public class PLDektopView extends FramedIOView {
 		if (keyText.equals(ViewCompound.COMPOUND_KEYTEXT) && key instanceof ViewCompound) {
 			ViewCompound comp = (ViewCompound) key;
 
+			if (resDebuggRender) {
+				// resource debug mode render
+				gr.setColor(Color.WHITE);
+				gr.drawRect(rect.x, rect.y, rect.width, rect.height);
+				gr.drawString(keyText, rect.x + 2, rect.y + rect.height - 8);
+			}
+			
+			gr.translate(rect.x, rect.y);
+			
+			
 			for (Viewable viewable : comp) {
 				render(viewable, gr);
 			}
+			
+			gr.translate(-rect.x, -rect.y);
 
 		} else if (keyText.startsWith(Viewable.DEBUGKEY_PREFIX)) {
 			if (hitboxDebugRender) {

@@ -48,7 +48,7 @@ public class KittenScoreboard extends GameCompound {
 	 * @param stats the {@link KittenStats} to display
 	 */
 	public KittenScoreboard(KittenStats stats) {
-		super(0, 0, GAME_WIDTH, LHPIXEL_HEIGHT * 3);
+		super(0, 20, GAME_WIDTH, LHPIXEL_HEIGHT * 3);
 		this.stats = stats;
 
 		pointsDisplay = new SimpleViewable[GAME_WIDTH / (LHPIXEL_WIDTH * 3)];
