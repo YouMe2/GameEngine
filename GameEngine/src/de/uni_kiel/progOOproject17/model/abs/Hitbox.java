@@ -44,6 +44,22 @@ public abstract class Hitbox {
 	public int getY() {
 		return pos.y;
 	}
+	
+	/**
+	 * @return
+	 */
+	public int getMaxW() {
+		return maxX()-getX();
+	}
+	
+	/**
+	 * @return
+	 */
+	public int getMaxH() {
+		return maxY()-getY();
+	}
+	
+	
 
 	/**
 	 * @param pos
@@ -977,5 +993,7 @@ public abstract class Hitbox {
 			return res.toString();
 		}
 	}
+
+	
 
 }

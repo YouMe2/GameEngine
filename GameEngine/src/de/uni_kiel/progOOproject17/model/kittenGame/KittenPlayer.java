@@ -110,7 +110,6 @@ public class KittenPlayer extends GameEntity {
 		super(new Hitbox.RectHitbox(x, y, PLAYER_W, PLAYER_H_NORMAL));
 		this.resKey = resKey;
 		getViewable().setKey(key);
-		getViewable().setLocation(x, y);
 		getViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
 		getViewable().setVisable(true);
 		

@@ -34,7 +34,6 @@ public class KittenEnemy extends GameEntity {
 		
 		
 		getViewable().setTextKey(resKey);
-		getViewable().setLocation(x, y);
 		getViewable().setSize(KittenBaseModel.LHPIXEL_WIDTH * 2,
 				Math.round(KittenBaseModel.LHPIXEL_HEIGHT * 0.9f));
 		getViewable().setVisable(true);
