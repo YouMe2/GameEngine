@@ -13,7 +13,7 @@ public abstract class Effect implements Ticked {
 	/**
 	 * wheather this {@link Effect} already is applied or not
 	 */
-	private boolean applied = false;
+	private boolean active = false;
 	/**
 	 * The {@link Stats} this {@link Effect} effects
 	 */
@@ -29,11 +29,11 @@ public abstract class Effect implements Ticked {
 	}
 	
 
-	public void apply(Stats stats) {
-		if (!isApplied()) {
+	public void applyTo(Stats stats) {
+		if (!isActive()) {
 			this.stats = stats;
 			onApplication(stats);
-			setApplied(true);
+			setActive(true);
 		}
 	}
 
@@ -44,14 +44,15 @@ public abstract class Effect implements Ticked {
 	 */
 	@Override
 	public void tick(long timestamp) {
-		if (isApplied()) {
+		if (isActive()) {
 			onTick(stats, timestamp);
 		}
 	}
 
+	//a effect may end itself during a tick!
 	public void end() {
-		if (isApplied()) {
-			setApplied(false);
+		if (isActive()) {
+			setActive(false);
 			onEnd(stats);
 		}
 	}
@@ -65,16 +66,16 @@ public abstract class Effect implements Ticked {
 	/**
 	 * @return the applied
 	 */
-	public boolean isApplied() {
-		return applied;
+	public boolean isActive() {
+		return active;
 	}
 
 	/**
 	 * @param applied
 	 *            the applied to set
 	 */
-	private void setApplied(boolean applied) {
-		this.applied = applied;
+	private void setActive(boolean applied) {
+		this.active = applied;
 	}
 	
 	/**

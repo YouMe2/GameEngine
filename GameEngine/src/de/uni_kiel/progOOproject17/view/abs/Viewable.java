@@ -18,6 +18,7 @@ import de.uni_kiel.progOOproject17.model.screen.MenuScreen;
 public interface Viewable extends Priority {
 
 	public static final String DEBUGKEY_PREFIX = "DEBUG-";
+	public static final String STRINGKEY_PREFIX = "TEXT-";
 
 	/**
 	 * The number of layers there are.
@@ -54,6 +55,7 @@ public interface Viewable extends Priority {
 	 * The 2nd {@link MenuScreen} layer.
 	 */
 	public static final int MENU2_LAYER = 7;
+
 
 	/**
 	 * Returns the key of this {@link Viewable} which is used by the

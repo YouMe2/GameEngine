@@ -2,8 +2,12 @@ package de.uni_kiel.progOOproject17.view;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
@@ -49,6 +53,56 @@ public class PLDektopView extends FramedIOView {
 		canvas = new Canvas();
 
 		canvas.setSize(contentPane.getWidth(), contentPane.getHeight());
+		
+		canvas.addMouseMotionListener(new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				System.out.println("moved!");
+				
+			}
+			
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		this.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
 		contentPane.add(canvas);
 		pack();
 //		setResizable(true);
@@ -93,7 +147,8 @@ public class PLDektopView extends FramedIOView {
 
 		if (keyText == null)
 			keyText = "null";
-
+		
+		// COMPUND RENDER
 		if (keyText.equals(ViewCompound.COMPOUND_KEYTEXT) && key instanceof ViewCompound) {
 			ViewCompound comp = (ViewCompound) key;
 
@@ -113,7 +168,16 @@ public class PLDektopView extends FramedIOView {
 			
 			gr.translate(-rect.x, -rect.y);
 
-		} else if (keyText.startsWith(Viewable.DEBUGKEY_PREFIX)) {
+		}
+		else if (keyText.startsWith(Viewable.STRINGKEY_PREFIX)) {
+			String text = keyText.replaceFirst(Viewable.STRINGKEY_PREFIX, "");
+			gr.setColor(Color.BLACK);
+			gr.setFont(new Font(null, Font.PLAIN, rect.height));
+			gr.drawString(text, rect.x, rect.y + rect.height);
+			
+		}
+		// DEBUG RENDER HIBOXES
+		else if (keyText.startsWith(Viewable.DEBUGKEY_PREFIX)) {
 			if (hitboxDebugRender) {
 				// hitbox debugging
 				gr.setColor(Color.CYAN);
@@ -128,7 +192,9 @@ public class PLDektopView extends FramedIOView {
 				}
 
 			}
-		} else {
+		} 
+		// STANDARD RENDER text -> img
+		else {
 			if (resDebuggRender) {
 				// resource debug mode render
 				gr.setColor(Color.WHITE);

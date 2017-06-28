@@ -12,6 +12,7 @@ public interface Effectable {
 	
 	public void applyEffect(Effect e);
 
+	//must not be the only way a effect ends!
 	public void endEffect(Effect e);
 
 }

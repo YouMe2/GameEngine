@@ -1,6 +1,6 @@
 package de.uni_kiel.progOOproject17.model.abs;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * This class represents a advanced {@link GameElement} that also is can be
@@ -18,7 +18,7 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	
 	private final Stats stats;
 	
-	private ArrayList<Effect> effects;
+	private LinkedList<Effect> effects;
 
 	
 	public GameObject(Hitbox hitbox) {
@@ -29,7 +29,7 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	public GameObject(Hitbox hitbox, Stats stats) {
 		super();
 		this.hitbox = hitbox;
-		this.effects = new ArrayList<>();
+		this.effects = new LinkedList<>();
 		if (stats == null)
 			this.stats = new Stats(1, 0, 0, 0, 0, 0, 0);
 		else
@@ -53,10 +53,15 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	}
 
 	private void tickEffects(long timestamp) {
+		LinkedList<Effect> deadEffects = new LinkedList<>();
 		for (Effect effect : effects) {
-			effect.tick(timestamp);
-		}
-		
+			if (effect.isActive())
+				effect.tick(timestamp);
+			else
+				deadEffects.add(effect);
+				
+		}	
+		effects.removeAll(deadEffects);		
 	}
 	
 	
@@ -66,7 +71,7 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	@Override
 	public void applyEffect(Effect e) {
 		effects.add(e);
-		e.apply(stats);
+		e.applyTo(this.getStats());
 		
 	}
 	
@@ -75,8 +80,10 @@ public abstract class GameObject extends GameElement implements Deadly, Collidab
 	 */
 	@Override
 	public void endEffect(Effect e) {
-		effects.remove(e);
-		e.end();
+		if(effects.remove(e)){
+			e.end();			
+		} else
+			System.err.println("Tried ending a non existing Effect");
 	}
 	
 

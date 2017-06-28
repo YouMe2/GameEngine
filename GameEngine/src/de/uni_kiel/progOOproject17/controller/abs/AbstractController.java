@@ -18,13 +18,13 @@ public abstract class AbstractController {
 	/**
 	 * The standard {@link OutputView} of this controller.
 	 */
-	protected final OutputView standardOut;
+	private final OutputView standardOut;
 	private Vector<OutputView> outs = new Vector<>();
 
 	/**
 	 * The standard {@link InputView} of this controller.
 	 */
-	protected final InputView standardIn;
+	private final InputView standardIn;
 	private Vector<InputView> ins = new Vector<>();
 
 	/**
@@ -144,6 +144,20 @@ public abstract class AbstractController {
 	 */
 	public InputView getInputView(int i) {
 		return ins.get(i);
+	}
+	
+	/**
+	 * @return the standardIn
+	 */
+	public InputView getStandardIn() {
+		return standardIn;
+	}
+	
+	/**
+	 * @return the standardOut
+	 */
+	public OutputView getStandardOut() {
+		return standardOut;
 	}
 
 }

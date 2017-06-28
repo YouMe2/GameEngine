@@ -54,23 +54,23 @@ public class PLController extends TickedController {
 		super(view, view, model, Integer.valueOf(GameProperties.getInstance().getProperty("tickLength")));
 
 		// standard Game Actions:
-		standardIn.addAction("pressed W", model.getAction(InputActionKey.UP_P));
-		standardIn.addAction("released W", model.getAction(InputActionKey.UP_R));
-		standardIn.addAction("pressed S", model.getAction(InputActionKey.DOWN_P));
-		standardIn.addAction("released S", model.getAction(InputActionKey.DOWN_R));
+		getStandardIn().addAction("pressed W", model.getAction(InputActionKey.UP_P));
+		getStandardIn().addAction("released W", model.getAction(InputActionKey.UP_R));
+		getStandardIn().addAction("pressed S", model.getAction(InputActionKey.DOWN_P));
+		getStandardIn().addAction("released S", model.getAction(InputActionKey.DOWN_R));
 		
-		standardIn.addAction("pressed D", model.getAction(InputActionKey.RIGHT_P));
-		standardIn.addAction("released D", model.getAction(InputActionKey.RIGHT_R));
-		standardIn.addAction("pressed A", model.getAction(InputActionKey.LEFT_P));
-		standardIn.addAction("released A", model.getAction(InputActionKey.LEFT_R));
+		getStandardIn().addAction("pressed D", model.getAction(InputActionKey.RIGHT_P));
+		getStandardIn().addAction("released D", model.getAction(InputActionKey.RIGHT_R));
+		getStandardIn().addAction("pressed A", model.getAction(InputActionKey.LEFT_P));
+		getStandardIn().addAction("released A", model.getAction(InputActionKey.LEFT_R));
 		
-		standardIn.addAction("pressed SPACE", model.getAction(InputActionKey.SELECT_P));
-		standardIn.addAction("released SPACE", model.getAction(InputActionKey.SELECT_R));
+		getStandardIn().addAction("pressed SPACE", model.getAction(InputActionKey.SELECT_P));
+		getStandardIn().addAction("released SPACE", model.getAction(InputActionKey.SELECT_R));
 
 
 		
 		// debugging actions
-		standardIn.addAction("pressed E", new AbstractAction() {
+		getStandardIn().addAction("pressed E", new AbstractAction() {
 
 			/**
 			 * 
@@ -83,7 +83,7 @@ public class PLController extends TickedController {
 			}
 		});
 
-		standardIn.addAction("released E", new AbstractAction() {
+		getStandardIn().addAction("released E", new AbstractAction() {
 
 			/**
 			 * 
@@ -96,7 +96,7 @@ public class PLController extends TickedController {
 			}
 		});
 
-		standardIn.addAction("pressed R", new AbstractAction() {
+		getStandardIn().addAction("pressed R", new AbstractAction() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -106,7 +106,7 @@ public class PLController extends TickedController {
 			}
 		});
 		
-		standardIn.addAction("pressed H", new AbstractAction() {
+		getStandardIn().addAction("pressed H", new AbstractAction() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -116,7 +116,7 @@ public class PLController extends TickedController {
 			}
 		});
 		
-		standardIn.addAction("pressed 1", new AbstractAction() {
+		getStandardIn().addAction("pressed 1", new AbstractAction() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -125,7 +125,7 @@ public class PLController extends TickedController {
 			}
 		});
 		
-		standardIn.addAction("pressed T", new AbstractAction() {
+		getStandardIn().addAction("pressed T", new AbstractAction() {
 
 			/**
 			 * 

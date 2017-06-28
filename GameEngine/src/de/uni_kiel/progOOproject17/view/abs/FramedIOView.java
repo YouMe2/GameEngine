@@ -145,8 +145,18 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 		else
 			in.setEnabeled(key, enabeled);
 	}
+	
+	
+
+	/**
+	 * 
+	 */
+	public void toggelResDebuggRender() {
+		// TODO Auto-generated method stub
+		
+	}
 
 
-	//TODO implement render here?
+	//TODO implement render here!
 
 }
