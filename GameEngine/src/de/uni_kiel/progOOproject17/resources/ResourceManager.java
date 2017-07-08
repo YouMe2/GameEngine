@@ -13,7 +13,9 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class ResourceManager {
+import de.uni_kiel.progOOproject17.view.abs.TextureManager;
+
+public class ResourceManager implements TextureManager{
 
 	/**
 	 * The static instance of the class ensures that there's only one instance

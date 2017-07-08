@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import de.uni_kiel.progOOproject17.model.abs.GameElement;
 import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable;
-import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
+import de.uni_kiel.progOOproject17.view.abs.Viewable.ViewContentKey;
 
 /**
  * This class represents a {@link GameElement} that serves as a animated
@@ -19,7 +19,7 @@ public class Particle extends GameElement {
 	private final int max;
 	private final String resKey;
 	
-	private Key key = new Key() {
+	private ViewContentKey key = new ViewContentKey() {
 		@Override
 		public String getText() {
 			return resKey + "_" + counter;

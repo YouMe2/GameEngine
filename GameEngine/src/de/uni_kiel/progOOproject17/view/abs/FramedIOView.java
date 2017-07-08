@@ -1,7 +1,12 @@
 package de.uni_kiel.progOOproject17.view.abs;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -11,6 +16,8 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import de.uni_kiel.progOOproject17.view.abs.Viewable.ViewContentKey;
 
 /**
  * This class provides a {@link JFrame} which holds an {@link InputView} in as
@@ -36,6 +43,10 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 
 	private HashMap<String, JButton> buttons = new HashMap<>();
 
+	private boolean texDebuggRender = false;
+
+	private final TextureManager textureManager;
+
 	/**
 	 * Constructs a new {@link FramedIOView}.
 	 * 
@@ -48,8 +59,16 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 	 * @param resizeable
 	 *            whether the frame should be resizeable
 	 */
-	public FramedIOView(String title, int w, int h, boolean resizeable) {
+	public FramedIOView(String title, int w, int h, boolean resizeable, TextureManager texMen) {
 		super(title);
+
+		this.textureManager = (texMen != null) ? texMen : new TextureManager() {
+			// dummy null manager
+			@Override
+			public Image getImage(String name) {
+				return null;
+			}
+		};
 
 		in = new MappedKeyInput();
 		contentPane = new JPanel(true);
@@ -68,8 +87,8 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 
 	/**
 	 * Adds a {@link JButton} b to the {@link JComponent} comp with the given
-	 * constraints. And makes this button available for the internal
-	 * {@link Action} handling.
+	 * constraints. And makes this button available for the internal {@link Action}
+	 * handling.
 	 * 
 	 * @param b
 	 *            the {@link JButton}
@@ -87,9 +106,9 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 	}
 
 	/**
-	 * Adds the action to the Input view, so that it will be performed when an
-	 * event occurs that need to be specified by the String key. For example a
-	 * keystroke or the name of a button.
+	 * Adds the action to the Input view, so that it will be performed when an event
+	 * occurs that need to be specified by the String key. For example a keystroke
+	 * or the name of a button.
 	 * 
 	 * @see de.uni_kiel.progOOproject17.view.abs.InputView#addAction(java.lang.String,
 	 *      javax.swing.Action)
@@ -106,8 +125,7 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * de.uni_kiel.progOOproject17.view.abs.InputView#addActionMap(javax.swing.
+	 * @see de.uni_kiel.progOOproject17.view.abs.InputView#addActionMap(javax.swing.
 	 * ActionMap)
 	 */
 	@Override
@@ -133,8 +151,7 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * de.uni_kiel.progOOproject17.view.abs.InputView#setEnabeled(java.lang.
+	 * @see de.uni_kiel.progOOproject17.view.abs.InputView#setEnabeled(java.lang.
 	 * String, boolean)
 	 */
 	@Override
@@ -145,18 +162,89 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 		else
 			in.setEnabeled(key, enabeled);
 	}
-	
-	
 
 	/**
 	 * 
 	 */
-	public void toggelResDebuggRender() {
-		// TODO Auto-generated method stub
-		
+	public void toggelTextureDebuggRender() {
+		texDebuggRender = !texDebuggRender;
 	}
 
+	@Override
+	public abstract void render(Viewable viewable);
 
-	//TODO implement render here!
+	protected void renderTo(Viewable v, Graphics gr) {
+		if (v == null)
+			return;
+		if (!v.isVisble())
+			return;
+
+		Rectangle rect = v.getViewRect();
+		ViewContentKey key = v.getContentKey();
+		String keyText = key != null ? key.getText() : null;
+
+		if (keyText == null)
+			keyText = "null";
+
+		// COMPOUND RENDER
+		if (keyText.equals(ViewCompound.COMPOUND_KEYTEXT) && key instanceof ViewCompound) {
+			ViewCompound comp = (ViewCompound) key;
+
+			if (texDebuggRender) {
+				// resource debug mode render
+				// show outline:
+				gr.setColor(Color.WHITE);
+				gr.drawRect(rect.x, rect.y, rect.width, rect.height);
+				gr.drawString(keyText, rect.x + 2, rect.y + rect.height - 8);
+			}
+
+			// relative render:
+			gr.translate(rect.x, rect.y);
+
+			for (Viewable viewable : comp) {
+				renderTo(viewable, gr);
+			}
+
+			gr.translate(-rect.x, -rect.y);
+
+		} else if (keyText.startsWith(Viewable.STRING_KEYPREFIX)) {
+			String text = keyText.replaceFirst(Viewable.STRING_KEYPREFIX, "");
+			gr.setColor(Color.BLACK);
+			gr.setFont(new Font(null, Font.PLAIN, rect.height));
+			gr.drawString(text, rect.x, rect.y + rect.height);
+
+		}
+		// DEBUG RENDER
+		else if (keyText.startsWith(Viewable.DEBUG_KEYPREFIX)) {
+			// TODO debug render hitboxes and more
+			// if (hitboxDebugRender) {
+			// // hitbox debugging
+			// gr.setColor(Color.CYAN);
+			// String key2 = keyText.replaceFirst(Viewable.DEBUG_KEYPREFIX, "");
+			// if (key2.equals(Hitbox.CIRCLE_KEY)) {
+			// gr.drawOval(rect.x, rect.y, rect.width, rect.height);
+			// }
+			// if (key2.equals(Hitbox.LINE_KEY)) {
+			// // gr.drawLine(rect.x, rect.y, rect.x + rect.width, rect.y +
+			// // rect.height);
+			// gr.drawLine(rect.x, rect.y, rect.width, rect.height);
+			// }
+			//
+			// }
+		}
+		// TEXTURE RENDER
+		else if (keyText.startsWith(Viewable.TEXTURE_KEYPREFIX)) {
+			if (texDebuggRender) {
+				// resource debug mode render
+				gr.setColor(Color.WHITE);
+				gr.drawRect(rect.x, rect.y, rect.width, rect.height);
+				gr.drawString(keyText, rect.x + 2, rect.y + 16);
+			}
+			// standard render
+			// System.out.println("redered img: "+keyText);
+			gr.drawImage(textureManager.getImage(keyText), rect.x, rect.y, rect.width, rect.height, null);
+
+		}
+	}
 
 }

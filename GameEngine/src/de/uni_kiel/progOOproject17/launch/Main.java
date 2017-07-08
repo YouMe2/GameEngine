@@ -156,8 +156,8 @@ public class Main {
 
 		ResourceManager.getInstance().init();
 
-		new PLController(new PLDektopView(GameProperties.getInstance().getProperty("titleText")), new KittenBaseModel())
-				.start(0);
+		new PLController(new PLDektopView(GameProperties.getInstance().getProperty("titleText"),
+				KittenBaseModel.GAME_WIDTH, KittenBaseModel.GAME_HEIGHT), new KittenBaseModel()).start(0);
 
 	}
 

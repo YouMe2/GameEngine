@@ -8,14 +8,14 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
-import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
+import de.uni_kiel.progOOproject17.view.abs.Viewable.ViewContentKey;
 
 /**
  * @author Yannik Eikmeier
  * @since 30.03.2017
  *
  */
-public class ViewCompound implements Key, Observer, Iterable<SimpleViewable> {
+public class ViewCompound implements ViewContentKey, Observer, Iterable<SimpleViewable> {
 
 	public static final Object REMOVE_ME_FLAG = new Object();
 

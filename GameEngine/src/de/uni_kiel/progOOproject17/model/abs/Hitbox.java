@@ -413,7 +413,7 @@ public abstract class Hitbox {
 
 			Point center = getCenter();
 			int r = getRadius();
-			return new SimpleViewable(Viewable.DEBUGKEY_PREFIX + CIRCLE_KEY, center.x - r, center.y - r, r * 2, r * 2,
+			return new SimpleViewable(Viewable.DEBUG_KEYPREFIX + CIRCLE_KEY, center.x - r, center.y - r, r * 2, r * 2,
 					Viewable.DEBUG_LAYER);
 		}
 
@@ -581,7 +581,7 @@ public abstract class Hitbox {
 		 */
 		@Override
 		public SimpleViewable getDebugViewable() {
-			return new SimpleViewable(Viewable.DEBUGKEY_PREFIX + Hitbox.LINE_KEY, getX(), getY(),
+			return new SimpleViewable(Viewable.DEBUG_KEYPREFIX + Hitbox.LINE_KEY, getX(), getY(),
 					getX(), getY(), Viewable.DEBUG_LAYER);
 		}
 	}
@@ -678,7 +678,7 @@ public abstract class Hitbox {
 		 */
 		@Override
 		public SimpleViewable getDebugViewable() {
-			return new SimpleViewable(Viewable.DEBUGKEY_PREFIX + Hitbox.LINE_KEY, getX(), getY(),
+			return new SimpleViewable(Viewable.DEBUG_KEYPREFIX + Hitbox.LINE_KEY, getX(), getY(),
 					getX(), getY(), Viewable.DEBUG_LAYER, false);
 		}
 

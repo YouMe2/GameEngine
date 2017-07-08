@@ -17,8 +17,9 @@ import de.uni_kiel.progOOproject17.model.screen.MenuScreen;
  */
 public interface Viewable extends Priority {
 
-	public static final String DEBUGKEY_PREFIX = "DEBUG-";
-	public static final String STRINGKEY_PREFIX = "TEXT-";
+	public static final String DEBUG_KEYPREFIX = "DEBUG-";
+	public static final String STRING_KEYPREFIX = "TEXT-";
+	public static final String TEXTURE_KEYPREFIX = "TEXTURE-";
 
 	/**
 	 * The number of layers there are.
@@ -65,7 +66,7 @@ public interface Viewable extends Priority {
 	 *
 	 * @return the resource key
 	 */
-	public Key getContentKey();
+	public ViewContentKey getContentKey();
 
 	/**
 	 * Returns the {@link Rectangle} in which this {@link Viewable} needs to be
@@ -106,7 +107,7 @@ public interface Viewable extends Priority {
 	@Override
 	public float getPriority();
 
-	public static interface Key {
+	public static interface ViewContentKey {
 
 		public String getText();
 

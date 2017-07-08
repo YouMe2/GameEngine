@@ -14,7 +14,7 @@ import de.uni_kiel.progOOproject17.model.abs.Distance;
  */
 public class SimpleViewable extends Observable implements Viewable {
 
-	private Key key;
+	private ViewContentKey key;
 	private Rectangle rect;
 	private Rectangle relativeAnchor = new Rectangle(0, 0, 0, 0);
 	private boolean visable;
@@ -46,7 +46,7 @@ public class SimpleViewable extends Observable implements Viewable {
 	}
 
 	public SimpleViewable(String keyText, int x, int y, int w, int h, float priority, boolean visable) {
-		this(new Key() {
+		this(new ViewContentKey() {
 			
 			@Override
 			public String getText() {
@@ -57,7 +57,7 @@ public class SimpleViewable extends Observable implements Viewable {
 	}
 	
 	public SimpleViewable(String keyText, Rectangle rect, float priority) {
-		this(new Key() {
+		this(new ViewContentKey() {
 
 			@Override
 			public String getText() {
@@ -67,12 +67,12 @@ public class SimpleViewable extends Observable implements Viewable {
 		}, rect, priority);
 	}
 
-	public SimpleViewable(Key key, Rectangle rect) {
+	public SimpleViewable(ViewContentKey key, Rectangle rect) {
 		this(key, rect, 0, true);
 	}
 
 	public SimpleViewable(String keyText, Rectangle rect) {
-		this(new Key() {
+		this(new ViewContentKey() {
 
 			@Override
 			public String getText() {
@@ -81,15 +81,15 @@ public class SimpleViewable extends Observable implements Viewable {
 		}, rect);
 	}
 
-	public SimpleViewable(Key key, Rectangle rect, float priority) {
+	public SimpleViewable(ViewContentKey key, Rectangle rect, float priority) {
 		this(key, rect, priority, true);
 	}
 
-	public SimpleViewable(Key key, Rectangle rect, boolean visable) {
+	public SimpleViewable(ViewContentKey key, Rectangle rect, boolean visable) {
 		this(key, rect, 0, visable);
 	}
 
-	public SimpleViewable(Key key, Rectangle rect, float priority, boolean visable) {
+	public SimpleViewable(ViewContentKey key, Rectangle rect, float priority, boolean visable) {
 		this.key = key;
 		this.rect = rect;
 		this.priority = priority;
@@ -105,7 +105,7 @@ public class SimpleViewable extends Observable implements Viewable {
 	 * @see de.uni_kiel.progOOproject17.view.abs.Viewable#getResourceKey()
 	 */
 	@Override
-	public Key getContentKey() {
+	public ViewContentKey getContentKey() {
 		return key;
 	}
 
@@ -263,7 +263,7 @@ public class SimpleViewable extends Observable implements Viewable {
 	 * @param pointsKey
 	 */
 	public void setTextKey(String keyText) {
-		setKey(new Key() {
+		setKey(new ViewContentKey() {
 
 			@Override
 			public String getText() {
@@ -277,7 +277,7 @@ public class SimpleViewable extends Observable implements Viewable {
 	 * @param key
 	 *            the key to set
 	 */
-	public void setKey(Key key) {
+	public void setKey(ViewContentKey key) {
 		this.key = key;
 	}
 	

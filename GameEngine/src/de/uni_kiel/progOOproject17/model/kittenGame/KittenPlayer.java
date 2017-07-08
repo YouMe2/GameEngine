@@ -16,7 +16,7 @@ import de.uni_kiel.progOOproject17.model.abs.MoveCommand;
 import de.uni_kiel.progOOproject17.model.abs.Stats;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
-import de.uni_kiel.progOOproject17.view.abs.Viewable.Key;
+import de.uni_kiel.progOOproject17.view.abs.Viewable.ViewContentKey;
 
 /**
  * This class represents a {@link GameEntity} that acts as the
@@ -78,7 +78,7 @@ public class KittenPlayer extends GameEntity {
 
 	private final String resKey;
 
-	private Key key = new Key() {
+	private ViewContentKey key = new ViewContentKey() {
 		@Override
 		public String getText() {
 			return (currMoveState == CROUCHING || currMoveState == KittenMoveState.JUMPING_AND_CROUCHING)

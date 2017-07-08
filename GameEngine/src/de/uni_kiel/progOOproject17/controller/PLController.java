@@ -100,21 +100,21 @@ public class PLController extends TickedController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				view.toggelResDebuggRender();
+				view.toggelTextureDebuggRender();
 				System.out.println("ResDebuggRender toggel");
 				
 			}
 		});
 		
-		getStandardIn().addAction("pressed H", new AbstractAction() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				view.toggelHitboxDebugRender();
-				System.out.println("HitboxDebugRender toggel");
-				
-			}
-		});
+//		getStandardIn().addAction("pressed H", new AbstractAction() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				view.toggelHitboxDebugRender();
+//				System.out.println("HitboxDebugRender toggel");
+//				
+//			}
+//		});
 		
 		getStandardIn().addAction("pressed 1", new AbstractAction() {
 			
