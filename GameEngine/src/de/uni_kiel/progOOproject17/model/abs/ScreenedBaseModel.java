@@ -26,14 +26,13 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  */
 public abstract class ScreenedBaseModel extends TickedBaseModel implements Actionable {
 
-	private Screen pausedScreen;
+	private Screen previousScreen;
 	private Screen activeScreeen;
 
-	private HashMapActionable actions;
+	private final HashMapActionable actions;
 
 	public ScreenedBaseModel() {
 		actions = new HashMapActionable();
-
 	}
 
 	/*
@@ -66,9 +65,8 @@ public abstract class ScreenedBaseModel extends TickedBaseModel implements Actio
 	 */
 	public void showScreen(Screen s) {
 
-		pausedScreen = activeScreeen;
+		previousScreen = activeScreeen;
 		activeScreeen = s;
-
 		forwardAllActionsToThis(getActiveScreeen());
 	}
 
@@ -80,11 +78,11 @@ public abstract class ScreenedBaseModel extends TickedBaseModel implements Actio
 	}
 
 	/**
-	 * Resumes the paused Screen and pauses the active {@link Screen}.
+	 * Resumes the previous Screen and pauses the active {@link Screen}.
 	 * 
 	 */
-	public void resumeScreen() {
-		showScreen(pausedScreen);
+	public void resumePreviousScreen() {
+		showScreen(previousScreen);
 	}
 
 	// /**
@@ -144,9 +142,8 @@ public abstract class ScreenedBaseModel extends TickedBaseModel implements Actio
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Action a = actions.getAction(iA);
-				if (a != null)
-					a.actionPerformed(e);
+				// should never be null
+				actions.getAction(iA).actionPerformed(e);
 			}
 		};
 	}

@@ -1,13 +1,12 @@
 /**
  * 
  */
-package de.uni_kiel.progOOproject17.model.testgame;
+package de.uni_kiel.progOOproject17.controller.abs;
 
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import de.uni_kiel.progOOproject17.controller.abs.TickedController;
 import de.uni_kiel.progOOproject17.model.abs.ScreenedBaseModel;
 import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
 import de.uni_kiel.progOOproject17.view.abs.FramedIOView;
@@ -79,7 +78,7 @@ public class GameController<M extends ScreenedBaseModel> extends TickedControlle
 			}
 		});
 		
-		//a
+		
 	}
 	
 	

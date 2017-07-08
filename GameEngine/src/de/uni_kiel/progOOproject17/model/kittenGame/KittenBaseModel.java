@@ -107,7 +107,7 @@ public class KittenBaseModel extends ScreenedBaseModel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			resumeScreen();
+			resumePreviousScreen();
 		}
 	};
 

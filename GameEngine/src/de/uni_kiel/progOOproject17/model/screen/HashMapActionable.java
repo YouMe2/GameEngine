@@ -3,8 +3,11 @@
  */
 package de.uni_kiel.progOOproject17.model.screen;
 
+import java.awt.event.ActionEvent;
 import java.util.HashMap;
+import java.util.Objects;
 
+import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 /**
@@ -21,6 +24,13 @@ public class HashMapActionable implements Actionable {
 	 */
 	public HashMapActionable() {
 		actions = new HashMap<>();
+		for (InputActionKey inKey : InputActionKey.values()) {
+			putAction(inKey, new AbstractAction("nullAction") {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+		}
 	}
 	
 	/*
@@ -31,6 +41,8 @@ public class HashMapActionable implements Actionable {
 	 */
 	@Override
 	public void putAction(InputActionKey iA, Action action) {
+		Objects.requireNonNull(iA);
+		Objects.requireNonNull(action);
 		actions.put(iA, action);
 	}
 
@@ -42,6 +54,7 @@ public class HashMapActionable implements Actionable {
 	 */
 	@Override
 	public Action getAction(InputActionKey iA) {
+		Objects.requireNonNull(iA);
 		return actions.get(iA);
 	}
 
@@ -53,8 +66,8 @@ public class HashMapActionable implements Actionable {
 	 */
 	@Override
 	public void forwardAllActionsToThis(Actionable a) {
+		Objects.requireNonNull(a);
 		actions.clear();
-
 		for (InputActionKey key : InputActionKey.values())
 			putAction(key, a.getAction(key));
 	}
