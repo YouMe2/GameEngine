@@ -24,11 +24,11 @@ public class Background extends GameElement {
 	public Background(String resKey, int x, int y, int w, int h) {
 		super();;
 		
-		getViewable().setTextKey(resKey);
-		getViewable().setLocation(x, y);
-		getViewable().setSize(w, h);
-		getViewable().setPriority(Viewable.BG_LAYER);
-		getViewable().setVisable(true);
+		getFullSimpleViewable().setTextureKey(resKey);
+		getFullSimpleViewable().setLocation(x, y);
+		getFullSimpleViewable().setSize(w, h);
+		getFullSimpleViewable().setPriority(Viewable.BG_LAYER);
+		getFullSimpleViewable().setVisable(true);
 		
 	}
 

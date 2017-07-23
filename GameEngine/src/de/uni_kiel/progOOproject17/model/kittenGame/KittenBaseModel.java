@@ -1,7 +1,7 @@
 package de.uni_kiel.progOOproject17.model.kittenGame;
 
 import de.uni_kiel.progOOproject17.controller.PLController;
-import de.uni_kiel.progOOproject17.model.abs.ScreenedBaseModel;
+import de.uni_kiel.progOOproject17.model.abs.ScreenControllerModel;
 import de.uni_kiel.progOOproject17.model.abs.TickedBaseModel;
 import de.uni_kiel.progOOproject17.model.screen.DebugScreen;
 import de.uni_kiel.progOOproject17.model.screen.PauseMenu;
@@ -27,7 +27,7 @@ import javax.swing.Action;
  * this being a game made to be viewable on the Lighthouse!
  * 
  */
-public class KittenBaseModel extends ScreenedBaseModel {
+public class KittenBaseModel extends ScreenControllerModel {
 
 	/**
 	 * The width of the Lighthouse in pixels
@@ -89,7 +89,7 @@ public class KittenBaseModel extends ScreenedBaseModel {
 		public void actionPerformed(ActionEvent e) {
 			
 			PauseMenu pm = new PauseMenu(GAME_WIDTH, GAME_HEIGHT, resumeAction, exitGame);
-			pm.addViewable(getActiveScreeen().getViewable());
+			pm.addViewable(getActiveScreeen().getFullSimpleViewable());
 			showScreen(pm);
 		}
 	};

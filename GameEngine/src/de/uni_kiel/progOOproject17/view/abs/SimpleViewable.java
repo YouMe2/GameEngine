@@ -262,22 +262,37 @@ public class SimpleViewable extends Observable implements Viewable {
 	/**
 	 * @param pointsKey
 	 */
-	public void setTextKey(String keyText) {
-		setKey(new ViewContentKey() {
+	public void setClearTextKey(String keyText) {
+		setContentKey(new ViewContentKey() {
 
 			@Override
 			public String getText() {
+				
+				
 				return keyText;
 			}
 		});
 
 	}
+	
+	public void setStringKey(String text) {
+		setClearTextKey(Viewable.STRING_KEYPREFIX + text);
+	}
+	
+	public void setTextureKey(String textureKey) {
+		setClearTextKey(Viewable.TEXTURE_KEYPREFIX + textureKey);
+	}
+	
+	public void setDebugKey(String text) {
+		setClearTextKey(Viewable.DEBUG_KEYPREFIX + text);
+	}
+	
 
 	/**
 	 * @param key
 	 *            the key to set
 	 */
-	public void setKey(ViewContentKey key) {
+	public void setContentKey(ViewContentKey key) {
 		this.key = key;
 	}
 	

@@ -30,8 +30,8 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 /**
  * This class represents a {@link Screen} that serves as the environment for the
- * game. It holds all the {@link GameElement}s, the {@link KittenScoreboard} and the
- * {@link LevelGenerator}, as well as the relevant actions for the player.
+ * game. It holds all the {@link GameElement}s, the {@link KittenScoreboard} and
+ * the {@link LevelGenerator}, as well as the relevant actions for the player.
  */
 public class KittenGameScreen extends Screen implements KittenStats {
 
@@ -39,9 +39,6 @@ public class KittenGameScreen extends Screen implements KittenStats {
 	private final LinkedList<GameElement> createdElements;
 	private final LinkedList<Destroyable> destroyedElements;
 
-	private final ViewCompound compView = new ViewCompound();
-	
-	
 	private final KittenPlayer player;
 	private int screenVelocity = Integer.valueOf(GameProperties.getInstance().getProperty("startVelocity"));
 
@@ -50,9 +47,8 @@ public class KittenGameScreen extends Screen implements KittenStats {
 	private final Action endAction;
 
 	private final Rectangle inGameScreenBoarder;
-	
-	private Environment environment;
 
+	private Environment environment;
 
 	private CreationHelper creatHelp = new CreationHelper() {
 		/*
@@ -67,8 +63,8 @@ public class KittenGameScreen extends Screen implements KittenStats {
 			// System.out.println("Created: " + g.getResourceKey());
 
 			createdElements.add(g);
-			g.getViewable().setRelativeAnchor(inGameScreenBoarder);
-			compView.addViewable(g.getViewable());
+			g.getFullSimpleViewable().setRelativeAnchor(inGameScreenBoarder);
+			compView.addViewable(g.getFullSimpleViewable());
 			g.activate(environment, this);
 		}
 
@@ -85,9 +81,9 @@ public class KittenGameScreen extends Screen implements KittenStats {
 	private long deathtime = -1;
 
 	/**
-	 * Constructs a new {@link KittenGameScreen} which essentially constructs a fully
-	 * new game. Creates a {@link KittenPlayer}. Starts the {@link LevelGenerator} and
-	 * initializes the player actions.
+	 * Constructs a new {@link KittenGameScreen} which essentially constructs a
+	 * fully new game. Creates a {@link KittenPlayer}. Starts the
+	 * {@link LevelGenerator} and initializes the player actions.
 	 * 
 	 * @param w
 	 *            the width
@@ -108,7 +104,7 @@ public class KittenGameScreen extends Screen implements KittenStats {
 		this.environment = new SimpleEnvironment(gameElements);
 
 		player = new KittenPlayer(GameProperties.getInstance().getProperty("playerResKey"),
-				KittenBaseModel.lhToGame(3, KittenBaseModel.LH_HEIGHT - 3));
+				KittenBaseModel.lhToGame(3, KittenBaseModel.LH_HEIGHT - 3.1f));
 		player.setPermaXVel(screenVelocity);
 		scoreboard = new KittenScoreboard(getPlayerStats());
 
@@ -170,12 +166,9 @@ public class KittenGameScreen extends Screen implements KittenStats {
 
 		creatHelp.create(player);
 
-		
-		//Viewable zusammen setzten:
-		compView.addViewable(scoreboard.getViewable());	
-		getViewable().setKey(compView);
-		
-		
+		// Viewable zusammen setzen:
+		compView.addViewable(scoreboard.getFullSimpleViewable());
+
 	}
 
 	/*
@@ -186,15 +179,14 @@ public class KittenGameScreen extends Screen implements KittenStats {
 	@Override
 	public void tick(long timestamp) {
 
-		if (!player.isAlive())
+		if (!player.isAlive()) {
+			System.out.println("died?");
+			if (deathtime == -1)
+				deathtime = timestamp;
+			if (deathtime + 1600 < timestamp)
+				endAction.actionPerformed(null);
 
-			if (!player.isAlive()) {
-				if (deathtime == -1)
-					deathtime = timestamp;
-				if (deathtime + 1600 < timestamp)
-					endAction.actionPerformed(null);
-
-			}
+		}
 
 		inGameScreenBoarder.setLocation((int) (player.getHitbox().getX() - KittenBaseModel.LHPIXEL_WIDTH * 2.5), 0);
 
@@ -205,9 +197,11 @@ public class KittenGameScreen extends Screen implements KittenStats {
 			public void accept(GameElement e) {
 
 				e.tick(timestamp);
-				if (e.getViewable().getViewRect().getMaxX() < KittenGameScreen.this.getX())
+				if (e.getFullSimpleViewable().getViewRect().getMaxX() < 0) {
 					e.destroy();
-
+					System.out.println("removed: " + e.getClass().getSimpleName());
+				}
+					
 			};
 
 		});
@@ -219,11 +213,8 @@ public class KittenGameScreen extends Screen implements KittenStats {
 
 		gameElements.addAll(createdElements);
 		createdElements.clear();
-		
-		
-		
-	}
 
+	}
 
 	/**
 	 * Returns the {@link KittenStats} of the player.

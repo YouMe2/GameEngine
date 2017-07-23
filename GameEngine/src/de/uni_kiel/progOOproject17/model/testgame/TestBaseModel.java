@@ -3,7 +3,7 @@
  */
 package de.uni_kiel.progOOproject17.model.testgame;
 
-import de.uni_kiel.progOOproject17.model.abs.ScreenedBaseModel;
+import de.uni_kiel.progOOproject17.model.abs.ScreenControllerModel;
 import de.uni_kiel.progOOproject17.model.screen.MenuScreen;
 
 /**
@@ -11,7 +11,7 @@ import de.uni_kiel.progOOproject17.model.screen.MenuScreen;
  * @since 03.04.2017
  *
  */
-public class TestBaseModel extends ScreenedBaseModel{
+public class TestBaseModel extends ScreenControllerModel{
 
 	
 	/**
@@ -26,6 +26,8 @@ public class TestBaseModel extends ScreenedBaseModel{
 	
 	//TODO onHitEffects -> Effects
 	//TODO use Effects testwise?
+	
+	//TODO ResourceHandels instead of Strings as Keys
 	
 	/**
 	 * 

@@ -20,8 +20,7 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  * 
  */
 public class MenuScreen extends Screen {
-
-	private final ViewCompound compView = new ViewCompound();	
+	
 	private final SimpleViewable background;
 	private final SimpleViewable selectionCursor;
 	private final SimpleViewable[] entries;
@@ -54,12 +53,12 @@ public class MenuScreen extends Screen {
 		entries = new SimpleViewable[resKeys.length];
 
 		for (int i = 0; i < actions.length; i++) {
-			entries[i] = new SimpleViewable(resKeys[i], (getWidth() - ENTRY_WIDTH) / 2,
+			entries[i] = new SimpleViewable(Viewable.TEXTURE_KEYPREFIX + resKeys[i], (getWidth() - ENTRY_WIDTH) / 2,
 					4 * KittenBaseModel.LHPIXEL_HEIGHT + i * (ENTRY_HEIGHT + KittenBaseModel.LHPIXEL_HEIGHT),
 					ENTRY_WIDTH, ENTRY_HEIGHT, Viewable.MENU_LAYER);
 		}
 
-		selectionCursor = new SimpleViewable("selection", (getWidth() - ENTRY_WIDTH) / 2,
+		selectionCursor = new SimpleViewable(Viewable.TEXTURE_KEYPREFIX + "selection", (getWidth() - ENTRY_WIDTH) / 2,
 				4 * KittenBaseModel.LHPIXEL_HEIGHT + selction * (ENTRY_HEIGHT + KittenBaseModel.LHPIXEL_HEIGHT),
 				CURSOR_WIDTH, CURSOR_HEIGHT, Viewable.MENU2_LAYER);
 
@@ -107,12 +106,10 @@ public class MenuScreen extends Screen {
 			}
 		});
 
-		// build up Viewables
-		
+		// build up Viewables		
 		compView.addViewable(background);
 		compView.addViewable(selectionCursor);
 		compView.addAllViewables(entries);
-		getViewable().setKey(compView);
 
 	}
 
@@ -136,14 +133,14 @@ public class MenuScreen extends Screen {
 	 * Sets a background.
 	 * 
 	 * @param resKey
-	 *            the resource key of the bg
+	 *            the resource key of the bg (only the resKey!)
 	 */
 	public void setBackground(String resKey) {
 		if (resKey == null) {
 			background.setVisable(false);
 		}
 		
-		background.setTextKey(resKey);
+		background.setTextureKey(resKey);
 		background.setVisable(true);
 	}
 
@@ -156,5 +153,4 @@ public class MenuScreen extends Screen {
 	public void addViewable(SimpleViewable v) {
 		compView.addViewable(v);
 	}
-
 }

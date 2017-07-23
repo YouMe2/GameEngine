@@ -22,7 +22,7 @@ public class Particle extends GameElement {
 	private ViewContentKey key = new ViewContentKey() {
 		@Override
 		public String getText() {
-			return resKey + "_" + counter;
+			return Viewable.TEXTURE_KEYPREFIX + resKey + "_" + counter;
 		}
 		
 	};
@@ -52,11 +52,11 @@ public class Particle extends GameElement {
 		this.max = lenghth;
 		this.dtime = dtime;
 		
-		getViewable().setKey(key);
-		getViewable().setLocation(x, y);
-		getViewable().setSize(w, h);
-		getViewable().setPriority(Viewable.PARTICLE_LAYER);
-		getViewable().setVisable(true);
+		getFullSimpleViewable().setContentKey(key);
+		getFullSimpleViewable().setLocation(x, y);
+		getFullSimpleViewable().setSize(w, h);
+		getFullSimpleViewable().setPriority(Viewable.PARTICLE_LAYER);
+		getFullSimpleViewable().setVisable(true);
 		
 	}
 

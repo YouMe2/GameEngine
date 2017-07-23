@@ -234,17 +234,23 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 		}
 		// TEXTURE RENDER
 		else if (keyText.startsWith(Viewable.TEXTURE_KEYPREFIX)) {
+			String resKey = keyText.replaceFirst(Viewable.TEXTURE_KEYPREFIX, "");
 			if (texDebuggRender) {
 				// resource debug mode render
 				gr.setColor(Color.WHITE);
 				gr.drawRect(rect.x, rect.y, rect.width, rect.height);
-				gr.drawString(keyText, rect.x + 2, rect.y + 16);
+				gr.drawString(resKey, rect.x + 2, rect.y + 16);
 			}
 			// standard render
 			// System.out.println("redered img: "+keyText);
-			gr.drawImage(textureManager.getImage(keyText), rect.x, rect.y, rect.width, rect.height, null);
+			gr.drawImage(textureManager.getImage(resKey), rect.x, rect.y, rect.width, rect.height, null);
 
 		}
+		else {
+			System.err.println("No matching prefix found: "+ keyText);
+		}
+		
+		
 	}
 
 }

@@ -23,7 +23,7 @@ public class KittenStartMenu extends MenuScreen {
 		super(w, h, new String[] { "play_kitten", "exit" }, new Action[] { kittenGameAction, exitAction });
 		setBackground("black");
 
-		addViewable(new SimpleViewable(GameProperties.getInstance().getProperty("titleResKey"), KittenBaseModel.lhToGam(8, 0, 12, 3), Viewable.FLOOR_LAYER));
+		addViewable(new SimpleViewable(Viewable.TEXTURE_KEYPREFIX + GameProperties.getInstance().getProperty("titleResKey"), KittenBaseModel.lhToGam(8, 0, 12, 3), Viewable.FLOOR_LAYER));
 
 	}
 

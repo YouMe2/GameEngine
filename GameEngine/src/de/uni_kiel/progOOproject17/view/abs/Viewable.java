@@ -24,7 +24,7 @@ public interface Viewable extends Priority {
 	/**
 	 * The number of layers there are.
 	 */
-	public static final int LAYERsSIZE = 8; // 0 1 2 3 4;
+	public static final int LAYERsSIZE = 8;
 
 	/**
 	 * The {@link Background} layer.

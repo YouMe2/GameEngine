@@ -16,6 +16,7 @@ import de.uni_kiel.progOOproject17.model.abs.MoveCommand;
 import de.uni_kiel.progOOproject17.model.abs.Stats;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.resources.ResourceManager;
+import de.uni_kiel.progOOproject17.view.abs.Viewable;
 import de.uni_kiel.progOOproject17.view.abs.Viewable.ViewContentKey;
 
 /**
@@ -81,8 +82,8 @@ public class KittenPlayer extends GameEntity {
 	private ViewContentKey key = new ViewContentKey() {
 		@Override
 		public String getText() {
-			return (currMoveState == CROUCHING || currMoveState == KittenMoveState.JUMPING_AND_CROUCHING)
-					? resKey + "_C" : resKey;
+			return Viewable.TEXTURE_KEYPREFIX + resKey + 
+					((currMoveState == CROUCHING || currMoveState == KittenMoveState.JUMPING_AND_CROUCHING) ? "_C" : "");
 		}
 
 	};
@@ -113,9 +114,9 @@ public class KittenPlayer extends GameEntity {
 		super(new Hitbox.RectHitbox(x, y, PLAYER_W, PLAYER_H_NORMAL),
 				new Stats(Integer.valueOf(GameProperties.getInstance().getProperty("playerLifes")), 0, 0, 0, 0, 0, 0));
 		this.resKey = resKey;
-		getViewable().setKey(key);
-		getViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
-		getViewable().setVisable(true);
+		getFullSimpleViewable().setContentKey(key);
+		getFullSimpleViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
+		getFullSimpleViewable().setVisable(true);
 
 	}
 
@@ -149,13 +150,13 @@ public class KittenPlayer extends GameEntity {
 					Distance headDown = new Distance(0, PLAYER_H_NORMAL - PLAYER_H_CROUCH);
 					move(headDown);
 				}
-				getViewable().setSize(PLAYER_W, PLAYER_H_CROUCH);
+				getFullSimpleViewable().setSize(PLAYER_W, PLAYER_H_CROUCH);
 				((Hitbox.RectHitbox) getThisHitbox()).setSize(PLAYER_W, PLAYER_H_CROUCH);
 				ResourceManager.getInstance().getSound("crouch").play();
 				break;
 			case JUMPING:
 				currMoveState = JUMPING_AND_CROUCHING;
-				getViewable().setSize(PLAYER_W, PLAYER_H_CROUCH);
+				getFullSimpleViewable().setSize(PLAYER_W, PLAYER_H_CROUCH);
 				((Hitbox.RectHitbox) getThisHitbox()).setSize(PLAYER_W, PLAYER_H_CROUCH);
 				ResourceManager.getInstance().getSound("crouch").play();
 				break;
@@ -177,7 +178,7 @@ public class KittenPlayer extends GameEntity {
 					maxDistance.add(crouchingDifference);
 					move(maxDistance);
 				}
-				getViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
+				getFullSimpleViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
 				((Hitbox.RectHitbox) getThisHitbox()).setSize(PLAYER_W, PLAYER_H_NORMAL);
 				break;
 			case JUMPING_AND_CROUCHING:
@@ -188,7 +189,7 @@ public class KittenPlayer extends GameEntity {
 					maxDistance.add(crouchingDifference);
 					move(maxDistance);
 				}
-				getViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
+				getFullSimpleViewable().setSize(PLAYER_W, PLAYER_H_NORMAL);
 				((Hitbox.RectHitbox) getThisHitbox()).setSize(PLAYER_W, PLAYER_H_NORMAL);
 			default:
 				break;
@@ -259,6 +260,8 @@ public class KittenPlayer extends GameEntity {
 	 */
 	public boolean damage(int dmg) {
 
+		System.out.println("player took dmg: "+dmg);
+		
 		if (!isAlive())
 			return false;
 

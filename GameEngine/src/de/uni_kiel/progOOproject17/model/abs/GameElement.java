@@ -3,6 +3,7 @@ package de.uni_kiel.progOOproject17.model.abs;
 import java.awt.Rectangle;
 
 import de.uni_kiel.progOOproject17.view.abs.SimpleViewable;
+import de.uni_kiel.progOOproject17.view.abs.Viewable;
 
 public abstract class GameElement implements Destroyable, Ticked {
 
@@ -24,7 +25,12 @@ public abstract class GameElement implements Destroyable, Ticked {
 		view = new SimpleViewable(null, new Rectangle(0, 0, 0, 0), false);
 	}
 
-	public SimpleViewable getViewable() {
+	//TODO this is worrying
+//	public Viewable getViewable(){
+//		return view; 
+//	}
+	
+	public SimpleViewable getFullSimpleViewable() {
 		return view;
 	}
 	
@@ -61,8 +67,9 @@ public abstract class GameElement implements Destroyable, Ticked {
 		if (isAlive()) {
 			alive = false;
 //			getViewable().setVisable(false);
-			getViewable().removeInAllComps();
+			getFullSimpleViewable().removeInAllComps();
 			creationHelper.onDestruction(this);
+			
 		}
 	}
 

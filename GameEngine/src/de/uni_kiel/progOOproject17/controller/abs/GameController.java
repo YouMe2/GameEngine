@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import de.uni_kiel.progOOproject17.model.abs.ScreenedBaseModel;
+import de.uni_kiel.progOOproject17.model.abs.ScreenControllerModel;
 import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
 import de.uni_kiel.progOOproject17.view.abs.FramedIOView;
 
@@ -16,7 +16,7 @@ import de.uni_kiel.progOOproject17.view.abs.FramedIOView;
  * @since 11.04.2017
  *
  */
-public class GameController<M extends ScreenedBaseModel> extends TickedController {
+public class GameController<M extends ScreenControllerModel> extends TickedController {
 
 	private M myModel;
 	private long frozenticktime;

@@ -31,7 +31,7 @@ public class KittenEndScreen extends MenuScreen {
 
 		scoreboard = new KittenScoreboard(stats);
 
-		addViewable(scoreboard.getViewable());
+		addViewable(scoreboard.getFullSimpleViewable());
 		
 	}
 

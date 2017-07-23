@@ -54,25 +54,24 @@ public class KittenScoreboard extends GameCompound {
 		pointsDisplay = new SimpleViewable[GAME_WIDTH / (LHPIXEL_WIDTH * 3)];
 		lifesDisplay = new SimpleViewable[GAME_WIDTH / (LHPIXEL_WIDTH * 3)];
 
-		progressDisplay = new SimpleViewable("stepbar", 0, Math.round(LHPIXEL_HEIGHT * 0.1f), 0,
+		progressDisplay = new SimpleViewable(Viewable.TEXTURE_KEYPREFIX + "stepbar", 0, Math.round(LHPIXEL_HEIGHT * 0.1f), 0,
 				Math.round(LHPIXEL_HEIGHT * 0.8f), Viewable.SB_LAYER, true);
 
 		for (int i = 0; i < pointsDisplay.length; i++)
-			pointsDisplay[i] = new SimpleViewable(pointsKey, LHPIXEL_WIDTH * (1 + 3 * i), LHPIXEL_HEIGHT * 2,
+			pointsDisplay[i] = new SimpleViewable(Viewable.TEXTURE_KEYPREFIX + pointsKey, LHPIXEL_WIDTH * (1 + 3 * i), LHPIXEL_HEIGHT * 2,
 					LHPIXEL_WIDTH * 2, LHPIXEL_HEIGHT, Viewable.SB_LAYER, false);
 
 		for (int i = 0; i < lifesDisplay.length; i++)
-			lifesDisplay[i] = new SimpleViewable(lifesKey, LHPIXEL_WIDTH * (1 + 3 * i), LHPIXEL_HEIGHT, LHPIXEL_WIDTH * 2,
+			lifesDisplay[i] = new SimpleViewable(Viewable.TEXTURE_KEYPREFIX + lifesKey, LHPIXEL_WIDTH * (1 + 3 * i), LHPIXEL_HEIGHT, LHPIXEL_WIDTH * 2,
 					LHPIXEL_HEIGHT, Viewable.SB_LAYER, false);
 		
 		
 		//build up Viewables
-		ViewCompound compView = new ViewCompound();
+//		ViewCompound compView = getViewableCompound();
 		compView.addViewable(progressDisplay);
 		compView.addAllViewables(pointsDisplay);
 		compView.addAllViewables(lifesDisplay);	
-		getViewable().setKey(compView);
-		getViewable().setPriority(Viewable.SB_LAYER);
+		setViewPriority(Viewable.SB_LAYER);
 		
 
 	}

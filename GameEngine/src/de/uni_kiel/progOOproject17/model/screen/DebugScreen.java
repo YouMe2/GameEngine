@@ -32,7 +32,6 @@ public class DebugScreen extends Screen {
 	private final LinkedList<GameElement> createdElements;
 	private final LinkedList<Destroyable> destroyedElements;
 
-	private final ViewCompound compView = new ViewCompound();
 
 	private final Environment environment;
 	private final CreationHelper creationHelper = new CreationHelper() {
@@ -48,7 +47,7 @@ public class DebugScreen extends Screen {
 			// System.out.println("Created: " + g.getResourceKey());
 
 			createdElements.add(g);
-			compView.addViewable(g.getViewable());
+			compView.addViewable(g.getFullSimpleViewable());
 //			if (g instanceof Collidable)
 //				compView.addViewable(((Collidable) g).getHitbox().getDebugViewable());
 			
@@ -86,10 +85,10 @@ public class DebugScreen extends Screen {
 //		testBlock = new Block(new Hitbox.CircleHitbox(60, 60, 6));
 
 		testBlock = new Block(new Hitbox.LineHitbox(60, 60, 80, 70));
-		testBlock.getViewable().setTextKey("floor");
-		testBlock.getViewable().setLocation(60, 60);
-		testBlock.getViewable().setSize(4, 4);
-		testBlock.getViewable().setPriority(Viewable.ENTITY_LAYER);
+		testBlock.getFullSimpleViewable().setClearTextKey("floor");
+		testBlock.getFullSimpleViewable().setLocation(60, 60);
+		testBlock.getFullSimpleViewable().setSize(4, 4);
+		testBlock.getFullSimpleViewable().setPriority(Viewable.ENTITY_LAYER);
 		testBlock.activate(environment, creationHelper);
 
 		Block line = new Block(new Hitbox.LineHitbox(20, 100, 20, 200));
@@ -104,10 +103,10 @@ public class DebugScreen extends Screen {
 
 		block = new Block(new Hitbox.PolygonHitbox(new Point(100, 100),
 				new Point[] { new Point(0, 0), new Point(100, -10), new Point(0, 30) }));
-		block.getViewable().setTextKey("floor");
-		block.getViewable().setLocation(100, 100);
-		block.getViewable().setSize(100, 30);
-		block.getViewable().setPriority(Viewable.ENTITY_LAYER);
+		block.getFullSimpleViewable().setClearTextKey("floor");
+		block.getFullSimpleViewable().setLocation(100, 100);
+		block.getFullSimpleViewable().setSize(100, 30);
+		block.getFullSimpleViewable().setPriority(Viewable.ENTITY_LAYER);
 		creationHelper.create(block);
 		creationHelper.create(testBlock);
 
@@ -180,7 +179,6 @@ public class DebugScreen extends Screen {
 		putAction(InputActionKey.SELECT_P, resumeAction);
 
 		// Viewable zusammen setzten:
-		getViewable().setKey(compView);
 
 	}
 
