@@ -1,11 +1,13 @@
 package de.uni_kiel.progOOproject17.controller;
 
-import de.uni_kiel.progOOproject17.controller.abs.InputConnector;
 import de.uni_kiel.progOOproject17.controller.abs.TickedController;
 import de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel;
 import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.view.PLDektopView;
+import de.uni_kiel.progOOproject17.view.abs.InputActionQueueWorker;
+import de.uni_kiel.progOOproject17.view.abs.InputConnector;
+
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 
@@ -43,6 +45,8 @@ public class PLController extends TickedController {
 
 	private final InputConnector inputConnector;
 
+	private InputActionQueueWorker worker;
+	
 	/**
 	 * Constructs a new {@link PLController} and sets the standard view and
 	 * model. Initializes the InputActions in the standardIn as well as the
@@ -58,7 +62,10 @@ public class PLController extends TickedController {
 		super(view, view, model, Integer.valueOf(GameProperties.getInstance().getProperty("tickLength")));
 
 		// standard Game Actions:
-		inputConnector = new InputConnector(getStandardIn(), getModel());
+		
+		worker = new InputActionQueueWorker(getModel());
+		
+		inputConnector = new InputConnector(getStandardIn(), worker);
 		
 		HashMap<InputActionKey, String> keyBindings = new HashMap<>();
 		keyBindings.put(InputActionKey.UP_P, "pressed W");
@@ -77,7 +84,7 @@ public class PLController extends TickedController {
 		keyBindings.put(InputActionKey.SELECT_R, "released SPACE");
 		
 		inputConnector.useBindings(keyBindings);
-
+		
 		
 		// debugging actions
 		getStandardIn().addAction("pressed E", new AbstractAction() {
@@ -148,6 +155,12 @@ public class PLController extends TickedController {
 			}
 		});
 
+	}
+	
+	@Override
+	public void start(long timestamp) {
+		worker.start();
+		super.start(timestamp);
 	}
 
 	/*

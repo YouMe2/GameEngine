@@ -19,7 +19,7 @@ import de.uni_kiel.progOOproject17.view.abs.OutputView;
  *
  *
  */
-public abstract class TickedController extends AbstractController implements Runnable, Ticked {
+public abstract class TickedController extends AbstractController implements Ticked {
 
 	private Thread thread;
 
@@ -66,59 +66,58 @@ public abstract class TickedController extends AbstractController implements Run
 		super(out, in, model);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
-	 */
-	@Override
-	public void run() {
+	private Runnable ticker = new Runnable() {
 
-		// time allways in ms!
+		public void run() {
 
-		long oldTime = System.currentTimeMillis();
-		long timeAccumulator = 0;
+			// time allways in ms!
 
-		int secTimer = 0;
-		int frames = 0;
-		int ticks = 0;
+			long oldTime = System.currentTimeMillis();
+			long timeAccumulator = 0;
 
-		while (running) {
+			int secTimer = 0;
+			int frames = 0;
+			int ticks = 0;
 
-			long newTime = System.currentTimeMillis();
-			long frameTime = newTime - oldTime;
-			oldTime = newTime;
+			while (running) {
 
-			secTimer += frameTime;
-			timeAccumulator += frameTime; // this is how much time the game
-			// has to calculate ticks for
+				long newTime = System.currentTimeMillis();
+				long frameTime = newTime - oldTime;
+				oldTime = newTime;
 
-			if (timeAccumulator >= ticklength) {
+				secTimer += frameTime;
+				timeAccumulator += frameTime; // this is how much time the game
+				// has to calculate ticks for
 
-				do {
-					// System.out.println("tick");
-					ticks++;
-					tick(gametime);
-					timeAccumulator -= ticklength;
-					gametime += ticklength;
-				} while (timeAccumulator >= ticklength);
-				// System.out.println("render");
-				frames++;
-				renderAllViews();
+				if (timeAccumulator >= ticklength) {
+
+					do {
+						// System.out.println("tick");
+						ticks++;
+						tick(gametime);
+						timeAccumulator -= ticklength;
+						gametime += ticklength;
+					} while (timeAccumulator >= ticklength);
+					// System.out.println("render");
+					frames++;
+					renderAllViews();
+
+				}
+
+				if (secTimer >= 1000) {
+					fps = frames;
+					tps = ticks;
+					secTimer = 0;
+					frames = 0;
+					ticks = 0;
+					if (printTpsFps)
+						System.out.println("Running at: " + tps + " tps and " + fps + " fps.");
+
+				}
 
 			}
-
-			if (secTimer >= 1000) {
-				fps = frames;
-				tps = ticks;
-				secTimer = 0;
-				frames = 0;
-				ticks = 0;
-				if (printTpsFps)
-					System.out.println("Running at: " + tps + " tps and " + fps + " fps.");
-
-			}
-
 		}
-	}
+	};
 
 	/**
 	 * Starts the ticked program loop with the given timestamp.
@@ -129,9 +128,8 @@ public abstract class TickedController extends AbstractController implements Run
 	public void start(long timestamp) {
 		if (thread == null) {
 			gametime = timestamp;
-			thread = new Thread(this);
+			thread = new Thread(ticker);
 			running = true;
-			timestamp = 0;
 			thread.start();
 		}
 	}
@@ -178,10 +176,9 @@ public abstract class TickedController extends AbstractController implements Run
 	public void setEnableTpsFpsPrint(boolean enable) {
 		printTpsFps = enable;
 	}
-	
+
 	/**
-	 * Toggels this controller to print out the fps und tps every
-	 * second.
+	 * Toggels this controller to print out the fps und tps every second.
 	 *
 	 * @param enable
 	 */

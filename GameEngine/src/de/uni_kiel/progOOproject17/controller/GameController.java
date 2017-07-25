@@ -1,16 +1,19 @@
 /**
  * 
  */
-package de.uni_kiel.progOOproject17.controller.abs;
+package de.uni_kiel.progOOproject17.controller;
 
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 
 import javax.swing.AbstractAction;
 
+import de.uni_kiel.progOOproject17.controller.abs.TickedController;
 import de.uni_kiel.progOOproject17.model.abs.ScreenControllerModel;
 import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
 import de.uni_kiel.progOOproject17.view.abs.FramedIOView;
+import de.uni_kiel.progOOproject17.view.abs.InputActionQueueWorker;
+import de.uni_kiel.progOOproject17.view.abs.InputConnector;
 
 /**
  * @author Yannik Eikmeier
@@ -23,11 +26,14 @@ public class GameController<M extends ScreenControllerModel> extends TickedContr
 	private long frozenticktime;
 	
 	private final InputConnector inputConnector;
+	private InputActionQueueWorker worker;
 	
 	public GameController(FramedIOView ioView, M model) {
 		super(ioView, ioView, model, 30);
-		inputConnector = new InputConnector(getStandardIn(), getModel());
-	
+		
+		worker = new InputActionQueueWorker(getModel());
+		inputConnector = new InputConnector(getStandardIn(), worker);
+		
 		HashMap<InputActionKey, String> keyBindings = new HashMap<>();
 		keyBindings.put(InputActionKey.UP_P, "pressed W");
 		keyBindings.put(InputActionKey.UP_R, "pressed W");
@@ -86,6 +92,12 @@ public class GameController<M extends ScreenControllerModel> extends TickedContr
 		});
 		
 		
+	}
+	
+	@Override
+	public void start(long timestamp) {
+		worker.start();
+		super.start(timestamp);
 	}
 	
 	
