@@ -4,6 +4,7 @@
 package de.uni_kiel.progOOproject17.controller.abs;
 
 import java.awt.event.ActionEvent;
+import java.util.HashMap;
 
 import javax.swing.AbstractAction;
 
@@ -21,23 +22,29 @@ public class GameController<M extends ScreenControllerModel> extends TickedContr
 	private M myModel;
 	private long frozenticktime;
 	
+	private final InputConnector inputConnector;
+	
 	public GameController(FramedIOView ioView, M model) {
 		super(ioView, ioView, model, 30);
-		
+		inputConnector = new InputConnector(getStandardIn(), getModel());
 	
-		// standard Game Actions:
-		getStandardIn().addAction("pressed W", model.getAction(InputActionKey.UP_P));
-		getStandardIn().addAction("released W", model.getAction(InputActionKey.UP_R));
-		getStandardIn().addAction("pressed S", model.getAction(InputActionKey.DOWN_P));
-		getStandardIn().addAction("released S", model.getAction(InputActionKey.DOWN_R));
+		HashMap<InputActionKey, String> keyBindings = new HashMap<>();
+		keyBindings.put(InputActionKey.UP_P, "pressed W");
+		keyBindings.put(InputActionKey.UP_R, "pressed W");
 		
-		getStandardIn().addAction("pressed D", model.getAction(InputActionKey.RIGHT_P));
-		getStandardIn().addAction("released D", model.getAction(InputActionKey.RIGHT_R));
-		getStandardIn().addAction("pressed A", model.getAction(InputActionKey.LEFT_P));
-		getStandardIn().addAction("released A", model.getAction(InputActionKey.LEFT_R));
+		keyBindings.put(InputActionKey.DOWN_P, "pressed S");
+		keyBindings.put(InputActionKey.DOWN_R, "pressed S");
+
+		keyBindings.put(InputActionKey.LEFT_P, "pressed A");
+		keyBindings.put(InputActionKey.LEFT_R, "pressed A");
 		
-		getStandardIn().addAction("pressed SPACE", model.getAction(InputActionKey.SELECT_P));
-		getStandardIn().addAction("released SPACE", model.getAction(InputActionKey.SELECT_R));
+		keyBindings.put(InputActionKey.RIGHT_P, "pressed D");
+		keyBindings.put(InputActionKey.RIGHT_R, "pressed D");
+		
+		keyBindings.put(InputActionKey.SELECT_P, "pressed SPACE");
+		keyBindings.put(InputActionKey.SELECT_R, "pressed SPACE");
+		
+		inputConnector.useBindings(keyBindings);
 
 		
 		// debug actions
@@ -58,7 +65,7 @@ public class GameController<M extends ScreenControllerModel> extends TickedContr
 			}
 		});
 		//freeze ticks
-		getStandardIn().addAction("pressed E", new AbstractAction() {
+		getStandardIn().addAction("pressed F3", new AbstractAction() {
 
 			private static final long serialVersionUID = -7423115611510814418L;
 
@@ -68,7 +75,7 @@ public class GameController<M extends ScreenControllerModel> extends TickedContr
 			}
 		});
 		//release ticks
-		getStandardIn().addAction("released E", new AbstractAction() {
+		getStandardIn().addAction("released F3", new AbstractAction() {
 
 			private static final long serialVersionUID = 4385435299522741604L;
 

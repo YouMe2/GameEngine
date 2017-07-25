@@ -17,7 +17,7 @@ public class MappedKeyInput implements InputView {
 
 	private InputMap inMap;
 	private ActionMap aMap;
-	private boolean enabeled = false;
+	private boolean inited = false;
 
 	/**
 	 * Creates a new {@link MappedKeyInput} with the specified
@@ -31,8 +31,7 @@ public class MappedKeyInput implements InputView {
 	public void initMaps(InputMap inMap, ActionMap aMap) {
 		this.inMap = inMap;
 		this.aMap = aMap;
-		enabeled = true;
-
+		inited = true;
 	}
 
 	/*
@@ -42,10 +41,14 @@ public class MappedKeyInput implements InputView {
 	 * String, javax.swing.Action)
 	 */
 	@Override
-	public void addAction(String actionKey, Action action) {
-		KeyStroke key = KeyStroke.getKeyStroke(actionKey);
+	public void addAction(String actionKeyText, Action action) {
+		if(!inited)
+			throw new IllegalStateException("Input- and Action Map not inited yet! See the init() method.");
+		KeyStroke key = KeyStroke.getKeyStroke(actionKeyText);
 		if (key != null)
 			addKeyAction(key, action);
+		else
+			throw new IllegalArgumentException("Invalid KeyStrokeString: "+actionKeyText);
 	}
 
 	/**
@@ -57,59 +60,41 @@ public class MappedKeyInput implements InputView {
 	 *            The Action
 	 */
 	public void addKeyAction(KeyStroke key, Action action) {
-		if (enabeled)
-			inMap.put(key, key);
-		else
-			inMap.put(key, "none");
+		if(!inited)
+			throw new IllegalStateException("Input- and Action Map not inited yet! See the init() method.");		
+		inMap.put(key, key);
 		aMap.put(key, action);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.uni_kiel.progOOproject17.view.abs.InputView#setEnabeled(boolean)
-	 */
-	@Override
-	public void setEnabeled(boolean enabeled) {
-		this.enabeled = enabeled;
 
-		for (KeyStroke key : inMap.keys())
-			if (enabeled)
-				inMap.put(key, key);
-			else
-				inMap.put(key, "none");
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * de.uni_kiel.progOOproject17.view.abs.InputView#setEnabeled(java.lang.
-	 * String, boolean)
-	 */
-	@Override
-	public void setEnabeled(String actionKey, boolean enabeled) {
-		KeyStroke key = KeyStroke.getKeyStroke(actionKey);
-		if (enabeled)
-			inMap.put(key, key);
-		else
-			inMap.put(key, "none");
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * de.uni_kiel.progOOproject17.view.abs.InputView#addActionMap(javax.swing.
-	 * ActionMap)
-	 */
-	@Override
-	public void addActionMap(ActionMap actionMap) {
-
-		for (Object o : actionMap.keys())
-			addAction((String) o, actionMap.get(o));
-	}
+//	@Override
+//	public void setEnabeled(boolean enabeled) {
+//		this.enabeled = enabeled;
+//
+//		for (KeyStroke key : inMap.keys())
+//			if (enabeled)
+//				inMap.put(key, key);
+//			else
+//				inMap.put(key, "none");
+//
+//	}
+//
+//	@Override
+//	public void setEnabeled(String actionKey, boolean enabeled) {
+//		KeyStroke key = KeyStroke.getKeyStroke(actionKey);
+//		if (enabeled)
+//			inMap.put(key, key);
+//		else
+//			inMap.put(key, "none");
+//
+//	}
+//
+//
+//	@Override
+//	public void addActionMap(ActionMap actionMap) {
+//
+//		for (Object o : actionMap.keys())
+//			addAction((String) o, actionMap.get(o));
+//	}
 
 }

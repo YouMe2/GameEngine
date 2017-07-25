@@ -71,8 +71,8 @@ public abstract class Screen extends TickedBaseModel implements Actionable {
 	 * uni_kiel.progOOproject17.model.Actionable)
 	 */
 	@Override
-	public void forwardAllActionsToThis(Actionable a) {
-		actions.forwardAllActionsToThis(a);
+	public void forwardAllActionsFrom(Actionable a) {
+		actions.forwardAllActionsFrom(a);
 	}
 	
 	@Override

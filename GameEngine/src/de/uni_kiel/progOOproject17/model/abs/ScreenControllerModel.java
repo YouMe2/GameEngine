@@ -65,7 +65,7 @@ public abstract class ScreenControllerModel extends TickedBaseModel implements A
 
 		previousScreen = activeScreeen;
 		activeScreeen = s;
-		forwardAllActionsToThis(getActiveScreeen());
+		forwardAllActionsFrom(getActiveScreeen());
 	}
 
 	/**
@@ -107,14 +107,15 @@ public abstract class ScreenControllerModel extends TickedBaseModel implements A
 		 * corresponding action and call it. This is done so that the returned
 		 * action will allways be up to date and never as to be refreshed.
 		 */
-		return new AbstractAction() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// should never be null
-				actions.getAction(iA).actionPerformed(e);
-			}
-		};
+//		return new AbstractAction() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// should never be null
+//				actions.getAction(iA).actionPerformed(e);
+//			}
+//		};
+		return actions.getAction(iA);
 	}
 
 	/*
@@ -124,8 +125,8 @@ public abstract class ScreenControllerModel extends TickedBaseModel implements A
 	 * uni_kiel.progOOproject17.model.Actionable)
 	 */
 	@Override
-	public void forwardAllActionsToThis(Actionable a) {
-		actions.forwardAllActionsToThis(a);
+	public void forwardAllActionsFrom(Actionable a) {
+		actions.forwardAllActionsFrom(a);
 	}
 
 }

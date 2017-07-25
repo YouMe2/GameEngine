@@ -72,37 +72,6 @@ public abstract class AbstractController {
 	}
 
 	/**
-	 * Enables or disables all actions in all {@link InputView}s.
-	 *
-	 * @param enabeled
-	 */
-	public void setEnabledAll(boolean enabeled) {
-		synchronized (ins) {
-
-			for (InputView in : ins)
-				in.setEnabeled(enabeled);
-		}
-
-	}
-
-	/**
-	 * Enabeles or disables the action specifyed by the actionkey in all
-	 * {@link InputView}s.
-	 *
-	 * @param actionKey
-	 *            the key specifying the action.
-	 * @param enabeled
-	 */
-	public void setEnabledAll(String actionKey, boolean enabeled) {
-		synchronized (ins) {
-
-			for (InputView in : ins)
-				in.setEnabeled(actionKey, enabeled);
-		}
-
-	}
-
-	/**
 	 * Renders all {@link InputView}s.
 	 *
 	 */

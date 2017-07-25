@@ -1,11 +1,13 @@
 package de.uni_kiel.progOOproject17.controller;
 
+import de.uni_kiel.progOOproject17.controller.abs.InputConnector;
 import de.uni_kiel.progOOproject17.controller.abs.TickedController;
 import de.uni_kiel.progOOproject17.model.kittenGame.KittenBaseModel;
 import de.uni_kiel.progOOproject17.model.screen.InputActionKey;
 import de.uni_kiel.progOOproject17.resources.GameProperties;
 import de.uni_kiel.progOOproject17.view.PLDektopView;
 import java.awt.event.ActionEvent;
+import java.util.HashMap;
 
 import javax.swing.AbstractAction;
 
@@ -39,6 +41,8 @@ public class PLController extends TickedController {
 	 */
 	private long gametimeSafe = 0;
 
+	private final InputConnector inputConnector;
+
 	/**
 	 * Constructs a new {@link PLController} and sets the standard view and
 	 * model. Initializes the InputActions in the standardIn as well as the
@@ -54,19 +58,25 @@ public class PLController extends TickedController {
 		super(view, view, model, Integer.valueOf(GameProperties.getInstance().getProperty("tickLength")));
 
 		// standard Game Actions:
-		getStandardIn().addAction("pressed W", model.getAction(InputActionKey.UP_P));
-		getStandardIn().addAction("released W", model.getAction(InputActionKey.UP_R));
-		getStandardIn().addAction("pressed S", model.getAction(InputActionKey.DOWN_P));
-		getStandardIn().addAction("released S", model.getAction(InputActionKey.DOWN_R));
+		inputConnector = new InputConnector(getStandardIn(), getModel());
 		
-		getStandardIn().addAction("pressed D", model.getAction(InputActionKey.RIGHT_P));
-		getStandardIn().addAction("released D", model.getAction(InputActionKey.RIGHT_R));
-		getStandardIn().addAction("pressed A", model.getAction(InputActionKey.LEFT_P));
-		getStandardIn().addAction("released A", model.getAction(InputActionKey.LEFT_R));
+		HashMap<InputActionKey, String> keyBindings = new HashMap<>();
+		keyBindings.put(InputActionKey.UP_P, "pressed W");
+		keyBindings.put(InputActionKey.UP_R, "released W");
 		
-		getStandardIn().addAction("pressed SPACE", model.getAction(InputActionKey.SELECT_P));
-		getStandardIn().addAction("released SPACE", model.getAction(InputActionKey.SELECT_R));
+		keyBindings.put(InputActionKey.DOWN_P, "pressed S");
+		keyBindings.put(InputActionKey.DOWN_R, "released S");
 
+		keyBindings.put(InputActionKey.LEFT_P, "pressed A");
+		keyBindings.put(InputActionKey.LEFT_R, "released A");
+		
+		keyBindings.put(InputActionKey.RIGHT_P, "pressed D");
+		keyBindings.put(InputActionKey.RIGHT_R, "released D");
+		
+		keyBindings.put(InputActionKey.SELECT_P, "pressed SPACE");
+		keyBindings.put(InputActionKey.SELECT_R, "released SPACE");
+		
+		inputConnector.useBindings(keyBindings);
 
 		
 		// debugging actions

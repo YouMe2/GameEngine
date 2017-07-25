@@ -156,6 +156,8 @@ public class Main {
 
 		ResourceManager.getInstance().init();
 
+		//Put the PLDesktopview(the Frame) on the EDT ... EventQueue.invokelater...
+		
 		new PLController(new PLDektopView(GameProperties.getInstance().getProperty("titleText"),
 				KittenBaseModel.GAME_WIDTH, KittenBaseModel.GAME_HEIGHT), new KittenBaseModel()).start(0);
 

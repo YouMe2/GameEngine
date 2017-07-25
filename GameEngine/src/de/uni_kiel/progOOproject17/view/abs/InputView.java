@@ -20,28 +20,28 @@ public interface InputView {
 	 */
 	public void addAction(String key, Action action);
 
-	/**
-	 * Adds an {@link ActionMap} to the {@link InputView}, so that the actions
-	 * in it will be performed on specific events.
-	 *
-	 * @param actionMap
-	 */
-	public void addActionMap(ActionMap actionMap);
+//	/**
+//	 * Adds an {@link ActionMap} to the {@link InputView}, so that the actions
+//	 * in it will be performed on specific events.
+//	 *
+//	 * @param actionMap
+//	 */
+//	public void addActionMap(ActionMap actionMap);
 
-	/**
-	 * Enables or disables all actions in this {@link InputView}.
-	 *
-	 * @param enabeled
-	 */
-	public void setEnabeled(boolean enabeled);
-
-	/**
-	 * Enables a specific action in this {@link InputView}.
-	 *
-	 * @param key
-	 *            the key specifying the action
-	 * @param enabeled
-	 */
-	public void setEnabeled(String key, boolean enabeled);
+//	/**
+//	 * Enables or disables all actions in this {@link InputView}.
+//	 *
+//	 * @param enabeled
+//	 */
+//	public void setEnabeled(boolean enabeled);
+//
+//	/**
+//	 * Enables a specific action in this {@link InputView}.
+//	 *
+//	 * @param key
+//	 *            the key specifying the action
+//	 * @param enabeled
+//	 */
+//	public void setEnabeled(String key, boolean enabeled);
 
 }

@@ -65,7 +65,7 @@ public class HashMapActionable implements Actionable {
 	 * uni_kiel.progOOproject17.model.Actionable)
 	 */
 	@Override
-	public void forwardAllActionsToThis(Actionable a) {
+	public void forwardAllActionsFrom(Actionable a) {
 		Objects.requireNonNull(a);
 		actions.clear();
 		for (InputActionKey key : InputActionKey.values())

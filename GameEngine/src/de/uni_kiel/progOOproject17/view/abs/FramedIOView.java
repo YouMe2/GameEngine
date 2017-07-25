@@ -122,47 +122,6 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 			in.addAction(key, action);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.uni_kiel.progOOproject17.view.abs.InputView#addActionMap(javax.swing.
-	 * ActionMap)
-	 */
-	@Override
-	public void addActionMap(ActionMap actionMap) {
-		in.addActionMap(actionMap);
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.uni_kiel.progOOproject17.view.abs.InputView#setEnabeled(boolean)
-	 */
-	@Override
-	public void setEnabeled(boolean enabeled) {
-
-		Set<String> keys = buttons.keySet();
-		for (String key : keys)
-			buttons.get(key).setEnabled(false);
-		in.setEnabeled(enabeled);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.uni_kiel.progOOproject17.view.abs.InputView#setEnabeled(java.lang.
-	 * String, boolean)
-	 */
-	@Override
-	public void setEnabeled(String key, boolean enabeled) {
-
-		if (buttons.get(key) != null)
-			buttons.get(key).setEnabled(enabeled);
-		else
-			in.setEnabeled(key, enabeled);
-	}
-
 	/**
 	 * 
 	 */

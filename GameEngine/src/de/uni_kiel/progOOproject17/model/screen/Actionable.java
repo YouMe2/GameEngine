@@ -29,12 +29,12 @@ public interface Actionable {
 	public void putAction(InputActionKey iAkey, Action action);
 
 	/**
-	 * Forwards all actions to this {@link Actionable} from the
+	 * Forwards all actions to this {@link Actionable} from the given
 	 * {@link Actionable} a.
 	 * 
 	 * @param a
 	 *            the {@link Actionable} to forward the actions from.
 	 */
-	public void forwardAllActionsToThis(Actionable a);
+	public void forwardAllActionsFrom(Actionable a);
 
 }
