@@ -166,6 +166,7 @@ public abstract class FramedIOView extends JFrame implements InputView, OutputVi
 
 			gr.translate(-rect.x, -rect.y);
 
+		// STRING RENDER
 		} else if (keyText.startsWith(Viewable.STRING_KEYPREFIX)) {
 			String text = keyText.replaceFirst(Viewable.STRING_KEYPREFIX, "");
 			gr.setColor(Color.BLACK);

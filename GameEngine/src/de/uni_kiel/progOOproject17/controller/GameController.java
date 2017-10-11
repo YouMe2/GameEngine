@@ -24,53 +24,52 @@ public class GameController<M extends ScreenControllerModel> extends TickedContr
 
 	private M myModel;
 	private long frozenticktime;
-	
+
 	private final InputConnector inputConnector;
 	private InputActionQueueWorker worker;
-	
-	public GameController(FramedIOView ioView, M model) {
-		super(ioView, ioView, model, 30);
-		
+
+	public GameController(FramedIOView ioView, M model, int ticklength) {
+		super(ioView, ioView, model, ticklength);
+
 		worker = new InputActionQueueWorker(getModel());
 		inputConnector = new InputConnector(getStandardIn(), worker);
-		
+
 		HashMap<InputActionKey, String> keyBindings = new HashMap<>();
 		keyBindings.put(InputActionKey.UP_P, "pressed W");
 		keyBindings.put(InputActionKey.UP_R, "pressed W");
-		
+
 		keyBindings.put(InputActionKey.DOWN_P, "pressed S");
 		keyBindings.put(InputActionKey.DOWN_R, "pressed S");
 
 		keyBindings.put(InputActionKey.LEFT_P, "pressed A");
 		keyBindings.put(InputActionKey.LEFT_R, "pressed A");
-		
+
 		keyBindings.put(InputActionKey.RIGHT_P, "pressed D");
 		keyBindings.put(InputActionKey.RIGHT_R, "pressed D");
-		
+
 		keyBindings.put(InputActionKey.SELECT_P, "pressed SPACE");
 		keyBindings.put(InputActionKey.SELECT_R, "pressed SPACE");
-		
+
 		inputConnector.useBindings(keyBindings);
 
-		
 		// debug actions
-		//fps
+		// fps
 		getStandardIn().addAction("pressed F1", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				toggelEnableTpsFpsPrint();
 			}
 		});
-		//texture debug
+		// texture debug
 		getStandardIn().addAction("pressed F2", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ioView.toggelTextureDebuggRender();
 				System.out.println("TextureDebuggRender toggel");
-				
+
 			}
 		});
-		//freeze ticks
+		// freeze ticks
 		getStandardIn().addAction("pressed F3", new AbstractAction() {
 
 			private static final long serialVersionUID = -7423115611510814418L;
@@ -80,7 +79,7 @@ public class GameController<M extends ScreenControllerModel> extends TickedContr
 				frozenticktime = stop();
 			}
 		});
-		//release ticks
+		// release ticks
 		getStandardIn().addAction("released F3", new AbstractAction() {
 
 			private static final long serialVersionUID = 4385435299522741604L;
@@ -90,18 +89,18 @@ public class GameController<M extends ScreenControllerModel> extends TickedContr
 				start(frozenticktime);
 			}
 		});
-		
-		
+
 	}
-	
+
 	@Override
 	public void start(long timestamp) {
 		worker.start();
 		super.start(timestamp);
 	}
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.uni_kiel.progOOproject17.controller.abs.TickedController#getModel()
 	 */
 	@Override
@@ -110,7 +109,5 @@ public class GameController<M extends ScreenControllerModel> extends TickedContr
 			myModel = (M) model;
 		return myModel;
 	}
-
-
 
 }

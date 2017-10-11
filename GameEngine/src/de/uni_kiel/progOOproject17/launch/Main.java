@@ -1,6 +1,6 @@
 package de.uni_kiel.progOOproject17.launch;
 
-import de.uni_kiel.progOOproject17.controller.PLController;
+import de.uni_kiel.progOOproject17.controller.KittenGameController;
 import de.uni_kiel.progOOproject17.controller.abs.AbstractController;
 import de.uni_kiel.progOOproject17.controller.abs.TickedController;
 import de.uni_kiel.progOOproject17.model.Background;
@@ -57,7 +57,7 @@ import de.uni_kiel.progOOproject17.view.abs.Viewable;
  * ticking of the entire program. Every tick, the model is being ticked and then
  * viewed (by all output views).
  * <p>
- * The {@link PLController} specifies that class even further and defines how
+ * The {@link KittenGameController} specifies that class even further and defines how
  * the controller of our actual game behaves. It refers to instances of a
  * {@link PLDektopView} and a {@link PLLighthouseView}. Also, it specifies that
  * the model is a {@link KittenBaseModel} (and thereby it defines that the
@@ -158,7 +158,7 @@ public class Main {
 
 		//Put the PLDesktopview(the Frame) on the EDT ... EventQueue.invokelater...
 		
-		new PLController(new PLDektopView(GameProperties.getInstance().getProperty("titleText"),
+		new KittenGameController(new PLDektopView(GameProperties.getInstance().getProperty("titleText"),
 				KittenBaseModel.GAME_WIDTH, KittenBaseModel.GAME_HEIGHT), new KittenBaseModel()).start(0);
 
 	}

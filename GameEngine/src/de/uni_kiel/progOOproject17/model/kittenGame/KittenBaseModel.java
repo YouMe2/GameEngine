@@ -1,6 +1,6 @@
 package de.uni_kiel.progOOproject17.model.kittenGame;
 
-import de.uni_kiel.progOOproject17.controller.PLController;
+import de.uni_kiel.progOOproject17.controller.KittenGameController;
 import de.uni_kiel.progOOproject17.model.abs.ScreenControllerModel;
 import de.uni_kiel.progOOproject17.model.abs.TickedBaseModel;
 import de.uni_kiel.progOOproject17.model.screen.DebugScreen;
@@ -18,7 +18,7 @@ import javax.swing.Action;
 
 /**
  * This class represents the very base of the model structure of this MVC
- * structure. This class is the 2nd most powerful after the {@link PLController}
+ * structure. This class is the 2nd most powerful after the {@link KittenGameController}
  * and the most powerful in the model branch. It controls all the
  * {@link Screen}s and redirects the input actions to the one which is currently
  * active ({@link #currentScreen}).

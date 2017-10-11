@@ -25,7 +25,7 @@ public class InputConnector {
 	}
 
 	public void useBindings(HashMap<InputActionKey, String> bindingMap) {
-		this.bindingMap = bindingMap;
+		this.bindingMap = (HashMap<InputActionKey, String>) bindingMap.clone();
 		hasValidBinding = true;
 		for (InputActionKey key : InputActionKey.values()) {
 			 inputView.addAction(bindingMap.get(key), actionableModel.getAction(key));
